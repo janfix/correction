@@ -3,7 +3,7 @@
 <p align="center">
 <img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status">
 <img src="https://www.wiquid.fr/depp/correction/download.png" alt="Application weight">
-<img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version">
+<img src="https://www.wiquid.fr/depp/correction/version.png" alt="Latest Stable Version">
 <img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License">
 </p>
 

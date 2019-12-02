@@ -7,15 +7,15 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About CorrMod - Correction module
+## Correction module
 
 Correction module is a part of a Depp project to build a modular approach of digital assessment correction.The modularisation is based on Laravel development. 
 
 The main functionnalities are : 
-Correctors management
-Corrections management
-Special interface to score fluence in text reading
-Special interface to score fluence in isolated words
+<li>Correctors management
+<li>Corrections management
+<li>Special interface to score fluence in text reading
+<li>Special interface to score fluence in isolated words</li>
 
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.

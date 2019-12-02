@@ -1,0 +1,43 @@
+{
+"title":"Le Géant égoïste" ,
+"subject":"French",
+"language": "French",
+"level":"Primary",
+"grade":"Second",
+"instructions": "Pendant que tu vas lire une histoire à haute voix, ta voix va être enregistrée pendant 1 minute. (montrer le micro).Pour l’instant, tu ne vois que le titre mais l’histoire sera sur 2 pages, quand tu auras fini de lire la première, tu devras cliquer sur la petite flèche blanche pour lire la suite. (montrer la flèche)Si tu ne lis pas le texte en entier ou si tu te trompes sur des mots, ce n’est pas grave. Fais de ton mieux. Essaye de lire le plus de mots possibles.Tu es prêt ? Nous allons afficher le texte à lire,  parle bien fort dans le micro du casque. A toi.",
+"content": "Tous les après-midi, en revenant de l’école, les enfants allaient jouer dans le jardin du Géant. C’était un grand et ravissant jardin avec une douce herbe verte. Çà et là, sur l’herbe, il y avait de belles fleurs qui ressemblaient à des étoiles, et il y avait douze pêchers qui, au printemps, s’épanouissaient en délicates floraisons couleur de rose et de perle, et, en automne, portaient des fruits magnifiques. Les oiseaux, assis sur les arbres, chantaient si joliment que les enfants s’ arrêtaient de jouer pour les écouter. «Comme nous sommes heureux ici !» s’écriaient-ils. Un jour, le Géant revint.Il était allé visiter son ami, l’Ogre de Cornouailles, et était resté sept ans avec lui. Au bout de sept ans, il avait dit tout ce qu’il avait à dire, car sa conversation était limitée, et il avait décidé de retourner dans son château. Quand il arriva, il vit les enfants jouer dans le jardin. «Que faites-vous ici ? » s’écria-t-il d’une voix très rude, et les enfants s’enfuirent. «Mon jardin à moi est mon jardin à moi», dit le Géant; «tout le monde peut comprendre cela, et je ne laisserai personne d’autre que moi y jouer.» Et il construisit tout autour un mur très haut et mit un écriteau : DEFENSE D’ENTRER SOUS PEINE D’AMENDE... C’était un Géant très égoïste.Les pauvres enfants n’avaient plus d’endroit pour jouer. Ils essayèrent de jouer sur la route, mais la route était très poussiéreuse et pleine de gros cailloux, et ils n’aimaient pas cela. Après avoir appris leurs leçons, ils erraient autour du mur en parlant du beau jardin qui était à l’intérieur. «Comme nous y étions heureux!» disaient-ils entre eux.", 
+"content_ref": "Oscar Wilde, Le géant égoïste.",
+"correction_mode": "precorr",
+"precorrection": [{
+        "id": "0130178Y_CPT4FLU6_1_aria121_2628586",
+        "hpreco": [0, 10, 20, 30, 40, 50],
+        "endpreco": 60
+    },
+    {
+        "id": "0130178Y_CPT4FLU6_1_aula136_546558",
+        "hpreco": [2, 12, 22, 32, 42, 52],
+        "endpreco": 62
+    },
+    {
+        "id": "0130178Y_CPT4FLU6_1_baby14_1730550",
+        "hpreco": [3, 13, 23, 33, 43, 53],
+        "endpreco": 63
+    },
+    {
+        "id": "0130178Y_CPT4FLU6_1_baie114_1246907",
+        "hpreco": [4, 14, 24, 34, 42, 54],
+        "endpreco": 64
+    }, 
+    {
+        "id": "0380105H_CPT4FLU6_1_eaux133_617584",
+        "hpreco": [4, 14, 24, 34, 42, 54],
+        "endpreco": 64
+    }
+],
+"item_type":"Text_reading",
+"Institution":"DEPP",
+"test_session_id":"001",
+"docLink": "http://anthologie.homovivens.org/poemes/le_geant_egoiste",
+"testTakers": 5,
+"startOn":"2019-12-12"
+}

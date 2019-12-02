@@ -1,0 +1,456 @@
+.corrapp .word {
+    border: 1px #F8FAFC solid;
+    display: inline;
+    columns: #6c757d;
+    ;
+}
+
+.corrapp .word:hover {
+    padding: 0px;
+    border: 1px dotted rgb(247, 227, 168);
+    border-radius: 24px;
+    background-color: bisque;
+
+}
+
+.corrapp .h_word {
+    display: inline;
+    padding: 2px;
+    border: 1px dotted #A48733;
+    border-radius: 24px;
+    background-color: rgb(255, 163, 57);
+    color: #6c757d;
+    ;
+}
+
+.corrapp .stop_word {
+    display: inline;
+    padding: 2px;
+    border: 1px dotted orangered;
+    color: white;
+    border-radius: 24px;
+    background-color: red;
+}
+
+.corrapp .ProsodyLine {
+    line-height: 30px;
+}
+
+.corrapp .textSpace {
+    border: 1px lightblue solid;
+    margin-top: 10px;
+}
+
+.corrapp .text-muted div {
+    display: inline;
+}
+
+.corrapp .textbrut {
+    width: 100%;
+    height: 400px;
+}
+
+
+
+.corrapp #canvas {
+    margin-top: 10px;
+    width: 100%;
+    height: 100%;
+    border: 1px lightblue solid;
+}
+
+audio {
+    left: 10px;
+    bottom: 10px;
+    width: calc(100% - 20px);
+}
+
+audio:focus {
+    outline: none;
+}
+
+.corrapp .testtaker {
+    padding-top: 10px;
+    height: 40px;
+    color: white;
+    clear:both;
+        border-radius: 5px;
+}
+
+.corrapp .barElement{
+    margin-top:-5px;
+    float:left;
+    margin-left:20px;
+}
+
+.corrapp .instruct{
+   padding-top: 1px;
+
+}
+
+
+.corrapp .tt {
+    display: inline;
+}
+
+/* .corrapp .ttPrevious {} */
+
+.corrapp .ttID {
+    padding:5px;
+    text-align: center;
+}
+
+.corrapp .ttNext {
+    text-align: right;
+}
+
+.signature {
+    text-align: center;
+    width: 100%;
+    font-size: 9px;
+}
+
+.corrapp .stateData {
+    display: none;
+}
+
+.bar-wrapper {
+    height: 300px;
+    position: relative;
+}
+
+.bar {
+    position: relative;
+    bottom: 0;
+    width: 5px;
+    display: inline-block;
+    border: 1px solid red;
+    height: 5px;
+    border-bottom: 3px solid #fff;
+}
+
+.initSession{
+    margin-bottom:50px;
+}
+
+.green{
+    color:rgb(106, 173, 4);
+}
+
+.red{
+    color:red;
+}
+
+.hidden{
+    display:none;
+}
+
+.go{ 
+    cursor: pointer;
+}
+
+.previousArrow{
+    margin-top: -2px;
+    float:left;
+}
+.previous{
+    float:left;
+}
+
+.next{
+    float:right;
+}
+.nextArrow{
+    margin-top: -2px;
+    float:right;
+}
+
+
+body{
+        margin: 0;
+        height: 90%;
+        overflow: hidden
+    
+}
+
+.corrapp .collector{
+    border : 1px lightblue solid;
+    padding:10px;
+    margin-bottom : 10px;
+    min-height: 360px;
+}
+
+ .corrapp .hesi{
+    color:yellow;
+    display:inline;
+
+}
+.corrapp .hesi:after {
+content:"|";
+}
+
+
+.mfMain {
+    
+    margin-top: -20px !important;
+}
+
+.main{
+    margin-left:10px;
+}
+
+.containerList{
+    margin-left:20px;
+}
+
+.SCtitle{
+    font-size: 30px;
+    font-weight: bold;
+    display:inline;
+}
+
+.SCtitle:hover{
+    color:grey;
+}
+    
+.itemInfo{
+    padding : 5px;
+    border : 1px lightskyblue dotted;
+    color:gray;
+    font-size: 15px;
+    margin-left: 00px;
+
+}
+
+
+
+.itemInfo:hover {
+    color :lightgrey;
+}
+
+.doneLabel{
+    margin-left: 20px;;
+}
+
+.hiddenData {
+    border:1px grey solid;
+    padding :10px;
+    margin: 30px;
+
+}
+
+.hiddenItem {
+    border:1px grey solid;
+    padding :10px;
+    margin: 30px;
+}
+
+.app-footer{
+    display:none;
+}
+
+.AttrFiche {
+    float:left;
+}
+
+.IDMCenter{
+    text-align: center;;
+    border:1px 
+}
+
+.IDMitem{
+    margin:10px;
+    padding : 10px;
+    border: 1px lightcoral solid;
+    text-align: center;
+}
+
+.idemTitleList{
+text-align: center!important;
+}
+.IDMmention button{
+    
+    margin : auto;
+}
+
+
+.IDMtestTaker {
+    font-variant-caps: all-small-caps;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    margin: 20px;
+}
+
+.todoHead{
+    
+    color:#3590DC;
+    font-size:20px;
+    text-align:center;
+    border-radius: 70% ;
+    border-bottom:1px #3590DC dotted;
+    margin-bottom:10px;
+
+}
+
+
+#wordToListen{
+    text-transform: uppercase;
+}
+
+.backTodo{
+    color:white;
+    background-color: transparent;
+    border:none;
+    cursor :pointer;
+    font-size: 23px!important;
+    float:right;
+}
+.backTodo:hover{
+    opacity : 0.8;
+}
+
+.formValBt{
+    display:inline;
+}
+
+.idmdoneit{
+    display:inline;
+}
+
+.backContainer{
+    display:inline;
+}
+
+.backContainer form{
+    display:inline;
+}
+
+/* Create a new correction */
+
+.texCorrAlert{
+    display:none;
+}
+
+.IDMCorrAlert{
+    display:none;
+}
+
+.texPreCodedCorrAlert{
+      display:none;
+}
+
+.cross{
+    font-size:17px;
+    font-weight:bold;
+}
+
+
+.dayWorkGroup {
+    margin-bottom:20px;
+    width:100%;
+    cursor:pointer;
+}
+
+.dayWordUnit{
+    width:40px;
+    height:30px; 
+    font-size: 15px;
+    border-radius: 5px;
+    margin-right:5px;
+    margin-bottom:15px;
+    float:left;
+    text-align: center;
+}
+
+.dayWordUnit:hover{
+    background-color: lightgray;
+    color:white;
+}
+
+.dayWorkLabel {
+color:grey;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+border-radius: 5px 5px 0px 0px;
+font-size:10px;
+border-top : 1px grey solid;
+border-left : 1px grey solid;
+border-right : 1px grey solid;
+}
+
+.dayWork{
+border : 1px grey solid;
+border-radius: 0px 0px 5px 5px;
+
+height:23px;
+}
+
+.workDayTodo{
+     background-color: orangered;
+     color:white;
+}
+
+.workDayDone {
+    background-color: lightgray;
+    color: white;
+}
+
+.IDMttTodo{
+    float:left;
+}
+
+.audiQLabel{
+    
+    float:left;
+    margin-right: 3px;
+}
+
+.audiQLabelgroup li{
+    color:white;
+    background-color:#6DB2EB; ;
+}
+.hesinline{
+    float:left;
+    padding-right:3px;    
+}
+
+.leftcol{
+    margin-left: -15px;
+    margin-bottom: -10px;
+}
+
+.lastWordRead{
+    color:darkred;
+}
+
+.additionalInfo {
+    float: left;
+}
+
+.fluence{
+    margin-left: 40px;
+}
+
+.toptitle{
+    text-transform: initial;
+}
+
+input, select{
+    cursor:pointer;
+}
+
+#precorrection{
+    display:none;
+}
+
+#attributionTable_wrapper{
+    padding : 10px;
+    width:-webkit-fill-available;
+}
+
+.accomplished{
+    text-decoration-line: line-through;
+}
+
+#attributionTable_Wrapper .custom-select{
+    width:80px!important;
+}

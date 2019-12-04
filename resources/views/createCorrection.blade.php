@@ -9,7 +9,7 @@
 <!-- <form action="http://127.0.0.1:8000/admin/iteminfo" method="post"> -->
 <p>{{trans('correction.New Corr Presentation')}}</p>
 <p>{{trans('correction.Precorrection validation format')}} : <a href="https://jsonlint.com/">JsonLint</a> ; 
-{{trans('correction.JSON models for')}} :  <a href="../uploads/json_Model_text/manifest.json">{{trans('correction.Text simple correction')}}</a>  ; <a href="../uploads/json_Model_TextPrecorr/manifest.json">{{trans('correction.Text with precorrection')}}</a> ; <a href="../uploads/json_Model_Word/manifest.json">{{trans('correction.Word reading fluency correction')}}</a></p>
+{{trans('correction.JSON models for')}} :  <a href="../uploads/json_Model_Text/manifest.json">{{trans('correction.Text simple correction')}}</a>  ; <a href="../uploads/json_Model_TextPrecorr/manifest.json">{{trans('correction.Text with precorrection')}}</a> ; <a href="../uploads/Json_Model_Word/manifest.json">{{trans('correction.Word reading fluency correction')}}</a></p>
 
 <form action="createCorrection/addrecords" method="post">
  @csrf

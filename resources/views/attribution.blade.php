@@ -211,7 +211,7 @@
 <div class="frequence"><input type="text" name="corrplan" id="corrplan" value="50"></div> 
 <input hidden type="text" name="itemid" id="itemId" value="{{$iteminfos[0]->id}}"> 
 <button type="submit" class="btn btn-primary">{{trans('correction.Save correction plan')}}</button>
-<button type="button" class="btn btn-secondary">{{trans('correction.Cancel')}}</button>
+<a href="{{url('admin/correctionList')}}" class="btn btn-secondary"><span class="fa fa-ban"></span> &nbsp;{{trans('correction.Cancel')}}</a>
 </form>
 <div class="section">
 

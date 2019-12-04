@@ -72,11 +72,16 @@
             @php
             $todo = sizeof($SuperBuzyUser[1]); 
             $done = sizeof($SuperBuzyUser[2]);
-            $progression = number_format($done/($todo + $done)*100 , 2,',',' ');
+            $progression = number_format($done/($todo + $done)*100 , 0,',',' ');
             @endphp
                 <div class="progress" style="width:90%">
-                  <div class="progress-bar" role="progressbar" style="width: {{$progression}}%;" aria-valuenow="{{$progression}}" aria-valuemin="0" aria-valuemax="100">{{$progression}}%</div>
+                  <div class="progress-bar" role="progressbar" style="width: {{$progression}}%;" aria-valuenow="{{$progression}}" aria-valuemin="0" aria-valuemax="100">
+                  {{$progression}}%
+                  </div>
                 </div>
+
+                
+
             @endforeach    
           <hr>
         <div class="col p-4 ">

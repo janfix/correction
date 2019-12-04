@@ -35,7 +35,7 @@ trait ExportOperation
         });
 
         $this->crud->operation('list', function () {
-            $this->crud->addButton('line', 'Export', 'view', 'crud::buttons.Export', 'beginning');
+            $this->crud->addButton('line', 'Export', 'view', 'crud::buttons.export', 'beginning');
         });
         
     }

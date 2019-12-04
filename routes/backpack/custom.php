@@ -31,7 +31,7 @@ Route::group([
     Route::post('attribution/reset', 'AttributionController@reset');
     Route::post('scoring/store', 'ScoringController@store');
 
-    Route::get("settings", "settingsController@index");
+    Route::get("settings", "SettingsController@index");
 
     //Custom Deleter : 
     Route::post('suppress', 'suppressCorrController@destroy');

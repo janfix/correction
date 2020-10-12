@@ -101,7 +101,7 @@
                <div class="subtitle">Modular Assessment ADministration</div>
                <div class="modulename">Correction Module</div>
                <div class="restricted">Restricted access</div>
-               <div class="signature">By Wiquid - Jean-Philippe Rivière for DEPP - French Ministery of Education Sept-Nov.2020</div>
+               <div class="signature">By Wiquid - Jean-Philippe Rivière for DEPP - French Ministry of Education Sept-Nov.2020</div>
                 
             </div>
         </a>

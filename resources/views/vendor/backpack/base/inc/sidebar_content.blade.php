@@ -2,7 +2,7 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="fa fa-dashboard nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a></li>
 
 @if (auth()->user()->isAdministrator())
-<li class=nav-item><a class=nav-link href="{{ backpack_url('elfinder') }}"><i class="nav-icon fa fa-files-o"></i> <span>{{ trans('backpack::crud.file_manager') }}</span></a></li>
+<li class=nav-item><a class=nav-link href="{{ backpack_url('elfinder') }}"><i class="nav-icon fa fa-file-text-o"></i> <span>{{ trans('backpack::crud.file_manager') }}</span></a></li>
 <!-- Users, Roles, Permissions -->
 <li class="nav-item nav-dropdown">
 	<a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon fa fa-group"></i> {{trans('correction.Authentication')}}</a>

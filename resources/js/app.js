@@ -9,15 +9,13 @@ window.$ = window.jQuery = $;
 import 'datatables.net-bs4/js/dataTables.bootstrap4';
 require('./bootstrap');
 require('./dataloader');
+require('./textTagger');
 require('./fluence');
 require('./scoringIDM');
+require('./scoringOral');
 require('./wavevoice');
 require('./attribution');
 
-//Scrollable DataTable
-/* $('#crudTable').DataTable({
-    "scrollY": "400px",
-    "scrollCollapse": true,
-});
-$('.dataTables_length').addClass('bs-select'); */
-
+$("body").on("contextmenu", function() {
+    return false;
+})

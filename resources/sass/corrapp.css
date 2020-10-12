@@ -1,456 +1,835 @@
-.corrapp .word {
-    border: 1px #F8FAFC solid;
-    display: inline;
-    columns: #6c757d;
-    ;
-}
-
-.corrapp .word:hover {
-    padding: 0px;
-    border: 1px dotted rgb(247, 227, 168);
-    border-radius: 24px;
-    background-color: bisque;
-
-}
-
-.corrapp .h_word {
-    display: inline;
-    padding: 2px;
-    border: 1px dotted #A48733;
-    border-radius: 24px;
-    background-color: rgb(255, 163, 57);
-    color: #6c757d;
-    ;
-}
-
-.corrapp .stop_word {
-    display: inline;
-    padding: 2px;
-    border: 1px dotted orangered;
-    color: white;
-    border-radius: 24px;
-    background-color: red;
-}
-
-.corrapp .ProsodyLine {
-    line-height: 30px;
-}
-
-.corrapp .textSpace {
-    border: 1px lightblue solid;
-    margin-top: 10px;
-}
-
-.corrapp .text-muted div {
-    display: inline;
-}
-
-.corrapp .textbrut {
-    width: 100%;
-    height: 400px;
-}
-
-
-
-.corrapp #canvas {
-    margin-top: 10px;
-    width: 100%;
-    height: 100%;
-    border: 1px lightblue solid;
-}
-
-audio {
-    left: 10px;
-    bottom: 10px;
-    width: calc(100% - 20px);
-}
-
-audio:focus {
-    outline: none;
-}
-
-.corrapp .testtaker {
-    padding-top: 10px;
-    height: 40px;
-    color: white;
-    clear:both;
+    .corrapp .word {
+        border: 1px #F8FAFC solid;
+        display: inline;
+        columns: #6c757d;
+    }
+    
+    .corrapp .word:hover {
+        padding: 0px;
+        font-weight: bold;
         border-radius: 5px;
-}
-
-.corrapp .barElement{
-    margin-top:-5px;
-    float:left;
-    margin-left:20px;
-}
-
-.corrapp .instruct{
-   padding-top: 1px;
-
-}
-
-
-.corrapp .tt {
-    display: inline;
-}
-
-/* .corrapp .ttPrevious {} */
-
-.corrapp .ttID {
-    padding:5px;
-    text-align: center;
-}
-
-.corrapp .ttNext {
-    text-align: right;
-}
-
-.signature {
-    text-align: center;
-    width: 100%;
-    font-size: 9px;
-}
-
-.corrapp .stateData {
-    display: none;
-}
-
-.bar-wrapper {
-    height: 300px;
-    position: relative;
-}
-
-.bar {
-    position: relative;
-    bottom: 0;
-    width: 5px;
-    display: inline-block;
-    border: 1px solid red;
-    height: 5px;
-    border-bottom: 3px solid #fff;
-}
-
-.initSession{
-    margin-bottom:50px;
-}
-
-.green{
-    color:rgb(106, 173, 4);
-}
-
-.red{
-    color:red;
-}
-
-.hidden{
-    display:none;
-}
-
-.go{ 
-    cursor: pointer;
-}
-
-.previousArrow{
-    margin-top: -2px;
-    float:left;
-}
-.previous{
-    float:left;
-}
-
-.next{
-    float:right;
-}
-.nextArrow{
-    margin-top: -2px;
-    float:right;
-}
-
-
-body{
+        background-color: bisque;
+        cursor: pointer;
+    }
+    
+    .corrapp .h_word {
+        display: inline;
+        padding: 2px;
+        border-radius: 5px;
+        background-color: greenyellow;
+    }
+    
+    .corrapp .stop_word {
+        display: inline;
+        padding: 2px;
+        border: 1px dotted orangered;
+        color: white;
+        border-radius: 24px;
+        background-color: red;
+    }
+    
+    .corrapp .ProsodyLine {
+        line-height: 30px;
+    }
+    
+    .corrapp .space {
+        padding-right: 1px;
+        padding-left: 1px;
+    }
+    
+    .corrapp .space:hover {
+        background-color: #99dbfc;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    
+    .corrapp .ponct {
+        padding-right: 1px;
+        padding-left: 1px;
+    }
+    
+    .corrapp .ponct:hover {
+        background-color: #b9f8c3;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    
+    .corrapp .textSpace {
+        border: 1px lightblue solid;
+        margin-top: 10px;
+        padding: 10px;
+        scroll-behavior: auto;
+    }
+    
+    .corrapp .text-muted td {
+        display: inline;
+    }
+    
+    .corrapp .textbrut {
+        width: 100%;
+        height: 400px;
+    }
+    
+    .corrapp #canvas {
+        margin-top: 10px;
+        width: 100%;
+        height: 100%;
+        border: 1px greenyellow solid;
+    }
+    
+    audio {
+        left: 10px;
+        bottom: 10px;
+        width: 40%;
+        height: 30px;
+        /* width: calc(100% - 20px); */
+    }
+    
+    .supportSpace audio {
+        width: 100%;
+        height: 40px;
+    }
+    
+    audio:focus {
+        outline: none;
+    }
+    
+    .corrapp .testtaker {
+        padding-top: 10px;
+        height: 40px;
+        border-radius: 5px;
+        border: 1px lightblue solid;
+    }
+    
+    .corrapp .ttEditor {
+        padding-top: 10px;
+        height: 40px;
+        border-radius: 5px;
+        border: 1px green dotted;
+        background-color: rgb(230, 205, 176);
+        display: none;
+        width: 100%;
+    }
+    
+    .corrapp .closeEditorMode {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+    
+    .corrapp .barElement {
+        margin-top: -5px;
+        float: left;
+        margin-left: 20px;
+    }
+    
+    .corrapp .tt {
+        display: inline;
+    }
+    /* .corrapp .ttPrevious {} */
+    
+    .corrapp .ttID {
+        padding: 5px;
+        text-align: center;
+    }
+    
+    .corrapp .ttNext {
+        text-align: right;
+    }
+    
+    .signature {
+        text-align: center;
+        width: 100%;
+        font-size: 9px;
+    }
+    
+    .corrapp .stateData {
+        display: none;
+    }
+    
+    .bar-wrapper {
+        height: 300px;
+        position: relative;
+    }
+    
+    .bar {
+        position: relative;
+        bottom: 0;
+        width: 5px;
+        display: inline-block;
+        border: 1px solid red;
+        height: 5px;
+        border-bottom: 3px solid #fff;
+    }
+    
+    .initSession {
+        margin-bottom: 50px;
+    }
+    
+    .green {
+        color: rgb(106, 173, 4);
+    }
+    
+    .red {
+        color: red;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    .go {
+        cursor: pointer;
+    }
+    
+    .previousArrow {
+        margin-top: -2px;
+        float: left;
+    }
+    
+    .previous {
+        float: left;
+    }
+    
+    .next {
+        float: right;
+    }
+    
+    .nextArrow {
+        margin-top: -2px;
+        float: right;
+    }
+    
+    body {
         margin: 0;
         height: 90%;
-        overflow: hidden
+        overflow: hidden;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
     
-}
-
-.corrapp .collector{
-    border : 1px lightblue solid;
-    padding:10px;
-    margin-bottom : 10px;
-    min-height: 360px;
-}
-
- .corrapp .hesi{
-    color:yellow;
-    display:inline;
-
-}
-.corrapp .hesi:after {
-content:"|";
-}
-
-
-.mfMain {
+    .corrapp .collector {
+        border: 1px lightblue solid;
+        padding: 10px;
+        margin-bottom: 10px;
+        min-height: 360px;
+    }
     
-    margin-top: -20px !important;
-}
-
-.main{
-    margin-left:10px;
-}
-
-.containerList{
-    margin-left:20px;
-}
-
-.SCtitle{
-    font-size: 30px;
-    font-weight: bold;
-    display:inline;
-}
-
-.SCtitle:hover{
-    color:grey;
-}
+    .corrapp .hesi {
+        color: yellow;
+        display: inline;
+    }
     
-.itemInfo{
-    padding : 5px;
-    border : 1px lightskyblue dotted;
-    color:gray;
-    font-size: 15px;
-    margin-left: 00px;
-
-}
-
-
-
-.itemInfo:hover {
-    color :lightgrey;
-}
-
-.doneLabel{
-    margin-left: 20px;;
-}
-
-.hiddenData {
-    border:1px grey solid;
-    padding :10px;
-    margin: 30px;
-
-}
-
-.hiddenItem {
-    border:1px grey solid;
-    padding :10px;
-    margin: 30px;
-}
-
-.app-footer{
-    display:none;
-}
-
-.AttrFiche {
-    float:left;
-}
-
-.IDMCenter{
-    text-align: center;;
-    border:1px 
-}
-
-.IDMitem{
-    margin:10px;
-    padding : 10px;
-    border: 1px lightcoral solid;
-    text-align: center;
-}
-
-.idemTitleList{
-text-align: center!important;
-}
-.IDMmention button{
+    .corrapp .hesi:after {
+        content: "|";
+    }
     
-    margin : auto;
-}
-
-
-.IDMtestTaker {
-    font-variant-caps: all-small-caps;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 30px;
-    margin: 20px;
-}
-
-.todoHead{
+    .mfMain {
+        margin-top: -20px !important;
+    }
     
-    color:#3590DC;
-    font-size:20px;
-    text-align:center;
-    border-radius: 70% ;
-    border-bottom:1px #3590DC dotted;
-    margin-bottom:10px;
-
-}
-
-
-#wordToListen{
-    text-transform: uppercase;
-}
-
-.backTodo{
-    color:white;
-    background-color: transparent;
-    border:none;
-    cursor :pointer;
-    font-size: 23px!important;
-    float:right;
-}
-.backTodo:hover{
-    opacity : 0.8;
-}
-
-.formValBt{
-    display:inline;
-}
-
-.idmdoneit{
-    display:inline;
-}
-
-.backContainer{
-    display:inline;
-}
-
-.backContainer form{
-    display:inline;
-}
-
-/* Create a new correction */
-
-.texCorrAlert{
-    display:none;
-}
-
-.IDMCorrAlert{
-    display:none;
-}
-
-.texPreCodedCorrAlert{
-      display:none;
-}
-
-.cross{
-    font-size:17px;
-    font-weight:bold;
-}
-
-
-.dayWorkGroup {
-    margin-bottom:20px;
-    width:100%;
-    cursor:pointer;
-}
-
-.dayWordUnit{
-    width:40px;
-    height:30px; 
-    font-size: 15px;
-    border-radius: 5px;
-    margin-right:5px;
-    margin-bottom:15px;
-    float:left;
-    text-align: center;
-}
-
-.dayWordUnit:hover{
-    background-color: lightgray;
-    color:white;
-}
-
-.dayWorkLabel {
-color:grey;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-border-radius: 5px 5px 0px 0px;
-font-size:10px;
-border-top : 1px grey solid;
-border-left : 1px grey solid;
-border-right : 1px grey solid;
-}
-
-.dayWork{
-border : 1px grey solid;
-border-radius: 0px 0px 5px 5px;
-
-height:23px;
-}
-
-.workDayTodo{
-     background-color: orangered;
-     color:white;
-}
-
-.workDayDone {
-    background-color: lightgray;
-    color: white;
-}
-
-.IDMttTodo{
-    float:left;
-}
-
-.audiQLabel{
+    .main {
+        margin-left: 10px;
+    }
     
-    float:left;
-    margin-right: 3px;
-}
-
-.audiQLabelgroup li{
-    color:white;
-    background-color:#6DB2EB; ;
-}
-.hesinline{
-    float:left;
-    padding-right:3px;    
-}
-
-.leftcol{
-    margin-left: -15px;
-    margin-bottom: -10px;
-}
-
-.lastWordRead{
-    color:darkred;
-}
-
-.additionalInfo {
-    float: left;
-}
-
-.fluence{
-    margin-left: 40px;
-}
-
-.toptitle{
-    text-transform: initial;
-}
-
-input, select{
-    cursor:pointer;
-}
-
-#precorrection{
-    display:none;
-}
-
-#attributionTable_wrapper{
-    padding : 10px;
-    width:-webkit-fill-available;
-}
-
-.accomplished{
-    text-decoration-line: line-through;
-}
-
-#attributionTable_Wrapper .custom-select{
-    width:80px!important;
-}
+    .containerList {
+        margin-left: 20px;
+    }
+    
+    .SCtitle {
+        font-size: 30px;
+        font-weight: bold;
+        display: inline;
+    }
+    
+    .SCtitle:hover {
+        color: grey;
+    }
+    
+    .itemInfo {
+        margin-top: -12px;
+        padding: 5px;
+        color: grey;
+        font-size: 10px;
+        margin-left: 00px;
+        float: right;
+    }
+    
+    .itemInfo:hover {
+        color: lightgrey;
+    }
+    
+    .doneLabel {
+        margin-left: 20px;
+        ;
+    }
+    
+    .hiddenData {
+        border: 1px grey solid;
+        padding: 10px;
+        margin: 30px;
+    }
+    
+    .hiddenItem {
+        border: 1px grey solid;
+        padding: 10px;
+        margin: 30px;
+    }
+    
+    .hiddenCorrDone {
+        border: 1px grey solid;
+        padding: 10px;
+        margin: 30px;
+    }
+    
+    .app-footer {
+        display: none;
+    }
+    
+    .AttrFiche {
+        float: left;
+    }
+    
+    .IDMCenter {
+        text-align: center;
+        ;
+        border: 1px
+    }
+    
+    .IDMitem {
+        margin: 10px;
+        padding: 10px;
+        border: 1px lightcoral solid;
+        text-align: center;
+    }
+    
+    .idemTitleList {
+        text-align: center!important;
+    }
+    
+    .IDMmention button {
+        margin: auto;
+    }
+    
+    .IDMtestTaker {
+        font-variant-caps: all-small-caps;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 30px;
+        margin: 20px;
+    }
+    
+    .todoHead {
+        color: #3590DC;
+        font-size: 20px;
+        text-align: center;
+        border-radius: 70%;
+        border-bottom: 1px #3590DC dotted;
+        margin-bottom: 10px;
+    }
+    
+    #wordToListen {
+        text-transform: uppercase;
+    }
+    
+    .backTodo {
+        color: white;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 23px!important;
+        float: right;
+    }
+    
+    .backTodo:hover {
+        opacity: 0.8;
+    }
+    
+    .formValBt {
+        display: inline;
+    }
+    
+    .idmdoneit {
+        display: inline;
+    }
+    
+    .backContainer {
+        display: inline;
+    }
+    
+    .backContainer form {
+        display: inline;
+    }
+    /* Create a new correction */
+    
+    .texCorrAlert {
+        display: none;
+    }
+    
+    .IDMCorrAlert {
+        display: none;
+    }
+    
+    .texPreCodedCorrAlert {
+        display: none;
+    }
+    
+    .cross {
+        font-size: 17px;
+        font-weight: bold;
+    }
+    
+    .dayWorkGroup {
+        margin-bottom: 20px;
+        width: 100%;
+        cursor: pointer;
+    }
+    
+    .dayWordUnit {
+        width: 40px;
+        height: 30px;
+        font-size: 15px;
+        border-radius: 5px;
+        margin-right: 5px;
+        margin-bottom: 15px;
+        float: left;
+        text-align: center;
+    }
+    
+    .dayWordUnit:hover {
+        background-color: lightgray;
+        color: white;
+    }
+    
+    .dayWorkLabel {
+        color: grey;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        border-radius: 5px 5px 0px 0px;
+        font-size: 10px;
+        border-top: 1px grey solid;
+        border-left: 1px grey solid;
+        border-right: 1px grey solid;
+    }
+    
+    .dayWork {
+        border: 1px grey solid;
+        border-radius: 0px 0px 5px 5px;
+        height: 23px;
+    }
+    
+    .workDayTodo {
+        background-color: orangered;
+        color: white;
+    }
+    
+    .workDayDone {
+        background-color: lightgray;
+        color: white;
+    }
+    
+    .IDMttTodo {
+        float: left;
+    }
+    
+    .audiQLabel {
+        float: left;
+        margin-right: 3px;
+    }
+    
+    .audiQLabelgroup li {
+        color: white;
+        background-color: #6DB2EB;
+        ;
+    }
+    
+    .hesinline {
+        float: left;
+        padding-right: 3px;
+    }
+    
+    .lastWordRead {
+        color: red;
+        font-weight: bold;
+    }
+    
+    .additionalInfo {
+        float: left;
+    }
+    
+    .fluence {
+        margin-left: 40px;
+    }
+    
+    .toptitle {
+        text-transform: initial;
+    }
+    
+    input,
+    select {
+        cursor: pointer;
+    }
+    
+    #precorrection {
+        display: none;
+    }
+    
+    #attributionTable_wrapper {
+        padding: 10px;
+        width: -webkit-fill-available;
+    }
+    
+    .accomplished {
+        text-decoration-line: line-through;
+    }
+    
+    #attributionTable_Wrapper .custom-select {
+        width: 80px!important;
+    }
+    
+    .correctToolBar {
+        padding: 3px;
+        float: right;
+    }
+    
+    .editZone {
+        height: 130px;
+        border: 1px solid gainsboro;
+        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAF0lEQVQYV2NkQANr1qxJY6RQEGQGuhEAQ5AMGLeqAnUAAAAASUVORK5CYII=") repeat;
+    }
+    
+    .editZone input {
+        padding: 10px;
+        text-align: center;
+        font-size: 35px;
+        height: 125px;
+    }
+    
+    .letterControl {
+        margin-top: 35px;
+        text-align: center;
+        font-size: 1.5em;
+        margin-right: auto;
+        margin-left: auto;
+        width: fit-content;
+    }
+    
+    .letter {
+        font-size: 3.5em;
+    }
+    
+    .normalLetter {
+        float: left;
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .normalLetter:hover {
+        color: grey;
+        /*  text-decoration-line: underline; */
+    }
+    
+    .exactLetter {
+        z-index: 1;
+    }
+    
+    .zoneEdition {
+        color: gainsboro;
+    }
+    
+    .activWordGroup {
+        margin: -30px;
+    }
+    
+    .badgeContainer {
+        display: inline;
+        position: absolute;
+    }
+    
+    .badgeLetter {
+        float: left;
+        position: relative;
+        cursor: pointer;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        color: white;
+        text-align: center;
+        padding-left: 2px;
+        padding-right: 2px;
+        border-radius: 25px;
+        font-size: 0.2em!important;
+        border: 1px orange solid;
+        background-color: grey;
+        width: fit-content;
+        top: -105px;
+        z-index: 10;
+        left: -17px;
+    }
+    
+    .badgeWord {
+        cursor: pointer;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        color: white;
+        text-align: center;
+        padding-left: 2px;
+        padding-right: 2px;
+        border-radius: 25px;
+        font-size: 0.6em;
+        border: 1px orange solid;
+        position: relative;
+        display: inline;
+        background-color: grey;
+        /*  width: fit-content; */
+        line-height: normal;
+        top: -8px;
+    }
+    
+    .B1 {
+        width: 35px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .btcomment {
+        margin: 10px;
+        padding: 2px!important;
+        font-size: 0.6em;
+    }
+    
+    td.lineNumber {
+        width: 30px;
+        text-align: right;
+        display: inline-block!important;
+    }
+    
+    .linePointer {
+        position: absolute;
+        color: orange;
+        font-size: 2em;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-shadow: 1px 1px 2px #33160E;
+    }
+    
+    .Off {
+        opacity: 0;
+        transition: all .2s linear;
+    }
+    
+    .B2 {
+        border-right: 1px solid gainsboro;
+    }
+    
+    .popover-footer {
+        border-top: 1px lightgrey solid;
+        padding: 15px;
+    }
+    
+    .anoter {
+        padding: 5px;
+    }
+    
+    .DIA {
+        color: red;
+    }
+    
+    .notaword {
+        color: yellow;
+        text-decoration: line-through;
+        cursor: pointer;
+    }
+    
+    .afterEnd {
+        color: gainsboro;
+        text-decoration: line-through;
+    }
+    /* LIAISON SYSTEM */
+    
+    .liaigroup {
+        min-width: 2px;
+        display: inline;
+    }
+    
+    .liai {
+        cursor: pointer;
+        opacity: 0.8;
+        margin-left: -13px;
+        margin-top: 9px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border-bottom: 2px solid blue;
+        position: absolute;
+        display: inline;
+    }
+    
+    .wliai {
+        cursor: pointer;
+        opacity: 0.8;
+        margin-left: -15px;
+        margin-top: 9px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border-bottom: 2px solid red;
+        position: absolute;
+        display: inline;
+    }
+    
+    .trait {
+        opacity: 0.5;
+        width: 77px;
+        margin-top: 27px;
+        margin-left: -5px;
+        position: absolute;
+        height: 3px;
+        padding: 3px;
+        border-left: 1px green solid;
+        border-bottom: 1px green solid;
+        display: inline;
+    }
+    
+    .liaisonLabel {
+        line-height: 1em;
+        background-color: white;
+        position: absolute;
+        margin-left: 8px;
+        font-size: 0.6em;
+        display: inline;
+    }
+    
+    .StartWG {
+        cursor: pointer;
+        padding: 2px;
+    }
+    
+    .commentTitle {
+        margin-top: 15px;
+        display: block;
+        font-size: 1.1em;
+        color: grey;
+    }
+    
+    #commentPerf {
+        border-color: grey;
+        width: 100%;
+    }
+    
+    .rightTbar {
+        display: inline;
+    }
+    
+    .resultSender {
+        margin-left: 10px;
+        cursor: pointer;
+    }
+    
+    .notReadLine {
+        text-decoration: line-through;
+        color: lightcoral;
+    }
+    
+    .missingLetter {
+        color: gainsboro;
+        text-decoration: line-through;
+        cursor: pointer;
+    }
+    
+    .toolButton {
+        float: left;
+        margin-right: 10px;
+    }
+    
+    .editorInfo {
+        margin-top: -8px;
+        margin-right: 10px;
+    }
+    
+    .openEditorMode {
+        margin-left: 5px;
+    }
+    
+    .restart {
+        display: inline;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    
+    .ctimeBox {
+        cursor: pointer;
+        font-size: 0.5em;
+        position: relative;
+        display: inline;
+        top: 10px;
+        left: -5px;
+    }
+    
+    .ctimeBox:hover {
+        color: red;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    
+    .startValue {
+        top: 3px;
+        position: relative;
+        display: inline;
+        border-radius: 5px;
+        border: 1px grey solid;
+        padding: 6px;
+    }
+    
+    .notreadBefore {
+        color: gainsboro;
+        text-decoration: line-through;
+    }
+    
+    .firstWordRead {
+        font-weight: bold;
+        color: green;
+    }
+    
+    .motsLusContainer {
+        text-align: right;
+        font-size: 0.8em;
+        margin-top: 15px;
+        margin-right: 10px;
+    }
+    
+    .questions {
+        /* overflow: scroll; 
+        height: 400px;*/
+    }
+    
+    .Qlabel {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    
+    .supportSpace {
+        position: fixed;
+        margin-left: 400px;
+        margin-top: 100px;
+    }
+    
+    .mode {
+        font-size: 1em;
+        margin: 5px;
+        position: absolute;
+        display: inline;
+    }
+    
+    .spaceRed {
+        background-color: red;
+    }
+    
+    .yellowWord {
+        background-color: yellow;
+    }
+    
+    .mComplexe {
+        background-color: green;
+    }
+    
+    .bigReset {
+        margin-top: 120px
+    }

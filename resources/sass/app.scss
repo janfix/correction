@@ -1,36 +1,28 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
 $fa-font-path: "../webfonts";
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
-
 //Datatables
 @import '~datatables.net-bs4/css/dataTables.bootstrap4.min.css';
-
 //Odometer
-
-
+//Font awesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+//My app
 @import 'corrapp.css';
-
-
 // My CSS
-.AddNewCorrector{
-    display:none;
+.AddNewCorrector {
+    display: none;
     margin-bottom: 5px;
-    padding:10px;
-    background-color:rgb(235, 249, 255);
+    padding: 10px;
+    background-color: rgb(235, 249, 255);
 }
 
-body{
+body {
     overflow: scroll;
 }
-
-
-
-

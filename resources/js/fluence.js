@@ -1,27 +1,40 @@
 import { COPYFILE_FICLONE_FORCE } from "constants";
+import tagtext from "./textTagger";
+import closeAllMC from './closeAll';
+import * as Rconti from './Rcontainer';
+import wordActivator from './wordActivator';
+import wordCMenu from './Word_CMenu';
+import spaceCMenu from './space_Cmenu';
+import punctCMenu from './punctCMenu';
+import badgeSystem from './badgeSystem';
+import markLiaison from './markLiaison';
+import { each } from "jquery";
+import editorMode from "./editormode";
 
-$(document).ready(function () {
+
+$(function() {
 
     //Get Structural Data : 
     try {
-        var CData = JSON.parse($(".hiddenData").html()); 
+        var CData = JSON.parse($(".hiddenData").html());
     } catch (error) {
         var CData = [{
-            Corr_Code:"",
-            Corr_cluster_id:"",
-            item_id:"",
-            id:"",
-            results:""
+            Corr_Code: "",
+            Corr_cluster_id: "",
+            item_id: "",
+            id: "",
+            results: ""
         }];
-        
+
     }
-    
+
+
     try {
         var CItem = JSON.parse($(".hiddenItem").html());
     } catch (error) {
         var CItem = [{
             content: "",
-            instructions:""
+            instructions: ""
         }];
 
     }
@@ -29,29 +42,19 @@ $(document).ready(function () {
 
     var textRef = CItem[0].content;
     var instructions = CItem[0].instructions;
-    console.log(instructions);
-   /*  var CorrCode = CData[0].Corr_Code;
-    var CorrCluster = CData[0].Corr_cluster_id;
-    var Corritem = CData[0].item_id;
-    var ttID = CData[0].id;
-    var results = CData[0].results; */
+    /*  var CorrCode = CData[0].Corr_Code;
+     var CorrCluster = CData[0].Corr_cluster_id;
+     var Corritem = CData[0].item_id;
+     var ttID = CData[0].id;
+     var results = CData[0].results; */
 
     //var PerfStat = CData[0].state; // TODO
     var originalText = textRef;
-    try {
-        var preCorr = JSON.parse(CData[0].precorrection);
-    } catch (error) {
-        preCorr = {
-            'hpreco': '-'
-        };
-    }
-    
-    var HesipreCorr = preCorr.hpreco;
-    var EndPreCorr = parseInt(preCorr.endpreco);
+
     var hesiWords = []; //List of word id 
 
     var workState = countState();
-    var mediaFolderName= CData[0].mediafolder;
+    var mediaFolderName = CData[0].mediafolder;
     //console.log(mediaFolderName);
     $(".mediaFolderName").html(mediaFolderName);
     $(".todo").html(workState.todo);
@@ -67,9 +70,12 @@ $(document).ready(function () {
         " - Grade: " + CItem[0].grade
     );
 
-    $("#mp3").attr("src", "/../uploads/" + mediaFolderName +"/"+ CData[0].mediafilename + ".mp3");
+    $("#mp3").attr("src", "/../uploads/" + mediaFolderName + "/" + CData[0].mediafilename + ".mp3");
 
-    // Array of all test takers selected
+    //Hide time tagger button
+    $(".timeOption").hide();
+
+    // Array of all test takers selected For new correction (TODO)
     var alltt = [];
     for (let i = 0; i < CData.length; i++) {
         alltt.push(CData[i].id);
@@ -77,11 +83,29 @@ $(document).ready(function () {
     }
     $("#jump").prop("selectedIndex", 1);
     // Jump from selector list
-    $("#jump").on("change", function () {
+    $("#jump").on("change", function() {
         let newval = $(this).val();
         loadTTData(newval);
     });
+
+
+    $(".openEditorMode").on("click", function() {
+        editorMode();
+    });
+
+    $(".HLliaisons").on("click", function() {
+        $(".liaiOblig").toggleClass("spaceRed");
+    });
+
+    $(".HLcomplexWords").on("click", function() {
+        $(".complexWord").toggleClass("yellowWord");
+    });
+
     installModal(instructions);
+    installModalTTagger();
+    displayWarningLiaisons();
+    displayEditorInfo();
+
 
     function countState() {
         var stateCounter = {
@@ -112,36 +136,25 @@ $(document).ready(function () {
                 $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CData[i].mediafilename + ".mp3");
 
                 // Reset the text
-                $(".h_word").each(function () {
+                $(".h_word").each(function() {
                     $(this).removeClass("h_word")
                 });
-                $(".stop_word").each(function () {
+                $(".stop_word").each(function() {
                     $(this).removeClass("stop_word")
                 });
 
-                //Load Precorrection
-                try {
-                     preCorr = JSON.parse(CData[i].precorrection);
-                } catch (error) {
-                     preCorr = {
-                         hpreco: "",
-                         endpreco : ""
-                     };
-                     
-                }
-               
-                HesipreCorr = preCorr.hpreco;
-                EndPreCorr = parseInt(preCorr.endpreco);
+
+
 
                 $('#jump option[value=' + nextOne + ']').prop('selected', true);
-                preCorrectionTags();
-               
+
+
             }
 
         }
     }
 
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    // window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
     //var originalText = "Il y avait en Westphalie, dans le château de M. le baron de Thunder−ten−tronckh, un jeune garçon à qui la nature avait donné les mœurs les plus douces. Sa physionomie annonçait son âme. Il avait le jugement assez droit, avec l'esprit le plus simple ; c'est, je crois, pour cette raison qu'on le nommait Candide. Les anciens domestiques de la maison soupçonnaient qu'il était fils de la sœur de monsieur le baron et d'un bon et honnête gentilhomme du voisinage, que cette demoiselle ne voulut jamais épouser parce qu'il n'avait pu prouver que soixante et onze quartiers, et que le reste de son arbre généalogique avait été perdu par l'injure du temps. Monsieur le baron était un des plus puissants seigneurs de la Westphalie, car son château avait une porte et des fenêtres. Sa grande salle même était ornée d'une tapisserie. Tous les chiens de ses basses−cours composaient une meute dans le besoin ; ses palefreniers étaient ses piqueurs ; le vicaire du village était son grand aumônier. Ils l'appelaient tous monseigneur, et ils riaient quand il faisait des contes."
 
@@ -151,7 +164,6 @@ $(document).ready(function () {
 
     tagtext(originalText);
 
-    preCorrectionTags();
     //Install modal
     function installModal(nextOne) {
         $('body').prepend('<div class="modalContainer">' +
@@ -165,72 +177,105 @@ $(document).ready(function () {
     }
 
 
-    //Precorrection
-    function preCorrectionTags() {
-        console.log(HesipreCorr, 'Hesi precor');
-        console.log(EndPreCorr, 'End precor');
-        if(HesipreCorr =="-"){
-            $(".precoTool").hide();
-        }else{
-        var markerprecor = [];
-        for (let i = 0; i < HesipreCorr.length; i++) {
-            $(".textSpace").find("#w" + HesipreCorr[i]).addClass("h_word").attr("title", "Hesitation Pre-Correction").addClass("hesipreCorr");
-            markerprecor.push("w" + HesipreCorr[i]);
-        }
-        $(".textSpace").find("#w" + EndPreCorr).addClass("stop_word").attr("title", "End Pre-Correction").addClass("endpreCorr");
-        
-        hesiWords = markerprecor;
-        addToHList(markerprecor);
-        let lastWordPreco = $(".textSpace").find("#w" + EndPreCorr).html();
-        $(".lastWordRead").html(lastWordPreco);
-        }
+    function installModalTTagger() {
+        $('body').prepend(
+            '<div class="modal" id="TimeTaggerInfo" tabindex="-1" role="dialog">' +
+            '<div class="modal-dialog" role="document">' +
+            '<div class="modal-content">' +
+            '<div class="modal-header">' +
+            '<h5 class="modal-title">' +
+            'Vous êtes en mode Chrono-marqueur, vous allez pouvoir accoler à chaque mot son temps de lecture. ' +
+            'Pour cela faites démarrer l\'enregistrement et lorsque vous entendez le mot visé, cliquez dessus, le temps s\'affichera dessous. Pour l\'effacer double cliquer sur ce temps.' +
+            '</h5>' +
+            '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+            '<span aria-hidden="true">&times;</span>' +
+            '</button>' +
+            '</div>' +
+            '<div class="modal-footer">' +
+            /*  '<button type="button" class="btn btn-primary" id="confirmDelete">Yes, sure</button>' + */
+            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>')
+    }
+
+    function displayWarningLiaisons() {
+        $('body').prepend(
+            '<div class="modal" id="warningDelModal" tabindex="-1" role="dialog">' +
+            '<div class="modal-dialog" role="document">' +
+            '<div class="modal-content">' +
+            '<div class="modal-header">' +
+            '<h5 class="modal-title">Attention... Êtes-vous sûr(e) de vouloir supprimer cet élément de correction?' +
+            '</h5>' +
+            '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+            '<span aria-hidden="true">&times;</span>' +
+            '</button>' +
+            '</div>' +
+            '<div class="modal-footer">' +
+            '<button type="button" class="btn btn-primary" id="confirmDelete">Oui, tout à fait sûr(e)</button>' +
+            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Non, pas du tout!</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+        );
+    }
+
+    function displayEditorInfo() {
+        $('body').prepend(
+            '<div class="modal" id="modalEditInfo" tabindex="-1" role="dialog">' +
+            '<div class="modal-dialog">' +
+            '<div class="modal-content">' +
+            '<div class="modal-header">' +
+            '<h5 class="modal-title">Rappel des règles d\'encodage</h5>' +
+            '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+            '<span aria-hidden="true">&times;</span>' +
+            '</button>' +
+            '</div>' +
+            '<div class="modal-body">' +
+            '<p>Les informations obligatoires sont : A B C</p>' +
+            '</div>' +
+            '<div class="modal-footer">' +
+            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+        );
     }
 
 
 
-    $("#preCorrBT").on("click", function () {
-        if ($(this).html() == "ACTIVATED") {
-            $(this).html("DEACTIVATED");
-            $(".textSpace").find(".hesipreCorr").removeClass("h_word");
-            $(".textSpace").find(".endpreCorr").removeClass("stop_word");
-        } else {
-            preCorrectionTags();
-            $(this).html("ACTIVATED");
-        }
-
-
-    });
-
-    $("#convertor").on("click", function () {
+    $("#convertor").on("click", function() {
         tagtext();
     });
 
-    $(".word").on("click", function () {
-        mark_hesitation(this);
+    $(".word").on("click", function() {
+        closeAllMC();
+        var isItLast = $(this).attr("class").split(/\s+/);
+        if (isItLast.indexOf("lastWordRead") == -1) {
+            mark_hesitation(this);
+        }
+
     });
 
-    $(".word").on("dblclick", function () {
-        mark_stop(this);
-    });
+    //How many words ? 
+    var allWords = $(".textSpace").find(".word");
+    $(".motslus").html(allWords.length)
 
 
-    jQuery(".text-muted").mousedown(function (e) {
+
+    jQuery(".text-muted").on('mousedown', function(e) {
         e.preventDefault();
+        closeAllMC();
     });
 
     function mark_hesitation(word) {
 
         // From stop_word to h-word 
         var isItLast = $(word).attr("class").split(/\s+/);
-        console.log(isItLast);
-        for (let i = 0; i < isItLast.length; i++) {
-            console.log(isItLast[i]);
-            if (isItLast[i] == "stop_word") {
-                console.log("MATCH")
-                $(word).removeClass("stop_word");
-                removeFromHList();
-            }
-        }
+
         // From word to h-word and reverse
         $(word).toggleClass("word").toggleClass("h_word");
         // Constitution of Array hesiWords based on unique Word ID
@@ -240,127 +285,75 @@ $(document).ready(function () {
         } else {
             hesiWords.splice(hesiWords.indexOf($(word).attr("id")), 1)
         }
-        addToHList(hesiWords);
-    }
-
-    function mark_stop(word) {
-        var isItHesi = $(word).attr("class").split(/\s+/);
-        // From word to stop
-        // Only One Stop word can exist
-        $('.stop_word').removeClass('stop_word');
-        $(word).toggleClass("stop_word");
-        addToStopList(word);
-    }
-
-    function addToHList(hesiArray) {
-        $(".h_list").html("");
-        for (let index = 0; index < hesiArray.length; index++) {
-            let wordtime = $("#" + hesiArray[index]).attr('data');
-            //if (!wordtime) {wordtime = "-"}
-            //$(".h_list").append("<li class='hesi' id='" + hesiArray[index] + "' >" + $("#" + hesiArray[index]).html() + " : " + wordtime + " sec. ");
-            let checkTWord = $("#" + hesiArray[index]).html()
-            if(typeof checkTWord != "undefined"){$(".h_list").append("<li class='hesi' id='" + hesiArray[index] + "' > " + checkTWord +" ");}
-            
-        }
-    }
-
-    function removeFromHList() {
-        $(".lastWordRead").empty();
-    }
-
-    function addToStopList(word) {
-        console.log(word);
-        $(".h_list").find($('#' + $(word).attr('id'))).remove(); // If in stopList, never in hlist
-        //$(".lastWordRead").html($(word).html() + " : " + $("#" + word.id).attr("data") + "sec.");
-         $(".lastWordRead").html($(word).html());
-    }
-
-    
-
-    function tagtext(text2tag) {
-        var st_brut = text2tag;
-        var st_arr = [];
-        var st_tag = "";
-        //First tag
-        //st_tag = '<div id= "w1" class="word" onclick="mark_hesitation(this)" ondblclick="mark_stop(this)">' + st_brut;
-        if (st_brut) {
-            st_arr = st_brut.split(" ")
-        };
-        //console.log(st_arr);
-        for (let i = 0; i < st_arr.length; i++) {
-            st_tag = st_tag + st_arr[i] + '</div><div id= "w' + (i) + '" class="word" > ';
-        }
-
-        st_tag = '<div id= "w" class="word">' + st_tag + '</div>';
-        //console.log(st_tag);
-        $(".text-muted").html(st_tag);
-        //var count = (st_brut.match(/ /g) || []).length;
-
-    }
-
-    function insert(str, index, value) {
-        return str.substr(0, index) + value + str.substr(index);
     }
 
 
-//Building JSON RESPONSE To send to Database
+    //Building JSON RESPONSE To send to Database CREATION
 
-$('#dataFlex').submit(function () {
-     var jsondata = {};
-     jsondata.audioQ = $("input[name='audioQ']:checked").val();
-     //Prepare Hesitation words
-     var hesiResponse = [];
-     $(".hesi").each(function () {
-         hesiResponse.push($.trim($(this).html()));
-     })
-     jsondata.hesiW = hesiResponse;
-     jsondata.lastW = $.trim($(".lastWordRead").html());
-     jsondata.prosody = $("#prosodyQ").val();
-     jsondata.fluence = $("#fluenceQ").val();
-     jsondata.comment = $(".commentText").val();
-
-     $("#datacorr").val(JSON.stringify(jsondata));
-     $("#perfid").val((getPerfActiv()));
-     console.log(jsondata);
-    return true; // return false to cancel form action
-});
-
-$("#FAKER").on("click", function(){
-     var jsondata = {};
-    jsondata.audioQ = $("input[name='audioQ']:checked").val();
-    //Prepare Hesitation words
-    var hesiResponse = [];
-    $(".hesi").each(function(){
-        hesiResponse.push($.trim($(this).html()));
+    $('#dataFlex').on("submit", function() {
+        var jsondata = {};
+        Rconti.RContainer.audioQ = $("#QaudioSelect option:selected").val();
+        console.log(Rconti.RContainer);
+        //debugger
+        Rconti.RContainer.comment = $("#commentPerf").val();
+        $(".h_word").each(function() {
+            $(this).attr("id");
+            Rconti.RContainer.Hword.push($(this).attr("id"));
         })
-    jsondata.hesiW = hesiResponse;
-    jsondata.lastW = $.trim($(".lastWordRead").html());
-    jsondata.prosody = $("#prosodyQ").val();
-    jsondata.fluence = $("#fluenceQ").val();
-    jsondata.comment = $(".commentText").val();
-    
-    $("#datacorr").val(JSON.stringify(jsondata));
-    console.log(jsondata);
-    console.log(getPerfActiv());
 
-})
+        console.log(Rconti.RContainer);
+        jsondata = Rconti.RContainer;
+
+
+        $("#datacorr").val(JSON.stringify(jsondata));
+        $("#perfid").val((getPerfActiv()));
+        console.log(jsondata);
+        return true; // return false to cancel form action
+    });
+
+    //Building JSON RESPONSE To send to Database MODIFY EDITION
+    $('#EMdataFlex').on('submit', function() {
+        var jsondata = {};
+
+        Rconti.RContainer.audioQ = $("#QaudioSelectEDITOR option:selected").val();
+
+        Rconti.RContainer.comment = $("#commentPerf").val();
+        $(".h_word").each(function() {
+            $(this).attr("id");
+            Rconti.RContainer.Hword.push($(this).attr("id"));
+        })
+        console.log(Rconti.RContainer)
+
+        //Results
+        jsondata = Rconti.RContainer;
+
+
+        $("#EMdatacorr").val(JSON.stringify(jsondata));
+        var perfActiv = $("#jumpDone option:selected").val();
+        $("#EMperfid").val(perfActiv);
+        console.log(jsondata);
+
+
+        return true; // return false to cancel form action
+    });
+
 
     var audioQSelected;
 
 
-    $('#audioQ').on("change", function () {
+    $('#audioQ').on("change", function() {
         audioQSelected = $('.audioQ option:selected').attr('value');
         $(".audioChoice").html("{audio:" + audioQSelected + "}");
     })
 
     var prosodySelected
-    $('#prosodyQ').on("change", function () {
+    $('#prosodyQ').on("change", function() {
         prosodySelected = $('.prosodyQ option:selected').attr('value');
         $(".prosodyChoice").html("{prosody:" + prosodySelected + "}");
     })
 
     var fluenceSelected
-    $('#fluenceQ').on("change", function () {
+    $('#fluenceQ').on("change", function() {
         fluenceSelected = $('.fluenceQ option:selected').attr('value');
         $(".fluenceChoice").html("{fluence:" + fluenceSelected + "}");
     })
@@ -368,7 +361,7 @@ $("#FAKER").on("click", function(){
     function sendResult() {
         // for hesitation
         var recupHesit = []
-        $(".hesi").each(function () {
+        $(".hesi").each(function() {
             recupHesit.push($(this).html())
         });
         $(".hesitationItems").html(JSON.stringify(recupHesit));
@@ -386,37 +379,6 @@ $("#FAKER").on("click", function(){
         return perfActive;
     }
 
-    //Slider 
-    $(".ttPrevious").on("click",
-        function () {
-            let activePerf = getPerfActiv();
-            loadTTData(parseInt(activePerf) - 1);
-            $("main").animate({
-                marginLeft: '-=2000px'
-            }, 1000, function () {
-                $("main").hide();
-                $("main").css("marginLeft", '0px');
-                $("main").show();
-            })
-        });
-
-    $(".ttNext").on("click",
-        function () {
-            let activePerf = getPerfActiv();
-            console.log(parseInt(activePerf) + 1);
-            loadTTData(parseInt(activePerf) + 1);
-            $("main").animate({
-                marginLeft: '+=2000px'
-            }, 1000, function () {
-                $("main").hide();
-                $("main").css("marginLeft", '0px');
-                $("main").show();
-            })
-        });
-    /* console.log("datatable");
-    $('#example').DataTable(); */
-
-
 
     function defaultWdays() {
         var counttt = 50;
@@ -425,10 +387,189 @@ $("#FAKER").on("click", function(){
     }
 
     defaultWdays();
+    // Time tagger Mode------------------------------
 
+    var wordTimerArray = [];
+    //Time tagger installation
+    $(".timeTagger").on("click", function() {
+
+        //show chrono-mark
+        $(".ctimeBox").show();
+
+        //Prepare context
+        $(".editZone").slideToggle();
+        $(".textSpace").find("input").prop("disabled", true).css("cursor", "default");
+
+        //Hidding Buttons 
+        $(".HLcomplexWords").hide();
+        $(".HLliaisons").hide();
+        $(".displayInstruction").hide();
+        $(".B1 a").css({ "color": "gainsboro", "cursor": "default" });
+        $(this).hide();
+        //Hidding footer element
+        $(".commentTitle").hide();
+        $("#commentPerf").hide();
+        $(".bigReset").hide();
+        //Word re-init
+        $(".word").off().on("mouseover", function() {
+            $(this).css("background", "#77ddff");
+        }).on("mouseout", function() {
+            $(this).css("background", "none");
+        }).on("contextmenu", function() {
+            return false;
+        });
+        // Inib space
+        $(".space").off().on("mouseover", function() {
+            $(this).css("background", "none");
+        }).on("mouseout", function() {
+            $(this).css("background", "none");
+        }).on("contextmenu", function() {
+            return false;
+        });
+
+        // Inib ponct
+        $(".ponct").off().on("mouseover", function() {
+            $(this).css("background", "none");
+        }).on("mouseout", function() {
+            $(this).css("background", "none");
+        }).on("contextmenu", function() {
+            return false;
+        });
+
+        //Add img
+        $(".textSpace").css('background', 'url(../images/chrono.png) 750px 46px no-repeat');
+        $(".textSpace").css('background-color', "#effbff");
+
+        //Show Time tagger button
+        $(".timeOption").show();
+
+        var startTime = 0
+            //Redifine start
+        $(".redifStart").on("click", function(e) {
+            startTime = getCurTime();
+            $(".startValue").html(startTime.toFixed(3));
+            Rconti.RContainer.timeReset = startTime.toFixed(3);
+
+        });
+
+        //Time tagger word listener
+        $(".word").on("click", function(e) {
+            let ctime = getCurTime();
+            ctime = ctime - startTime;
+            ctime = ctime.toFixed(3)
+            $(this).attr("data-ctime", ctime);
+            timebadge(e.target, ctime);
+        });
+
+        $(".h_word").on("click", function(e) {
+            let ctime = getCurTime();
+            ctime = ctime - startTime;
+            ctime = ctime.toFixed(3)
+            $(this).attr("data-ctime", ctime);
+            timebadge(e.target, ctime);
+        });
+
+        //Reset Timer data
+        $(".resetTimer").on("click", function() {
+            $(".ctimeBox").remove();
+            wordTimerArray = [];
+        });
+
+
+
+    })
+
+    // Closer Timetagger and restore marker UI !:::::!!!!! 
+    $(".closeTTagger ").on("click", function() {
+        //Edit Zone
+        $(".editZone").slideToggle();
+        //Line elements
+        $(".textSpace").find("input").prop("disabled", false).css("cursor", "default");
+        // Button - toolbar 2
+        $(".HLcomplexWords").show();
+        $(".HLliaisons").show();
+        $(".displayInstruction").show();
+        $(".timeTagger").show();
+        $(".timeOption").hide();
+
+        // Canceler color and func.
+        $(".B1 a").css({ "color": "#3490dc", "cursor": "pointer" });
+        //Footer elements
+        $(".commentTitle").show();
+        $("#commentPerf").show();
+        $(".bigReset").show();
+
+        //Hide chrono-mark
+        $(".ctimeBox").hide();
+
+        //Click on elements
+        $(".word").off();
+        wordActivator();
+        $(".word").on("click", function() {
+            closeAllMC();
+            var isItLast = $(this).attr("class").split(/\s+/);
+            console.log(isItLast);
+            if (isItLast.indexOf("lastWordRead") == -1) {
+                mark_hesitation(this);
+            }
+        });
+        $(".space").off();
+        $(".ponct").off();
+
+        //Calling Context Menu for Space, Word, Punctuation
+        spaceCMenu();
+        wordCMenu();
+        punctCMenu();
+
+        //Remove img
+        $(".textSpace").css('background', 'none');
+        $(".textSpace").css('background-color', "none");
+
+
+    });
+
+
+    function getCurTime() {
+        return audio.currentTime;
+    }
+
+    function timebadge(target, ctime) {
+        let wtid = $(target).attr("id");
+
+        if (wordTimerArray.indexOf(wtid) === -1) {
+            //console.log(wtid);
+            //console.log(wordTimerArray);
+            wordTimerArray.push(wtid);
+            $(target).after('<div class="ctimeBox" data-w ="' + wtid + '" >' + ctime + '</div>');
+            let timeData = new Rconti.timeMark(wtid, ctime);
+            //console.log(timeData);
+            Rconti.RContainer.timer.push(timeData);
+            $(".ctimeBox").on('dblclick', function(e) {
+
+                let delwtid = $(e.target).attr("data-w");
+                console.log(delwtid);
+                for (let i = 0; i < wordTimerArray.length; i++) {
+                    if (wordTimerArray[i] == delwtid) {
+                        wordTimerArray.splice(i, 1);
+                    }
+                }
+                //Suppression de la data dans le RContainer à faire
+                // Trouver l'ID à virer et la virer ...
+                for (let i = 0; i < Rconti.RContainer.timer.length; i++) {
+                    if (Rconti.RContainer.timer[i].origin == delwtid) {
+                        Rconti.RContainer.timer.splice(i, 1);
+                    }
+
+                }
+                $(e.target).remove();
+            })
+        }
+    }
+
+
+    $(".bigReset").on("click", function() {
+        window.location.reload(true);
+    })
     console.log("ready!");
+
 });
-
-
-
-

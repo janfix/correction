@@ -21,6 +21,7 @@ Route::group([
     Route::get('export', 'ExportController@export');
     Route::get('scoring', 'ScoringController@index');
     Route::get('scoringidm', 'ScoringIdmController@index');
+    Route::get('scoringOral', 'ScoringOralProdController@index');
     Route::crud('iteminfo', 'IteminfoCrudController');
     Route::crud('coresult', 'CoresultCrudController');
 

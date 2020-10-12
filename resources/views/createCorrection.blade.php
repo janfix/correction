@@ -20,7 +20,7 @@
                 <input type="radio" name="itemtype" class="textCorr gtype" autocomplete="off" value="Text_reading"> {{trans('correction.Fluency in text reading')}}
             </label>
              <label class="btn btn-primary active textPreCodedCorr">
-                <input type="radio" name="itemtype" class="textPreCodedCorr gtype" autocomplete="off" value="Text_reading">{{trans('correction.Pre-Coded Fluency text reading')}}
+                <input type="radio" name="itemtype" class="oralProdCorr gtype" autocomplete="off" value="Oral_production">{{trans('correction.Oral production')}}
             </label>
             <label class="btn btn-primary wordCorr">
                 <input type="radio" name="itemtype" class="wordCorr gtype" autocomplete="off" value="Word_reading">{{trans('correction.Fluency Word reading')}}
@@ -142,11 +142,6 @@
             <input required type="text" placeholder= "{{trans('correction.Additional references (author, edition, publication year)...')}}" class="form-control" id="content_ref" name="content_ref"/>  
             </div>
         </div>
-        <div class="row mb-2 textItemType">
-            <div class="col">
-            <textarea type="text" placeholder="Json Pre-coded correction" class="form-control" name="precorrection" id="precorrection" title="Json Pre-coded correction" /></textarea>   
-            </div>
-        </div> 
         <div class="row mb-2">
             <div class="col">
                 <div class="input-group ">
@@ -157,10 +152,17 @@
                     <option value="">{{trans('correction.Choose...')}}</option>
                     <option value="simple">{{trans('correction.Simple')}}</option>
                     <option value="double">{{trans('correction.Double')}}</option>
-                    <option value="precorr">{{trans('correction.Computer Pre-correction')}}</option>
                 </select>
                 </div>
             </div>
+            <div class="col">
+                <div class="input-group ">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="correction_mode" hidden>Mots complexes</label>
+                </div>
+            <input type="text" hidden placeholder= "Mots complexes séparés par des virgules" class="form-control" id="Mcomplex"  name="Mcomplex"/>
+        </div>    
+        </div>
             <div class="col">
             <input type="text" placeholder= "Author" class="form-control" id="Author" hidden name="Author" value="{{ backpack_auth()->user()->name }}" />
             <input required type="text" placeholder= "{{trans('correction.Institution')}}" class="form-control" id="institution"  name="Institution"/>

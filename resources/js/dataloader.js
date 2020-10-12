@@ -1,6 +1,6 @@
 // Loading the data session from Json file
 
-$(document).ready(function () {
+$(document).ready(function() {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -9,15 +9,15 @@ $(document).ready(function () {
     $('#datestart').val(today);
     var itemType;
 
-    $(".loaderbt").on("click", function () {
+    $(".loaderbt").on("click", function() {
         var datafolder = $("#mediapath").val();
         jsonLoader(datafolder);
     });
 
-    
+
 
     // Create Correction
-    $(".textCorr").on("click", function () {
+    $(".textCorr").on("click", function() {
         $(".texCorrAlert").show();
         $(".IDMCorrAlert").hide();
         $(".texPreCodedCorrAlert").hide();
@@ -26,11 +26,11 @@ $(document).ready(function () {
         $(".textCorr").removeClass("btn-primary").addClass("btn-success");
         $(".wordCorr").removeClass("btn-success").addClass("btn-primary");
         $(".textPreCodedCorr").removeClass("btn-success").addClass("btn-primary");
-         $("#precorrection").hide();
+        $("#precorrection").hide();
     })
 
 
-    $(".wordCorr").on("click", function () {
+    $(".wordCorr").on("click", function() {
         $(".IDMCorrAlert").show();
         $(".texCorrAlert").hide();
         $(".texPreCodedCorrAlert").hide();
@@ -42,7 +42,7 @@ $(document).ready(function () {
         $("#precorrection").hide();
     })
 
-    $(".textPreCodedCorr").on("click", function () {
+    $(".textPreCodedCorr").on("click", function() {
         $(".texPreCodedCorrAlert").show();
         $(".IDMCorrAlert").hide();
         $(".texCorrAlert").hide();
@@ -52,17 +52,17 @@ $(document).ready(function () {
         $(".wordCorr").removeClass("btn-success").addClass("btn-primary");
         $(".textPreCodedCorr").removeClass("btn-primary").addClass("btn-success");
         $("#precorrection").show();
-        
+
     })
 
     function jsonLoader(datafolder) {
-        
+
 
         if (typeof itemType === "undefined") {
             alert("Please choose a type of correction first !");
         }
 
-        var jsonloader = $.getJSON('../uploads/' + datafolder + '/manifest.json', function (json) {}).done(function (json) {
+        var jsonloader = $.getJSON('../uploads/' + datafolder + '/manifest.json', function(json) {}).done(function(json) {
             // Check json loading
             $(".checkData").html("<div class='alert alert-success' role='alert'><i class='fa fa-check green cross' aria-hidden='true'></i> Data folder found ! </div>").delay(8000).fadeOut(4000);
 
@@ -101,17 +101,14 @@ $(document).ready(function () {
             }
             if (json.instructions == "" || typeof json.instructions === "undefined") {
                 $("#instructions").css('border', '3px red solid');
-            } 
-            else {
+            } else {
                 $("#instructions").val(json.instructions).css('border', '2px lightgreen solid');
             }
             if (json.content == "" || typeof json.content === "undefined") {
                 $("#content").css('border', '3px red solid');
-            } 
-            else if (typeof json.content === "object") {
-                 $("#content").val(JSON.stringify(json.content)).css('border', '2px lightgreen solid');
-            }
-            else {
+            } else if (typeof json.content === "object") {
+                $("#content").val(JSON.stringify(json.content)).css('border', '2px lightgreen solid');
+            } else {
                 $("#content").val(json.content).css('border', '2px lightgreen solid');
             }
             if (json.content_ref == "" || typeof json.content_ref === "undefined") {
@@ -128,6 +125,12 @@ $(document).ready(function () {
                 $("#correction_mode").css('border', '3px red solid');
             } else {
                 $("#correction_mode").val(json.correction_mode).css('border', '2px lightgreen solid');
+            }
+            console.log(json.Motcomplexe);
+            if (json.correction_mode == "" || typeof json.Motcomplexe === "undefined") {
+                $("#Mcomplex").css('border', '3px red solid');
+            } else {
+                $("#Mcomplex").val(json.Motcomplexe).css('border', '2px lightgreen solid');
             }
             if (json.item_type == "" || typeof json.item_type === "undefined") {
                 $("#item_type").css('border', '3px red solid');
@@ -154,9 +157,9 @@ $(document).ready(function () {
             } else {
                 $("#datestart").val(json.startOn).css('border', '2px lightgreen solid');
             }
-            if($("input").val()==""){ $("#datestart").css('border', '3px red solid');}
+            if ($("input").val() == "") { $("#datestart").css('border', '3px red solid'); }
             return;
-        }).fail(function () {
+        }).fail(function() {
             $(".checkData").html("<div class='alert alert-danger'  role='alert'> <i class='fa fa-times red cross' aria-hidden='true'></i>There is an error, no folder found : check file name and path in the File Manager!</div>").delay(8000).fadeOut(4000);;
         });
 

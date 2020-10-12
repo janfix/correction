@@ -1,125 +1,185 @@
-
 @extends(backpack_view('blank'))
 
 @section('content')
+            
 <main class="mfMain">
      <div class="hiddenData hidden">
           {{$correction}}
      </div>
-          <div class="hiddenItem hidden">
+     <div class="hiddenItem hidden">
           {{$item}}
      </div>
+     <div class="hiddenCorrDone hidden">
+          {{$corrDone}}
+     </div>
        <div class="container p-3 corrapp">
-            <h1 class="toptitle">{{trans('correction.Scoring text-reading fluency')}}</h1>
+        <div class="itemInfo"></div>    
+        <h1 class="toptitle">{{trans('correction.Scoring text-reading fluency')}}</h1>
             
-            <div class="itemInfo"></div>
-            <hr>
-            <div class="testtaker bg-info row mb-2">
-                <div class="ttPrevious go col">
-                    <div class="fa fa-arrow-circle-left fa-2x previousArrow" aria-hidden="true"></div> 
-                    <div class="previous">{{trans('correction.Previous')}}</div>
-                </div>
-                <div class="bartools">
-                <div class="ttID barElement precoTool">{{trans('correction.Pre-correction')}}: <button id ="preCorrBT" type="button" class="btn btn-warning btn-sm instruct" >{{trans('correction.ACTIVATED')}}</button>    </div>                
-                <div class="ttID barElement">{{trans('correction.Test taker id')}}:</div>
+            
+            <div class="testtaker row">
+                {{-- <div class="ttID barElement precoTool">{{trans('correction.Pre-correction')}}: <button id ="preCorrBT" type="button" class="btn btn-warning btn-sm instruct" >{{trans('correction.ACTIVATED')}}</button>    </div> --}}                
+                <div class="ttID barElement">{{trans('correction.New correction')}}:</div>
                 <div class="jumpto barElement">
                 <select class="form-control-sm" name="jump" id="jump">
-                <option disabled selected value="" >- {{trans('correction.Go to test taker...')}} -</option>
+                <option disabled selected value="" >- {{trans('correction.Test-taker code')}} -</option>
                 </select>
                 </div>
                 <div class="cpt barElement ttID">{{trans('correction.To do')}} : <span class="todo">___ </span></div>
-                <div class="instruct barElement"><button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#modalInstruct">{{trans('correction.Instructions')}}</button>
-                </div>
-                </div>
-
-                <div class="ttNext col go"><span class="fa fa-arrow-circle-right fa-2x nextArrow" aria-hidden="true"></span><span class="next">{{trans('correction.Next')}}</span> </div>
-
-            </div>
-            <div class="row">
-                <div class="col leftcol">
-                    <div id="content">
-                        
-                        <canvas id="canvas" width="400" height="200"></canvas>
-
-                        <audio id="audio"  preload="auto" controls ></audio> 
-                       <!--  <audio id="mp3" muted  id="audio" controls>HTML5 Audio element not supported</audio> -->
-                    </div>
-                    <div class="collector">
-                    <ul  class="list-group audiQLabelgroup">
-                    <li class="list-group-item" id="audioQuality"><div class="audiQLabel">{{trans('correction.Audio quality')}} :</div> 
-                        <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="audioQ" id="audioQ1" value="good">
-                        <label class="form-check-label" for="audioQ1">{{trans('correction.Good')}}</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="audioQ" id="audioQ2" value="correct">
-                        <label class="form-check-label" for="audioQ2">{{trans('correction.Correct')}}</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="audioQ" id="audioQ3" value="low">
-                        <label class="form-check-label" for="audioQ3">{{trans('correction.Low')}}</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="audioQ" id="audioQ4" value="unusable">
-                        <label class="form-check-label" for="audioQ4">{{trans('correction.unusable')}}</label>
-                        </div>
-                    </li>
-                    <li class="hesinline list-group-item"> <div class="h_count hesinline">{{trans('correction.Hesitations')}} : </div>
-                        <div class="h_list hesinline"></div></li>
-                    <li class="list-group-item">{{trans('correction.Last word read')}} : <span class="lastWordRead"></span></li> 
-<!--                     <li>First silence : 1s</li>
-                    <li>Last silence : 3s</li>
-                 <li>Silence (ratio): TODO</li> -->   
-                    <li class="list-group-item" >
-                    <div class="prosody additionalInfo">
-                    {{trans('correction.Prosody')}} : 
-                        <select name="prosodyQ" id="prosodyQ" class="prosodyQ">
-                            <option disabled selected value="--">--</option>
-                            <option value="Vgood">{{trans('correction.Very good')}}</option>
-                            <option value="good">{{trans('correction.Good')}}</option>
-                            <option value="adequate">{{trans('correction.Adequate')}}</option>
-                            <option value="Just">{{trans('correction.Just enough')}}</option>
-                            <option value="notenough">{{trans('correction.not enough')}}</option>
-                        </select> 
-                    </div>
-                    <div class="fluence additionalInfo">
-                    {{trans('correction.Fluency')}} :
-                        <select name="fluenceQ" id="fluenceQ" class="fluenceQ">
-                            <option disabled selected value="--">--</option>
-                            <option value="Vgood">{{trans('correction.Very good')}}</option>
-                            <option value="good">{{trans('correction.Good')}}</option>
-                            <option value="adequate">{{trans('correction.Adequate')}}</option>
-                            <option value="Just">{{trans('correction.Just enough')}}</option>
-                            <option value="notenough">{{trans('correction.not enough')}}</option>
-                        </select>
-                    </div>
-                        </li>
-                        <li class="comments list-group-item">
-                            <textarea class="commentText" rows="2" cols="50" placeholder="{{trans('correction.Your comment')}}"></textarea>
-                        </li>
-                    </ul>
-                    
+                <div class="barElement">
                     <form action ="scoring/store" method="post" id="dataFlex">
                         @csrf
-                        <input type="text" name="perfid" id="perfid" hidden>
+                        <div><input type="text" name="perfid" id="perfid" hidden>
                         <input type="text" name="datacorr" id="datacorr" hidden>
-                        <button class="resultSender btn btn-primary btn-sm mt-3" type="submit">{{trans('correction.Confirm and save correction')}}</button>
+                        <div class="input-group input-group-sm mb-3 ">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="QaudioSelect">Enregistrement</label>
+                            </div>
+                                <select class="custom-select" id="QaudioSelect">
+                                    <option selected disabled>choisissez...</option>
+                                    <option value="inaudible">Inaudible</option>
+                                    <option value="Contenu_Inap">Contenu inapproprié</option>
+                                    <option value="troncque">Tronqué</option>
+                                    <option value="interfs">Interférences</option>
+                                    <option value="valide">Valide</option>
+                                </select>
+
+                           <button class="resultSender btn btn-primary btn-sm" title="{{trans('correction.Save correction')}}" type="submit"><i class="far fa-save"></i> Enregistrer</button>     
+                           <button type="button" title="Cliquez sur ce bouton pour faire apparaître les corrections que vous avez déjà encodées afin d'y apporter des modifications ou bien pour les compléter." class="btn btn-info btn-sm openEditorMode"><i class="fas fa-edit"></i> Editer mes corrections</button>
+                        </div> 
+                        </div>
+                    </form>   
+                </div>
+                
+            </div> 
+            <div class="row">
+            <div class="ttEditor">
+                <div class="ttID barElement"><button type="button" class="btn btn-info btn-sm editorInfo" data-toggle="modal" data-target="#modalEditInfo"><i class="far fa-question-circle"></i></button>Editer correction n°:</div>
+                <div class="jumpto barElement">
+                <select class="form-control-sm" name="jumpDone" id="jumpDone">
+                <option disabled selected value="" >- {{trans('correction.Test-taker code')}} -</option>
+                </select>
+                </div>
+                <div class="cpt barElement ttID">{{trans('correction.To do')}} : <span class="todo">___ </span></div>
+                <div class="barElement">
+                    <form action ="scoring/store" method="post" id="EMdataFlex">
+                        @csrf
+                        <div><input type="text" name="perfid" id="EMperfid" hidden>
+                        <input type="text" name="datacorr" id="EMdatacorr" hidden>
+                        <div class="input-group input-group-sm mb-3 ">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="QaudioSelectEDITOR">Enregistrement</label>
+                            </div>
+                                <select class="custom-select" id="QaudioSelectEDITOR" name="audioQ">
+                                    <option selected disabled>choisissez...</option>
+                                    <option value="inaudible">Inaudible</option>
+                                    <option value="Contenu_Inap">Contenu inapproprié</option>
+                                    <option value="troncque">Tronqué</option>
+                                    <option value="interfs">Interférences</option>
+                                    <option value="valide">Valide</option>
+                                </select>
+
+                        <button class="resultSender btn btn-primary btn-sm" title="Sauver les modifications" type="submit"><i class="far fa-save"></i> Sauver les modifications</button>     
+                         <button type="button" class="btn btn-info btn-sm closeEditorMode"><i class="fas fa-times"></i> Fermer l'éditeur de correction</button>
+                        </div> 
+                        </div>
                     </form>
-                    <!-- <button type="button" id="FAKER">TEST FAKE SUBMIT</button> -->
+                       
+                </div>
+               
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div id="content">
+                        <canvas id="canvas" width="400" height="10"></canvas>
                     </div>
+                    <div class="toolbarCorrection">
+                        <audio id="audio"  preload="auto" controls ></audio> 
+                        <div class="mode">Creation</div>
+                       <!--  <audio id="mp3" muted  id="audio" controls>HTML5 Audio element not supported</audio> -->
+                        <div class="correctToolBar">   
+                        <button type="button" class="btn btn-primary btn-sm displayInstruction"  data-toggle="modal" data-target="#modalInstruct">{{trans('correction.Instructions')}}</button>
+                        <button type="button" class="btn btn-info btn-sm timeTagger">{{trans('correction.Time tagger')}}</button>
+                        <button type="button" class="btn btn-warning btn-sm HLcomplexWords">{{trans('correction.Complex words')}}</button>
+                        <button type="button" class="btn btn-danger btn-sm HLliaisons">{{trans('correction.Liaisons')}}</button>
+                        <button type="button" class="btn btn-primary btn-sm displayTimeInstruction timeOption"  data-toggle="modal" data-target="#TimeTaggerInfo"><i class="far fa-clock"> </i>{{trans('correction.Time coding instructions')}}</button>
+                        <button type="button" class="btn btn-success btn-sm closeTTagger timeOption"><i class="fas fa-times"></i> {{trans('correction.Close Time tagger')}}</button>
+                        <button type="button" class="btn btn-warning btn-sm redifStart timeOption"><i class="fas fa-flag-checkered"> </i> {{trans('correction.Redefine Start')}}</button>
+                        <div class="restart startValue timeOption">00:000</div>
+                        <button type="button" class="btn btn-danger btn-sm resetTimer timeOption"><i class="far fa-clock"> </i> {{trans('correction.Reset all chrono-tags')}}</button>
+                        
+                        
+                    </div>
+                    </div>
+            <div class="editZone">
+                <div class="activWordGroup">
+                    <div class="letterControl" title="Cliquez sur les mots du texte pour les éditer et préciser vos annotations">
+                        <span class="letter zoneEdition">Espace d'analyse des mots</span>
+                    </div>
+                </div>
+                <div class="motsLusContainer">
+                    Mots lus : <span class="motslus">103</span>
+                </div>
+            </div>
                     
 
+                
+                <div class="textSpace">
+             <table class="text-muted ProsodyLine "> </table>
                 </div>
-                <div class="col textSpace">
-             <span class="text-muted ProsodyLine ">
+                <div class="commentPerfContainer">
+                    <span class="commentTitle">Espace commentaire :</span> 
+                    <textarea name="commentPerf" id="commentPerf" rows="5"></textarea>
+                </div>
+                <button title="Efface l'ensemble des annotations de correction" type="button" class="btn btn-danger bigReset">Remise à zéro de la correction</button>
+
+            <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
+                <a class="dropdown-item bad_pronunciation" href="#">Mot mal prononcé (P)</a>
+                <a class="dropdown-item missing_word" href="#">Mot manquant (E)</a>
+                <a class="dropdown-item confusion" href="#">Un mot pour un autre (c)</a>
+                <a class="dropdown-item invention" href="#">Mot inventé (i)</a>
+                <a class="dropdown-item repetition" href="#">répétition (R)</a>
+                <hr>
+                <a class="dropdown-item firstWord" href="#">Premier mot lu</a>
+                <a class="dropdown-item 30sWord" href="#">Mot lu à 30s (30)</a>
+                <a class="dropdown-item lastWord" href="#">Dernier mot lu</a>
+            </div>
+
+            <div class="dropdown-menu dropdown-menu-sm" id="letterCMenu">
+                <a class="dropdown-item letterConfusion" href="#">Graphème mal lu (G)</a>
+                <a class="dropdown-item letterInversion" href="#">Inversion</a>
+                <a class="dropdown-item letterRepetition" href="#">Repetition (R)</a>
+                <hr>
+                <a class="dropdown-item letterBlock" href="#">{{trans('correction.Blocking')}} (A)</a>
+                <a class="dropdown-item letterNotRead" href="#">Ommision (O)</a>
+
+            </div>
+
+            <div class="dropdown-menu dropdown-menu-sm" id="spaceCMenu">
+                <a class="dropdown-item missingLiaison" href="#">Liaison manquante</a>
+                <a class="dropdown-item wrongLiaison" href="#">Mauvaise liaison</a>
+                <hr />
+                <a class="dropdown-item WordInversion" href="#">Inversion de mots</a>
+                <a class="dropdown-item addition" href="#">Ajout</a>
+            </div>
+
+            <div class="dropdown-menu dropdown-menu-sm" id="ponctCMenu">
+                <a class="dropdown-item ponctnotconsid" href="#">Intonation finale non marquée</a>
+                <a class="dropdown-item ponctnotvalid" href="#">Intonation finale inappropriée</a>
+            </div>
 
 
-             </span>
-                </div>
+            
+
+
+
                   
         </div>
        <!-- Modal -->
     </main>
+    
 @endsection
+
 
 

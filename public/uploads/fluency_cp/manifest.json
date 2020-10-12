@@ -1,0 +1,77 @@
+{
+    "title": "Argumentation",
+    "subject": "French",
+    "language": "French",
+    "level": "Primary",
+    "grade": "Second",
+    "instructions": "Ecouter et noter la production orale de l'élève en répondant aux questions",
+    "content": {
+        "img": "scooter.png",
+        "questions": {
+            "Q1": [
+                "Ceci est la question 1 ?",
+                "Choix A",
+                "Choix B",
+                "Choix C",
+                "Choix D"
+            ],
+            "Q2": [
+                "Ceci est la question 2 ?",
+                "Choix A",
+                "Choix B",
+                "Choix C",
+                "Choix D"
+            ],
+            "Q3": [
+                "Ceci est la question 3 ?",
+                "Choix A",
+                "Choix B",
+                "Choix C",
+                "Choix D"
+            ],
+            "Q4": [
+                "Ceci est la question 4 ?",
+                "Choix A",
+                "Choix B",
+                "Choix C",
+                "Choix D"
+            ],
+            "Q5": [
+                "Ceci est la question 5 ?",
+                "Choix A",
+                "Choix B",
+                "Choix C",
+                "Choix D"
+            ],
+            "Q6": [
+                "Ceci est la question 6 ?",
+                "Choix A",
+                "Choix B",
+                "Choix C",
+                "Choix D"
+            ],
+            "Q7": [
+                "Ceci est la question 7 ?",
+                "Choix A",
+                "Choix B",
+                "Choix C",
+                "Choix D"
+            ],
+            "Q8": [
+                "Ceci est la question 8 ?",
+                "Choix A",
+                "Choix B",
+                "Choix C",
+                "Choix D"
+            ]
+        }
+    },
+    "content_ref": "Créé par Hélène et son équipe",
+    "correction_mode": "simple",
+    "item_type": "Oral_production",
+    "Institution": "DEPP",
+    "test_session_id": "001",
+    "docLink": "www.wiquid.fr",
+    "testTakers": 1500,
+    "startOn": "2020-12-12"
+}

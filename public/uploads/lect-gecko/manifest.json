@@ -1,0 +1,18 @@
+{
+    "title": "Gecko",
+    "subject": "French",
+    "language": "French",
+    "level": "Primary",
+    "grade": "Second",
+    "instructions": "Ecouter la lecture de l’élève. Cliquer une fois sur les mots mal lus, ils apparaîtront alors surlignés en orange. Double-cliquer sur le dernier mot lu (correctement ou pas). Pour annuler, cliquer de nouveau sur le mot. Evaluer la qualité audio, la prosodie et la fluence dans le cadre bleu à gauche.Sauvegarder pour passer au fichier suivant.",
+    "content": "Depuis longtemps une question intrigue les scientifiques : comment certains_ |animaux arrivent-ils à courir sur l’eau ? Un cousin des lézards, appelé gecko, |présente des_ aptitudes étonnantes. Il peut se déplacer sur la plupart des |surfaces : des_ arbres, une paroi verticale (même en verre) ou un plafond. Ses |pattes possèdent de petites ventouses qui rendent possibles ces_ acrobaties.|Il peut aussi sauter de branches en branches ou planer, comme le font les_|écureuils volants. Mais ce n’est pas tout. Il est capable de traverser un_ étang |avec aisance et rapidité, soit_ en nageant soit, et c’est le plus spectaculaire,|en marchant sur l’eau.|Pour réaliser cet_ exploit, le gecko, qui possède une peau hydrophobe*, |associe deux techniques. Il frappe violemment l’eau avec ses quatre |membres afin de se projeter vers le haut, dans un mouvement frénétique. Il_ |utilise sa queue, à la manière d’un crocodile, comme un moyen de |propulsion. Ainsi, ce lézard déjà bon nageur court sur l’eau presque aussi vite |que sur le sol. Il peut donc marcher sur l’eau grâce à sa peau hydrophobe* et |à des techniques très efficaces, mais pas très longtemps, car ce moyen de |locomotion est exténuant.",
+    "content_ref": "Source à préciser.",
+    "correction_mode": "simple",
+    "Motcomplexe": ["hydrophobe"],
+    "item_type": "Text_reading",
+    "Institution": "DEPP",
+    "test_session_id": "001",
+    "docLink": "no",
+    "testTakers": 14,
+    "startOn": "2020-01-10"
+}

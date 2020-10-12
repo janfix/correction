@@ -23,7 +23,7 @@ class createCorrectionRecords extends Controller
             'instructions'=>'required',
             'content'=>'required',
             'content_ref'=>'required',
-            'corrtype'=>'required',
+            'corrtype'=>'required',       
             'itemtype'=>'required',
             'Author'=>'required',
             'Institution'=>'required',

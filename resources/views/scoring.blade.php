@@ -102,7 +102,7 @@
                         <button type="button" class="btn btn-primary btn-sm displayInstruction"  data-toggle="modal" data-target="#modalInstruct">{{trans('correction.Instructions')}}</button>
                         <button type="button" class="btn btn-info btn-sm timeTagger">{{trans('correction.Time tagger')}}</button>
                         <button type="button" class="btn btn-warning btn-sm HLcomplexWords">{{trans('correction.Complex words')}}</button>
-                        <button type="button" class="btn btn-danger btn-sm HLliaisons">{{trans('correction.Liaisons')}}</button>
+                        <button type="button" class="btn btn-danger btn-sm HLliaisons">Liaisons obligatoires</button>
                         <button type="button" class="btn btn-primary btn-sm displayTimeInstruction timeOption"  data-toggle="modal" data-target="#TimeTaggerInfo"><i class="far fa-clock"> </i>{{trans('correction.Time coding instructions')}}</button>
                         <button type="button" class="btn btn-success btn-sm closeTTagger timeOption"><i class="fas fa-times"></i> {{trans('correction.Close Time tagger')}}</button>
                         <button type="button" class="btn btn-warning btn-sm redifStart timeOption"><i class="fas fa-flag-checkered"> </i> {{trans('correction.Redefine Start')}}</button>

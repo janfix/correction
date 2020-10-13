@@ -142,6 +142,13 @@ $(function() {
                 $(".stop_word").each(function() {
                     $(this).removeClass("stop_word")
                 });
+                $(".badgeWord").trigger("dblclick");
+                $(".firstWordRead").each(function() {
+                    $(this).removeClass("firstWordRead")
+                });
+                $(".ctimeBox").remove();
+                $(".liaigroup").remove();
+
 
 
 

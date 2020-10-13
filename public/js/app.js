@@ -46865,6 +46865,12 @@ $(function () {
         $(".stop_word").each(function () {
           $(this).removeClass("stop_word");
         });
+        $(".badgeWord").trigger("dblclick");
+        $(".firstWordRead").each(function () {
+          $(this).removeClass("firstWordRead");
+        });
+        $(".ctimeBox").remove();
+        $(".liaigroup").remove();
         $('#jump option[value=' + nextOne + ']').prop('selected', true);
       }
     }
@@ -48436,8 +48442,8 @@ function RWordCount() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\laragon\www\deppcorrection.wiquid.fr\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\laragon\www\deppcorrection.wiquid.fr\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\laragon\www\correction\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\laragon\www\correction\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

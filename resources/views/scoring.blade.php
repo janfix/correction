@@ -96,7 +96,7 @@
                     </div>
                     <div class="toolbarCorrection">
                         <audio id="audio"  preload="auto" controls ></audio> 
-                        <div class="mode">Creation</div>
+                        <div class="mode">Creation </div>
                        <!--  <audio id="mp3" muted  id="audio" controls>HTML5 Audio element not supported</audio> -->
                         <div class="correctToolBar">   
                         <button type="button" class="btn btn-primary btn-sm displayInstruction"  data-toggle="modal" data-target="#modalInstruct">{{trans('correction.Instructions')}}</button>

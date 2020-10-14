@@ -21,7 +21,7 @@
                 {{-- <div class="ttID barElement precoTool">{{trans('correction.Pre-correction')}}: <button id ="preCorrBT" type="button" class="btn btn-warning btn-sm instruct" >{{trans('correction.ACTIVATED')}}</button>    </div> --}}                
                 <div class="ttID barElement">{{trans('correction.New correction')}}:</div>
                 <div class="jumpto barElement">
-                <select class="form-control-sm" name="jump" id="jump">
+                <select disabled class="form-control-sm" name="jump" id="jump">
                 <option disabled selected value="" >- {{trans('correction.Test-taker code')}} -</option>
                 </select>
                 </div>
@@ -46,6 +46,12 @@
 
                            <button class="resultSender btn btn-primary btn-sm" title="{{trans('correction.Save correction')}}" type="submit"><i class="far fa-save"></i> Enregistrer</button>     
                            <button type="button" title="Cliquez sur ce bouton pour faire apparaître les corrections que vous avez déjà encodées afin d'y apporter des modifications ou bien pour les compléter." class="btn btn-info btn-sm openEditorMode"><i class="fas fa-edit"></i> Editer mes corrections</button>
+                           <div class="trackCorr">
+                               <div class="audioTrack"></div>
+                               <div class="chronoTrack"></div>
+                               <div class="mComplexTrack"></div>
+                               <div class="liaisonTrack"></div>
+                           </div>
                         </div> 
                         </div>
                     </form>   
@@ -96,7 +102,7 @@
                     </div>
                     <div class="toolbarCorrection">
                         <audio id="audio"  preload="auto" controls ></audio> 
-                        <div class="mode">Creation </div>
+                        <div class="mode">Creation</div>
                        <!--  <audio id="mp3" muted  id="audio" controls>HTML5 Audio element not supported</audio> -->
                         <div class="correctToolBar">   
                         <button type="button" class="btn btn-primary btn-sm displayInstruction"  data-toggle="modal" data-target="#modalInstruct">{{trans('correction.Instructions')}}</button>
@@ -135,20 +141,16 @@
                 <button title="Efface l'ensemble des annotations de correction" type="button" class="btn btn-danger bigReset">Remise à zéro de la correction</button>
 
             <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
-                <a class="dropdown-item bad_pronunciation" href="#">Mot mal prononcé (P)</a>
                 <a class="dropdown-item missing_word" href="#">Mot manquant (E)</a>
                 <a class="dropdown-item confusion" href="#">Un mot pour un autre (c)</a>
-                <a class="dropdown-item invention" href="#">Mot inventé (i)</a>
-                <a class="dropdown-item repetition" href="#">répétition (R)</a>
-                <hr>
-                <a class="dropdown-item firstWord" href="#">Premier mot lu</a>
-                <a class="dropdown-item 30sWord" href="#">Mot lu à 30s (30)</a>
-                <a class="dropdown-item lastWord" href="#">Dernier mot lu</a>
+                <a class="dropdown-item bad_pronunciation" href="#">Mot mal prononcé (P)</a>
+                <a class="dropdown-item mtronque" href="#">Mot tronqué (T)</a>
+                <a class="dropdown-item autocorr" href="#">AutoCorrection(AC)</a>    
             </div>
 
             <div class="dropdown-menu dropdown-menu-sm" id="letterCMenu">
                 <a class="dropdown-item letterConfusion" href="#">Graphème mal lu (G)</a>
-                <a class="dropdown-item letterInversion" href="#">Inversion</a>
+                <a class="dropdown-item letterInversion" href="#">Inversion (I)</a>
                 <a class="dropdown-item letterRepetition" href="#">Repetition (R)</a>
                 <hr>
                 <a class="dropdown-item letterBlock" href="#">{{trans('correction.Blocking')}} (A)</a>
@@ -160,13 +162,19 @@
                 <a class="dropdown-item missingLiaison" href="#">Liaison manquante</a>
                 <a class="dropdown-item wrongLiaison" href="#">Mauvaise liaison</a>
                 <hr />
-                <a class="dropdown-item WordInversion" href="#">Inversion de mots</a>
+                <a class="dropdown-item WordInversion" href="#">Inversion de mots (i)</a>
                 <a class="dropdown-item addition" href="#">Ajout</a>
             </div>
 
             <div class="dropdown-menu dropdown-menu-sm" id="ponctCMenu">
                 <a class="dropdown-item ponctnotconsid" href="#">Intonation finale non marquée</a>
                 <a class="dropdown-item ponctnotvalid" href="#">Intonation finale inappropriée</a>
+            </div>
+
+            <div class="dropdown-menu dropdown-menu-sm" id="timerCmenu">
+                <a class="dropdown-item firstWord" href="#">Premier mot lu</a>
+                <a class="dropdown-item 30sWord" href="#">Mot lu à 30s (30)</a>
+                <a class="dropdown-item lastWord" href="#">Dernier mot lu</a>
             </div>
 
 

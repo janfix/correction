@@ -6,6 +6,7 @@ import wordActivator from './wordActivator';
 import wordCMenu from './Word_CMenu';
 import spaceCMenu from './space_Cmenu';
 import punctCMenu from './punctCMenu';
+import timerCmenu from './timer_CMenu';
 import badgeSystem from './badgeSystem';
 import markLiaison from './markLiaison';
 import { each } from "jquery";
@@ -86,6 +87,7 @@ $(function() {
     $("#jump").on("change", function() {
         let newval = $(this).val();
         loadTTData(newval);
+
     });
 
 
@@ -98,7 +100,8 @@ $(function() {
     });
 
     $(".HLcomplexWords").on("click", function() {
-        $(".complexWord").toggleClass("yellowWord");
+
+        $(".complexWord").toggleClass("yellowWord").removeClass("h_word");
     });
 
     installModal(instructions);
@@ -131,8 +134,7 @@ $(function() {
     function loadTTData(nextOne) {
         for (let i = 0; i < CData.length; i++) {
             if (CData[i].id == nextOne) {
-                console.log("TRACKER")
-                    //Load media    
+                //Load media    
                 $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CData[i].mediafilename + ".mp3");
 
                 // Reset the text
@@ -289,6 +291,19 @@ $(function() {
             hesiWords.splice(hesiWords.indexOf($(word).attr("id")), 1)
         }
     }
+
+    $("#QaudioSelect").on("change", function() {
+
+        if ($(this).val() == "inaudible" || $(this).val() == "Contenu_Inap") {
+            var maskHeight = $(".textSpace").css("height");
+            var maskWidth = $(".textSpace").css("width");
+            $(".textSpace").prepend("<div class='textMask'></div>");
+            $(".textMask").css({ "width": maskWidth, "height": maskHeight });
+        } else {
+            $(".textMask").remove();
+        }
+    })
+
 
 
     //Building JSON RESPONSE To send to Database CREATION
@@ -455,6 +470,8 @@ $(function() {
 
         });
 
+        timerCmenu();
+
         //Time tagger word listener
         $(".word").on("click", function(e) {
             let ctime = getCurTime();
@@ -474,6 +491,7 @@ $(function() {
 
         //Reset Timer data
         $(".resetTimer").on("click", function() {
+            $("#timerCmenu").hide();
             $(".ctimeBox").remove();
             wordTimerArray = [];
         });
@@ -504,6 +522,9 @@ $(function() {
 
         //Hide chrono-mark
         $(".ctimeBox").hide();
+
+        //hide contextMenu
+        $("#timerCmenu").hide();
 
         //Click on elements
         $(".word").off();

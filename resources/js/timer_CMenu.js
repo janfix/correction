@@ -9,7 +9,7 @@ import * as Rconti from './Rcontainer';
 import RWordCount from './wordcounter';
 
 
-export default function wordCMenu() {
+export default function timerCmenu() {
 
     $(".word").on('contextmenu', function(e) {
         var left = e.originalEvent.layerX;
@@ -19,110 +19,17 @@ export default function wordCMenu() {
 
         closeAllMC(); //Close all precedent contextMenu
 
-
-
-        $(".bad_pronunciation").off();
-        $(".missing_word").off();
-        $(".confusion").off();
-        $(".invention").off();
-        $(".repetition").off();
         $(".firstWord").off();
         $(".30sWord").off();
         $(".lastWord").off();
-        $(".mtronque").off();
-        $(".autocorr").off();
 
-
-        $("#context-menu").css({
+        $("#timerCmenu").css({
             "font-size": "0.8em",
             background: "#FBEFF8",
             display: "block",
             top: top,
             left: left
         }).addClass("show");
-
-        $(".bad_pronunciation").on("click", function() {
-            //console.log(e.target);
-            let bdgType = {};
-            bdgType.initial = "P";
-            bdgType.mention = "Mot mal prononcé";
-            bdgType.pHolder = "You can describe here the strong hésitation..."
-            badgeSystem(e.target, bdgType, "creation");
-            $(".dropdown-item").off();
-            $("#context-menu").removeClass("show").hide();
-            /* $('html,body').animate({
-                scrollTop: 500
-            }, 'slow'); */
-        });
-
-        $(".missing_word").on("click", function() {
-            //console.log(e.target);
-            let bdgType = {};
-            bdgType.initial = "E";
-            bdgType.mention = "Elision";
-            bdgType.pHolder = "You can comment..."
-            badgeSystem(e.target, bdgType, "creation");
-            $(e.target).removeClass("activWord");
-            $(".dropdown-item").off();
-            $("#context-menu").removeClass("show").hide();
-            RWordCount()
-
-        });
-
-        $(".confusion").on("click", function() {
-            let bdgType = {};
-            bdgType.initial = "c";
-            bdgType.mention = "Confusion de mots";
-            bdgType.pHolder = "Specify the word produced instead...";
-            badgeSystem(e.target, bdgType, "creation");
-            $(".dropdown-item").off();
-            $("#context-menu").removeClass("show").hide();
-        });
-
-        $(".invention").on("click", function() {
-            //console.log(e.target);
-            let bdgType = {};
-            bdgType.initial = "i";
-            bdgType.mention = "Mot inventé";
-            bdgType.pHolder = "Specify the fake-word produced instead...";
-            badgeSystem(e.target, bdgType, "creation");
-            $(".dropdown-item").off();
-            $("#context-menu").removeClass("show").hide();
-        });
-
-        $(".mtronque").on("click", function() {
-            //console.log(e.target);
-            let bdgType = {};
-            bdgType.initial = "T";
-            bdgType.mention = "Mot tronqué";
-            bdgType.pHolder = "...";
-            badgeSystem(e.target, bdgType, "creation");
-            $(".dropdown-item").off();
-            $("#context-menu").removeClass("show").hide();
-        });
-
-        $(".autocorr").on("click", function() {
-            //console.log(e.target);
-            let bdgType = {};
-            bdgType.initial = "AC";
-            bdgType.mention = "Autocorrection";
-            bdgType.pHolder = "...";
-            badgeSystem(e.target, bdgType, "creation");
-            $(".dropdown-item").off();
-            $("#context-menu").removeClass("show").hide();
-        });
-
-        $(".repetition").on("click", function() {
-            //console.log(e.target);
-            let bdgType = {};
-            bdgType.initial = "R";
-            bdgType.mention = "Repetition";
-            bdgType.pHolder = "What kind of repetition ?...";
-            badgeSystem(e.target, bdgType, "creation");
-            $(".dropdown-item").off();
-            $("#context-menu").removeClass("show").hide();
-        });
-
 
         $(".30sWord").on("click", function() {
             //console.log(e.target);
@@ -132,7 +39,7 @@ export default function wordCMenu() {
             bdgType.pHolder = "Specify the sequential error...";
             badgeSystem(e.target, bdgType, "creation");
             $(".dropdown-item").off();
-            $("#context-menu").removeClass("show").hide();
+            $("#timerCmenu").removeClass("show").hide();
         });
 
 
@@ -146,7 +53,7 @@ export default function wordCMenu() {
             $(".notreadBefore").removeClass("notreadBefore");
             $(".firstWordRead").removeClass("firstWordRead");
             $(".dropdown-item").off();
-            $("#context-menu").removeClass("show").hide();
+            $("#timerCmenu").removeClass("show").hide();
             var firstWordIndex = $(e.target).attr("id").split("w");
             console.log(firstWordIndex)
             $(e.target).addClass("firstWordRead");
@@ -221,7 +128,7 @@ export default function wordCMenu() {
             RWordCount()
 
             //$(".dropdown-item").unbind();
-            $("#context-menu").removeClass("show").hide();
+            $("#timerCmenu").removeClass("show").hide();
         });
 
     });

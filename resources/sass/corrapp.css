@@ -58,7 +58,8 @@
         border: 1px lightblue solid;
         margin-top: 10px;
         padding: 10px;
-        scroll-behavior: auto;
+        /* overflow: scroll;
+        max-height: 550px; */
     }
     
     .corrapp .text-muted td {
@@ -815,11 +816,12 @@
         font-size: 1em;
         margin: 5px;
         position: absolute;
-        display: inline;
+        display: none;
     }
     
     .spaceRed {
-        background-color: red;
+        background-color: pink;
+        border: 1px thistle dotted;
     }
     
     .yellowWord {
@@ -832,4 +834,18 @@
     
     .bigReset {
         margin-top: 120px
+    }
+    
+    .HLliaisons {
+        background-color: pink!important;
+        border-color: thistle!important;
+        color: grey!important;
+    }
+    
+    .textMask {
+        opacity: 0.7;
+        background-color: whitesmoke;
+        position: absolute;
+        margin-top: -10px;
+        margin-left: -10px;
     }

@@ -100,7 +100,7 @@ export default function editorMode() {
         $(".mode").html("Creation");
         $(".ttEditor").hide();
         $(".testtaker").show();
-        $(".corrapp").css("background-color", "#fff");
+        $(".corrapp").css("background-color", "#F8F9FA");
         clearAllMarks();
 
     });

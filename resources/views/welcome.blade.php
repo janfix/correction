@@ -93,7 +93,7 @@
                     @endauth
                 </div>
             @endif
-            <a href="https://deppcorrection.wiquid.fr/admin">
+
             <div class="content">
                 <div class="title m-b-md">
                     <h1 id="bigtitle">MAAD</h1>
@@ -101,10 +101,9 @@
                <div class="subtitle">Modular Assessment ADministration</div>
                <div class="modulename">Correction Module</div>
                <div class="restricted">Restricted access</div>
-               <div class="signature">By Wiquid - Jean-Philippe Rivière for DEPP - French Ministry of Education Sept-Nov.2020</div>
+               <div class="signature">By Wiquid - Jean-Philippe Rivière for DEPP - French Ministery of Education Sept-Nov.2020</div>
                 
             </div>
-        </a>
         </div>
         <script src="js/shine.min.js"></script>
         <script src="js/gate.js"></script>

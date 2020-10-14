@@ -131,8 +131,8 @@ $(function() {
     function loadTTData(nextOne) {
         for (let i = 0; i < CData.length; i++) {
             if (CData[i].id == nextOne) {
-
-                //Load media    
+                console.log("TRACKER")
+                    //Load media    
                 $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CData[i].mediafilename + ".mp3");
 
                 // Reset the text
@@ -148,10 +148,6 @@ $(function() {
                 });
                 $(".ctimeBox").remove();
                 $(".liaigroup").remove();
-
-
-
-
 
                 $('#jump option[value=' + nextOne + ']').prop('selected', true);
 

@@ -46946,7 +46946,7 @@ $(function () {
   }
 
   function displayEditorInfo() {
-    $('body').prepend('<div class="modal" id="modalEditInfo" tabindex="-1" role="dialog">' + '<div class="modal-dialog">' + '<div class="modal-content">' + '<div class="modal-header">' + '<h5 class="modal-title">Rappel des règles d\'encodage</h5>' + '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' + '<span aria-hidden="true">&times;</span>' + '</button>' + '</div>' + '<div class="modal-body">' + '<p>Les informations obligatoires sont : A B C</p>' + '</div>' + '<div class="modal-footer">' + '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' + '</div>' + '</div>' + '</div>' + '</div>');
+    $('body').prepend('<div class="modal" id="modalEditInfo" tabindex="-1" role="dialog">' + '<div class="modal-dialog">' + '<div class="modal-content">' + '<div class="modal-header">' + '<h5 class="modal-title">Rappel des règles d\'encodage</h5>' + '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' + '<span aria-hidden="true">&times;</span>' + '</button>' + '</div>' + '<div class="modal-body">' + '<p>Les informations obligatoires sont : </p>' + '<ul><li>Qualité audio</li><li>Marquage des temps</li><li>Mots complexes</li><li>Liaisons obligatoires</li></ul>' + '</div>' + '<div class="modal-footer">' + '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' + '</div>' + '</div>' + '</div>' + '</div>');
   }
 
   $("#convertor").on("click", function () {
@@ -48677,8 +48677,8 @@ function RWordCount() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\laragon\www\deppcorrection.wiquid.fr\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\laragon\www\deppcorrection.wiquid.fr\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\laragon\www\correction\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\laragon\www\correction\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

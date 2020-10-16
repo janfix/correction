@@ -242,7 +242,8 @@ $(function() {
             '</button>' +
             '</div>' +
             '<div class="modal-body">' +
-            '<p>Les informations obligatoires sont : A B C</p>' +
+            '<p>Les informations obligatoires sont : </p>' +
+            '<ul><li>Qualité audio</li><li>Marquage des temps</li><li>Mots complexes</li><li>Liaisons obligatoires</li></ul>' +
             '</div>' +
             '<div class="modal-footer">' +
             '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +

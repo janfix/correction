@@ -46688,7 +46688,25 @@ function editorMode() {
   function updateData() {
     //AudioQuality
     $("#QaudioSelectEDITOR").val(R.audioQ);
-    $("#commentPerf").val(R.comment); //FirstWord and lastW Recovery
+    $("#commentPerf").val(R.comment);
+    console.log(R);
+
+    if (R.tracker[0] == true) {
+      $(".audioTrack").css("backgroundColor", "green");
+    }
+
+    if (R.tracker[1] == true) {
+      $(".chronoTrack").css("backgroundColor", "green");
+    }
+
+    if (R.tracker[2] == true) {
+      $(".mComplexTrack").css("backgroundColor", "green");
+    }
+
+    if (R.tracker[3] == true) {
+      $(".liaisonTrack").css("backgroundColor", "green");
+    } //FirstWord and lastW Recovery
+
 
     if (R.firstWord.length > 0) {
       $("#" + R.firstWord).addClass("firstWordRead");
@@ -46741,6 +46759,7 @@ function editorMode() {
     $(".testtaker").show();
     $(".corrapp").css("background-color", "#F8F9FA");
     Object(_clearAllMarks__WEBPACK_IMPORTED_MODULE_1__["default"])();
+    $(".trackIcon").css("background-color", "crimson");
   });
 }
 
@@ -46847,9 +46866,13 @@ $(function () {
     Object(_editormode__WEBPACK_IMPORTED_MODULE_12__["default"])();
   });
   $(".HLliaisons").on("click", function () {
+    $(".liaisonTrack").css("backgroundColor", "green");
+    _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].tracker[3] = true;
     $(".liaiOblig").toggleClass("spaceRed");
   });
   $(".HLcomplexWords").on("click", function () {
+    $(".mComplexTrack").css("backgroundColor", "green");
+    _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].tracker[2] = true;
     $(".complexWord").toggleClass("yellowWord").removeClass("h_word");
   });
   installModal(instructions);
@@ -46960,6 +46983,25 @@ $(function () {
   }
 
   $("#QaudioSelect").on("change", function () {
+    $(".audioTrack").css("backgroundColor", "green");
+    _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].tracker[0] = true;
+
+    if ($(this).val() == "inaudible" || $(this).val() == "Contenu_Inap") {
+      var maskHeight = $(".textSpace").css("height");
+      var maskWidth = $(".textSpace").css("width");
+      $(".textSpace").prepend("<div class='textMask'></div>");
+      $(".textMask").css({
+        "width": maskWidth,
+        "height": maskHeight
+      });
+    } else {
+      $(".textMask").remove();
+    }
+  });
+  $("#QaudioSelectEDITOR").on("change", function () {
+    $(".audioTrack").css("backgroundColor", "green");
+    _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].tracker[0] = true;
+
     if ($(this).val() == "inaudible" || $(this).val() == "Contenu_Inap") {
       var maskHeight = $(".textSpace").css("height");
       var maskWidth = $(".textSpace").css("width");
@@ -47056,7 +47098,9 @@ $(function () {
   var wordTimerArray = []; //Time tagger installation
 
   $(".timeTagger").on("click", function () {
-    //show chrono-mark
+    $(".chronoTrack").css("backgroundColor", "green");
+    _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].tracker[1] = true; //show chrono-mark
+
     $(".ctimeBox").show(); //Prepare context
 
     $(".editZone").slideToggle();

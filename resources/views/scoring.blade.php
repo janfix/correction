@@ -47,10 +47,10 @@
                            <button class="resultSender btn btn-primary btn-sm" title="{{trans('correction.Save correction')}}" type="submit"><i class="far fa-save"></i> Enregistrer</button>     
                            <button type="button" title="Cliquez sur ce bouton pour faire apparaître les corrections que vous avez déjà encodées afin d'y apporter des modifications ou bien pour les compléter." class="btn btn-info btn-sm openEditorMode"><i class="fas fa-edit"></i> Editer mes corrections</button>
                            <div class="trackCorr">
-                               <div class="audioTrack"></div>
-                               <div class="chronoTrack"></div>
-                               <div class="mComplexTrack"></div>
-                               <div class="liaisonTrack"></div>
+                               <div class="audioTrack trackIcon"><i class="fas fa-volume-up"></i></div>
+                               <div class="chronoTrack trackIcon"><i class="fas fa-stopwatch"></i></div>
+                               <div class="mComplexTrack trackIcon"><i class="fas fa-exclamation"></i></div>
+                               <div class="liaisonTrack trackIcon"><i class="fas fa-arrows-alt-h"></i></div>
                            </div>
                         </div> 
                         </div>
@@ -60,7 +60,7 @@
             </div> 
             <div class="row">
             <div class="ttEditor">
-                <div class="ttID barElement"><button type="button" class="btn btn-info btn-sm editorInfo" data-toggle="modal" data-target="#modalEditInfo"><i class="far fa-question-circle"></i></button>Editer correction n°:</div>
+                <div class="ttID barElement"><button type="button" class="btn btn-info btn-sm editorInfo" data-toggle="modal" data-target="#modalEditInfo"><i class="far fa-question-circle"></i></button>Editer</div>
                 <div class="jumpto barElement">
                 <select class="form-control-sm" name="jumpDone" id="jumpDone">
                 <option disabled selected value="" >- {{trans('correction.Test-taker code')}} -</option>
@@ -85,8 +85,15 @@
                                     <option value="valide">Valide</option>
                                 </select>
 
-                        <button class="resultSender btn btn-primary btn-sm" title="Sauver les modifications" type="submit"><i class="far fa-save"></i> Sauver les modifications</button>     
-                         <button type="button" class="btn btn-info btn-sm closeEditorMode"><i class="fas fa-times"></i> Fermer l'éditeur de correction</button>
+                        <button class="resultSender btn btn-primary btn-sm" title="Sauver les modifications" type="submit"><i class="far fa-save"></i> Enregistrer</button>     
+                        <button type="button" class="btn btn-info btn-sm closeEditorMode"><i class="fas fa-times"></i> Fermer l'Editeur de correction</button>
+                        <div class="trackCorr">
+                               <div class="audioTrack trackIcon"><i class="fas fa-volume-up"></i></div>
+                               <div class="chronoTrack trackIcon"><i class="fas fa-stopwatch"></i></div>
+                               <div class="mComplexTrack trackIcon"><i class="fas fa-exclamation"></i></div>
+                               <div class="liaisonTrack trackIcon"><i class="fas fa-arrows-alt-h"></i></div>
+                           </div>
+                    
                         </div> 
                         </div>
                     </form>

@@ -849,3 +849,20 @@
         margin-top: -10px;
         margin-left: -10px;
     }
+    
+    .trackIcon {
+        margin-top: 2px;
+        color: gainsboro;
+        background-color: crimson;
+        font-size: 0.8em;
+        float: left;
+        border: 1px white solid;
+        margin-left: 0px;
+        padding: 2px;
+        width: 25px;
+        text-align: center;
+    }
+    
+    .trackCorr {
+        margin-left: 3px;
+    }

@@ -39,6 +39,7 @@ export default function editorMode() {
         for (let i = 0; i < CorrDoneData.length; i++) {
             if (CorrDoneData[i].id == $(this).val()) {
                 R = JSON.parse(CorrDoneData[i].results);
+
                 clearAllMarks();
                 updateData(CorrDoneData[i].id);
                 Rconti.RContainer.badges = R.badges;
@@ -53,6 +54,19 @@ export default function editorMode() {
         //AudioQuality
         $("#QaudioSelectEDITOR").val(R.audioQ);
         $("#commentPerf").val(R.comment);
+        console.log(R);
+        if (R.tracker[0] == true) {
+            $(".audioTrack").css("backgroundColor", "green");
+        }
+        if (R.tracker[1] == true) {
+            $(".chronoTrack").css("backgroundColor", "green");
+        }
+        if (R.tracker[2] == true) {
+            $(".mComplexTrack").css("backgroundColor", "green");
+        }
+        if (R.tracker[3] == true) {
+            $(".liaisonTrack").css("backgroundColor", "green");
+        }
 
         //FirstWord and lastW Recovery
         if (R.firstWord.length > 0) { $("#" + R.firstWord).addClass("firstWordRead"); }
@@ -102,6 +116,7 @@ export default function editorMode() {
         $(".testtaker").show();
         $(".corrapp").css("background-color", "#F8F9FA");
         clearAllMarks();
+        $(".trackIcon").css("background-color", "crimson");
 
     });
 

@@ -96,11 +96,14 @@ $(function() {
     });
 
     $(".HLliaisons").on("click", function() {
+        $(".liaisonTrack").css("backgroundColor", "green");
+        Rconti.RContainer.tracker[3] = true;
         $(".liaiOblig").toggleClass("spaceRed");
     });
 
     $(".HLcomplexWords").on("click", function() {
-
+        $(".mComplexTrack").css("backgroundColor", "green");
+        Rconti.RContainer.tracker[2] = true;
         $(".complexWord").toggleClass("yellowWord").removeClass("h_word");
     });
 
@@ -293,6 +296,22 @@ $(function() {
     }
 
     $("#QaudioSelect").on("change", function() {
+        $(".audioTrack").css("backgroundColor", "green");
+        Rconti.RContainer.tracker[0] = true;
+
+        if ($(this).val() == "inaudible" || $(this).val() == "Contenu_Inap") {
+            var maskHeight = $(".textSpace").css("height");
+            var maskWidth = $(".textSpace").css("width");
+            $(".textSpace").prepend("<div class='textMask'></div>");
+            $(".textMask").css({ "width": maskWidth, "height": maskHeight });
+        } else {
+            $(".textMask").remove();
+        }
+    })
+
+    $("#QaudioSelectEDITOR").on("change", function() {
+        $(".audioTrack").css("backgroundColor", "green");
+        Rconti.RContainer.tracker[0] = true;
 
         if ($(this).val() == "inaudible" || $(this).val() == "Contenu_Inap") {
             var maskHeight = $(".textSpace").css("height");
@@ -410,6 +429,9 @@ $(function() {
     var wordTimerArray = [];
     //Time tagger installation
     $(".timeTagger").on("click", function() {
+
+        $(".chronoTrack").css("backgroundColor", "green");
+        Rconti.RContainer.tracker[1] = true;
 
         //show chrono-mark
         $(".ctimeBox").show();

@@ -65,6 +65,16 @@ export default function letterCMenu() {
                 $("#letterCMenu").removeClass("show").hide();
             });
 
+            $(".letterAjout").on("click", function() {
+                let bdgType = {};
+                bdgType.initial = "+";
+                bdgType.mention = "Ajout de lettre/son";
+                bdgType.pHolder = "You can precise the repetition (strong/incident...)";
+                badgeSystem(e.target, bdgType, "creation");
+                $(".dropdown-item").off();
+                $("#letterCMenu").removeClass("show").hide();
+            });
+
             $(".letterBlock").on("click", function() {
                 let bdgType = {};
                 bdgType.initial = "A";

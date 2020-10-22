@@ -46205,14 +46205,19 @@ function badgeSystem(zeTarget, bdgType, mode) {
   }
 
   if (ElementType == "letter") {
+    console.log(zeTarget);
+    console.log(bdgType);
     Tracker = $(zeTarget).parent().attr('id');
     var uniqID = Tracker + bdgType.initial;
     console.log(Tracker);
+    console.log(uniqID);
     badgeTracker = new _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["badges"](bdgType.initial, bdgType.mention, Tracker, uniqID);
     console.log(badgeTracker);
-    var wordCode = badgeTracker.origin.split("L"); //if (mode == "creation") {
+    var wordCode = badgeTracker.origin.split("L");
 
-    _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges.push([wordCode[0], badgeTracker]); //}
+    if (mode == "creation") {
+      _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges.push([wordCode[0], badgeTracker]);
+    }
 
     $(zeTarget).parent().find(".badgeContainer").append('<div id="' + uniqID + '" title="' + bdgType.mention + '" class="' + styleElement + ' freeNote" data-content="<i>' + bdgType.comment + '</i>">' + bdgType.initial + '</div>');
 
@@ -46692,19 +46697,27 @@ function editorMode() {
     console.log(R);
 
     if (R.tracker[0] == true) {
-      $(".audioTrack").css("backgroundColor", "green");
+      $(".audioTrackED").css("backgroundColor", "green");
+    } else {
+      $(".audioTrackED").css("backgroundColor", "red");
     }
 
     if (R.tracker[1] == true) {
-      $(".chronoTrack").css("backgroundColor", "green");
+      $(".chronoTrackED").css("backgroundColor", "green");
+    } else {
+      $(".chronoTrackED").css("backgroundColor", "red");
     }
 
     if (R.tracker[2] == true) {
-      $(".mComplexTrack").css("backgroundColor", "green");
+      $(".mComplexTrackED").css("backgroundColor", "green");
+    } else {
+      $(".mComplexTrackED").css("backgroundColor", "red");
     }
 
     if (R.tracker[3] == true) {
-      $(".liaisonTrack").css("backgroundColor", "green");
+      $(".liaisonTrackED").css("backgroundColor", "green");
+    } else {
+      $(".liaisonTrackED").css("backgroundColor", "red");
     } //FirstWord and lastW Recovery
 
 
@@ -47287,9 +47300,8 @@ function letterBadgeUpdate(bdgInfo) {
   console.log(bdgInfo);
   var zeTarget = bdgInfo.origin,
       bdgType = bdgInfo.type,
-      iconLabel,
-      exactTarget; //console.log($("#"+zeTarget).find('.exactLetter'));
-
+      exactTarget;
+  console.log($("#" + zeTarget).find('.exactLetter'));
   exactTarget = $("#" + zeTarget).find('.exactLetter');
 
   if (bdgType == "Graphème mal lu") {
@@ -47298,9 +47310,9 @@ function letterBadgeUpdate(bdgInfo) {
     _bdgType.mention = "Graphème mal lu";
     _bdgType.comment = "You can precise the type of confusion : symetry b/d or p/b or more phonological : m/n, s/c";
     Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_0__["default"])(exactTarget, _bdgType, "update");
-  } else if (bdgType == "Inversion de lettres") {
+  } else if (bdgType == "Inversion de lettres(I)") {
     var _bdgType2 = {};
-    _bdgType2.initial = "><";
+    _bdgType2.initial = "I";
     _bdgType2.mention = "Inversion de lettres";
     _bdgType2.comment = "You can precise the inversion";
     Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_0__["default"])(exactTarget, _bdgType2, "update");
@@ -47310,18 +47322,24 @@ function letterBadgeUpdate(bdgInfo) {
     _bdgType3.mention = "Répétition de lettres";
     _bdgType3.comment = "You can precise the repetition (strong/incident...)";
     Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_0__["default"])(exactTarget, _bdgType3, "update");
-  } else if (bdgType == "Point d'arrêt") {
+  } else if (bdgType == "Ajout de lettre/son") {
     var _bdgType4 = {};
-    _bdgType4.initial = "A";
-    _bdgType4.mention = "Point d'arrêt";
-    _bdgType4.comment = "You can comment";
+    _bdgType4.initial = "+";
+    _bdgType4.mention = "Ajout de lettre/son";
+    _bdgType4.comment = "...";
     Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_0__["default"])(exactTarget, _bdgType4, "update");
-  } else if (bdgType == "Ommission") {
+  } else if (bdgType == "Point d'arrêt") {
     var _bdgType5 = {};
-    _bdgType5.initial = "O";
-    _bdgType5.mention = "Ommission";
-    _bdgType5.comment = "You can comment the ommission";
+    _bdgType5.initial = "A";
+    _bdgType5.mention = "Point d'arrêt";
+    _bdgType5.comment = "You can comment";
     Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_0__["default"])(exactTarget, _bdgType5, "update");
+  } else if (bdgType == "Ommission") {
+    var _bdgType6 = {};
+    _bdgType6.initial = "O";
+    _bdgType6.mention = "Ommission";
+    _bdgType6.comment = "You can comment the ommission";
+    Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_0__["default"])(exactTarget, _bdgType6, "update");
   }
 }
 
@@ -47393,6 +47411,15 @@ function letterCMenu() {
         var bdgType = {};
         bdgType.initial = "R";
         bdgType.mention = "Répétition de lettres";
+        bdgType.pHolder = "You can precise the repetition (strong/incident...)";
+        Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_1__["default"])(e.target, bdgType, "creation");
+        $(".dropdown-item").off();
+        $("#letterCMenu").removeClass("show").hide();
+      });
+      $(".letterAjout").on("click", function () {
+        var bdgType = {};
+        bdgType.initial = "+";
+        bdgType.mention = "Ajout de lettre/son";
         bdgType.pHolder = "You can precise the repetition (strong/incident...)";
         Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_1__["default"])(e.target, bdgType, "creation");
         $(".dropdown-item").off();
@@ -47859,52 +47886,6 @@ $(function () {
   }
 
   if (CItem[0].itemtype == "Oral_production") {
-    //dragElement(document.getElementById("support"));
-    var dragElement = function dragElement(elmnt) {
-      var pos1 = 0,
-          pos2 = 0,
-          pos3 = 0,
-          pos4 = 0;
-
-      if (document.getElementById(elmnt.id + "header")) {
-        // if present, the header is where you move the DIV from:
-        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-      } else {
-        // otherwise, move the DIV from anywhere inside the DIV:
-        elmnt.onmousedown = dragMouseDown;
-      }
-
-      function dragMouseDown(e) {
-        e = e || window.event;
-        e.preventDefault(); // get the mouse cursor position at startup:
-
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.onmouseup = closeDragElement; // call a function whenever the cursor moves:
-
-        document.onmousemove = elementDrag;
-      }
-
-      function elementDrag(e) {
-        e = e || window.event;
-        e.preventDefault(); // calculate the new cursor position:
-
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY; // set the element's new position:
-
-        elmnt.style.top = elmnt.offsetTop - pos2 + "px";
-        elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
-      }
-
-      function closeDragElement() {
-        // stop moving when mouse button is released:
-        document.onmouseup = null;
-        document.onmousemove = null;
-      }
-    };
-
     // Javascript - Domain definition
     console.log("ORAL");
     /* 1. Get the image path and display it ! */
@@ -47933,7 +47914,7 @@ $(function () {
       Qgroup++;
     }
 
-    $(".supportSpace").append('<img src="/uploads/fluency_cp/' + contentOBJ.img + '"/>');
+    $(".supportSpace").append('<img src="/uploads/fluency_cp/' + contentOBJ.img + '"/>'); //dragElement(document.getElementById("support"));
   }
 });
 
@@ -48482,10 +48463,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Rcontainer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Rcontainer */ "./resources/js/Rcontainer.js");
 /* harmony import */ var _letter_CMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./letter_CMenu */ "./resources/js/letter_CMenu.js");
 /* harmony import */ var _letterBadgeUpdate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./letterBadgeUpdate */ "./resources/js/letterBadgeUpdate.js");
+/* harmony import */ var _badgeSystem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./badgeSystem */ "./resources/js/badgeSystem.js");
 // Licence Create commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 // https://creativecommons.org/licenses/by-nc-sa/4.0/
 // Author : Jean-Philippe Rivière - Wiquid - January 2020 project
 // Base idea of project DEPP. Ministère de l'éducation nationale - France
+
 
 
  // Add listeners on Words and listeners on word's letters...
@@ -48519,12 +48502,13 @@ function wordActivator() {
         for (var _i = 0; _i < _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges.length; _i++) {
           //Check solo badge
           if (_Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges[_i][1].origin == idLet) {
-            //console.log(idLet);
+            console.log(idLet);
             bdginfo.id = _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges[_i][1].id;
             bdginfo.origin = _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges[_i][1].origin;
             bdginfo.type = _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges[_i][1].type;
             console.log(bdginfo);
             Object(_letterBadgeUpdate__WEBPACK_IMPORTED_MODULE_2__["default"])(bdginfo);
+            /* badgeSystem($("#" + idLet).html(), bdginfo) */
           }
 
           ;
@@ -48580,7 +48564,7 @@ function wordActivator() {
         var getState = $(this).attr("data-state");
 
         if (getState == "normal") {
-          $(this).addClass("missingLetter");
+          //$(this).addClass("missingLetter");
           $(this).removeClass("normalLetter");
           $(this).attr("title", "lettre omise");
           $(this).attr("data-state", "cross");
@@ -48588,8 +48572,8 @@ function wordActivator() {
           var wclassarray = wclass.split(" ");
           $("#" + wclassarray[0]).addClass("attention");
         } else {
-          $(this).addClass("normalLetter");
-          $(this).removeClass("missingLetter");
+          $(this).addClass("normalLetter"); //$(this).removeClass("missingLetter");
+
           $(this).attr("title", "");
           $(this).attr("data-state", "normal");
         }
@@ -48677,8 +48661,8 @@ function RWordCount() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\laragon\www\correction\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\laragon\www\correction\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\laragon\www\deppcorrection.wiquid.fr\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\laragon\www\deppcorrection.wiquid.fr\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

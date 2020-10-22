@@ -6,6 +6,7 @@
 import * as Rconti from './Rcontainer';
 import letterCMenu from './letter_CMenu';
 import letterBadgeUpdate from './letterBadgeUpdate';
+import badgeSystem from './badgeSystem';
 
 
 
@@ -39,12 +40,13 @@ export default function wordActivator() {
                 for (let i = 0; i < Rconti.RContainer.letterBadges.length; i++) {
                     //Check solo badge
                     if (Rconti.RContainer.letterBadges[i][1].origin == idLet) {
-                        //console.log(idLet);
+                        console.log(idLet);
                         bdginfo.id = Rconti.RContainer.letterBadges[i][1].id;
                         bdginfo.origin = Rconti.RContainer.letterBadges[i][1].origin;
                         bdginfo.type = Rconti.RContainer.letterBadges[i][1].type;
                         console.log(bdginfo);
                         letterBadgeUpdate(bdginfo);
+                        /* badgeSystem($("#" + idLet).html(), bdginfo) */
                     };
 
                 }
@@ -106,7 +108,7 @@ export default function wordActivator() {
             $(".exactLetter").on("click", function() {
                 let getState = $(this).attr("data-state");
                 if (getState == "normal") {
-                    $(this).addClass("missingLetter");
+                    //$(this).addClass("missingLetter");
                     $(this).removeClass("normalLetter");
                     $(this).attr("title", "lettre omise");
                     $(this).attr("data-state", "cross");
@@ -115,7 +117,7 @@ export default function wordActivator() {
                     $("#" + wclassarray[0]).addClass("attention");
                 } else {
                     $(this).addClass("normalLetter");
-                    $(this).removeClass("missingLetter");
+                    //$(this).removeClass("missingLetter");
                     $(this).attr("title", "");
                     $(this).attr("data-state", "normal");
                 }

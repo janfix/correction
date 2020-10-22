@@ -23,15 +23,22 @@ export default function badgeSystem(zeTarget, bdgType, mode) {
     }
 
     if (ElementType == "letter") {
+
+        console.log(zeTarget);
+        console.log(bdgType);
+
         Tracker = $(zeTarget).parent().attr('id');
         var uniqID = Tracker + bdgType.initial;
         console.log(Tracker);
+        console.log(uniqID);
+
+
         badgeTracker = new Rconti.badges(bdgType.initial, bdgType.mention, Tracker, uniqID);
         console.log(badgeTracker);
         var wordCode = badgeTracker.origin.split("L");
-        //if (mode == "creation") {
-        Rconti.RContainer.letterBadges.push([wordCode[0], badgeTracker]);
-        //}
+        if (mode == "creation") {
+            Rconti.RContainer.letterBadges.push([wordCode[0], badgeTracker]);
+        }
 
         $(zeTarget).parent().find(".badgeContainer").append('<div id="' + uniqID + '" title="' + bdgType.mention + '" class="' + styleElement + ' freeNote" data-content="<i>' + bdgType.comment + '</i>">' + bdgType.initial + '</div>');
 

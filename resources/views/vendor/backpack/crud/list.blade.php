@@ -23,6 +23,7 @@
 @section('content')
 <!-- Default box -->
   <div class="row">
+
     <!-- THE ACTUAL CONTENT -->
     <div class="{{ $crud->getListContentClass() }}">
       <div class="">
@@ -30,11 +31,13 @@
         <div class="row mb-0">
           <div class="col-6">
             @if ( $crud->buttons()->where('stack', 'top')->count() ||  $crud->exportButtons())
+             @if (auth()->user()->isAdministrator())
             <div class="hidden-print {{ $crud->hasAccess('create')?'with-border':'' }}">
 
               @include('crud::inc.button_stack', ['stack' => 'top'])
 
             </div>
+            @endif
             @endif
           </div>
           <div class="col-6">

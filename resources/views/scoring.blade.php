@@ -47,10 +47,10 @@
                            <button class="resultSender btn btn-primary btn-sm" title="{{trans('correction.Save correction')}}" type="submit"><i class="far fa-save"></i> Enregistrer</button>     
                            <button type="button" title="Cliquez sur ce bouton pour faire apparaître les corrections que vous avez déjà encodées afin d'y apporter des modifications ou bien pour les compléter." class="btn btn-info btn-sm openEditorMode"><i class="fas fa-edit"></i> Editer mes corrections</button>
                            <div class="trackCorr">
-                               <div class="audioTrack trackIcon"><i class="fas fa-volume-up"></i></div>
-                               <div class="chronoTrack trackIcon"><i class="fas fa-stopwatch"></i></div>
-                               <div class="mComplexTrack trackIcon"><i class="fas fa-exclamation"></i></div>
-                               <div class="liaisonTrack trackIcon"><i class="fas fa-arrows-alt-h"></i></div>
+                               <div title="Attention qualité audio -> contrôle necessaire" class="audioTrack trackIcon"><i class="fas fa-volume-up"></i></div>
+                               <div title="Attention encodage des temps -> contrôle necessaire" class="chronoTrack trackIcon"><i class="fas fa-stopwatch"></i></div>
+                               <div title="Attention mots complexes ->contrôle necessaire" class="mComplexTrack trackIcon"><i class="fas fa-exclamation"></i></div>
+                               <div title="Attention liasions obligatoires ->contrôle necessaire" class="liaisonTrack trackIcon"><i class="fas fa-arrows-alt-h"></i></div>
                            </div>
                         </div> 
                         </div>
@@ -88,10 +88,10 @@
                         <button class="resultSender btn btn-primary btn-sm" title="Sauver les modifications" type="submit"><i class="far fa-save"></i> Enregistrer</button>     
                         <button type="button" class="btn btn-info btn-sm closeEditorMode"><i class="fas fa-times"></i> Fermer l'Editeur de correction</button>
                         <div class="trackCorr">
-                               <div class="audioTrack trackIcon"><i class="fas fa-volume-up"></i></div>
-                               <div class="chronoTrack trackIcon"><i class="fas fa-stopwatch"></i></div>
-                               <div class="mComplexTrack trackIcon"><i class="fas fa-exclamation"></i></div>
-                               <div class="liaisonTrack trackIcon"><i class="fas fa-arrows-alt-h"></i></div>
+                               <div class="audioTrackED trackIcon"><i class="fas fa-volume-up"></i></div>
+                               <div class="chronoTrackED trackIcon"><i class="fas fa-stopwatch"></i></div>
+                               <div class="mComplexTrackED trackIcon"><i class="fas fa-exclamation"></i></div>
+                               <div class="liaisonTrackED trackIcon"><i class="fas fa-arrows-alt-h"></i></div>
                            </div>
                     
                         </div> 
@@ -159,9 +159,10 @@
                 <a class="dropdown-item letterConfusion" href="#">Graphème mal lu (G)</a>
                 <a class="dropdown-item letterInversion" href="#">Inversion (I)</a>
                 <a class="dropdown-item letterRepetition" href="#">Repetition (R)</a>
+                <a class="dropdown-item letterAjout" href="#">Ajout de lettre/son (+)</a>
                 <hr>
                 <a class="dropdown-item letterBlock" href="#">{{trans('correction.Blocking')}} (A)</a>
-                <a class="dropdown-item letterNotRead" href="#">Ommision (O)</a>
+                <a class="dropdown-item letterNotRead" href="#">Omission (O)</a>
 
             </div>
 

@@ -56,16 +56,24 @@ export default function editorMode() {
         $("#commentPerf").val(R.comment);
         console.log(R);
         if (R.tracker[0] == true) {
-            $(".audioTrack").css("backgroundColor", "green");
+            $(".audioTrackED").css("backgroundColor", "green");
+        } else {
+            $(".audioTrackED").css("backgroundColor", "red");
         }
         if (R.tracker[1] == true) {
-            $(".chronoTrack").css("backgroundColor", "green");
+            $(".chronoTrackED").css("backgroundColor", "green");
+        } else {
+            $(".chronoTrackED").css("backgroundColor", "red");
         }
         if (R.tracker[2] == true) {
-            $(".mComplexTrack").css("backgroundColor", "green");
+            $(".mComplexTrackED").css("backgroundColor", "green");
+        } else {
+            $(".mComplexTrackED").css("backgroundColor", "red");
         }
         if (R.tracker[3] == true) {
-            $(".liaisonTrack").css("backgroundColor", "green");
+            $(".liaisonTrackED").css("backgroundColor", "green");
+        } else {
+            $(".liaisonTrackED").css("backgroundColor", "red");
         }
 
         //FirstWord and lastW Recovery

@@ -550,6 +550,7 @@
     .badgeContainer {
         display: inline;
         position: absolute;
+        top: 208px;
     }
     
     .badgeLetter {

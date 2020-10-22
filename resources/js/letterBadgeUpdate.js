@@ -5,9 +5,9 @@ export default function letterBadgeUpdate(bdgInfo) {
     console.log(bdgInfo);
     var zeTarget = bdgInfo.origin,
         bdgType = bdgInfo.type,
-        iconLabel, exactTarget;
+        exactTarget;
 
-    //console.log($("#"+zeTarget).find('.exactLetter'));
+    console.log($("#" + zeTarget).find('.exactLetter'));
     exactTarget = $("#" + zeTarget).find('.exactLetter');
     if (bdgType == "Graphème mal lu") {
         let bdgType = {};
@@ -15,9 +15,9 @@ export default function letterBadgeUpdate(bdgInfo) {
         bdgType.mention = "Graphème mal lu";
         bdgType.comment = "You can precise the type of confusion : symetry b/d or p/b or more phonological : m/n, s/c";
         badgeSystem(exactTarget, bdgType, "update");
-    } else if (bdgType == "Inversion de lettres") {
+    } else if (bdgType == "Inversion de lettres(I)") {
         let bdgType = {};
-        bdgType.initial = "><";
+        bdgType.initial = "I";
         bdgType.mention = "Inversion de lettres";
         bdgType.comment = "You can precise the inversion";
         badgeSystem(exactTarget, bdgType, "update");
@@ -26,6 +26,12 @@ export default function letterBadgeUpdate(bdgInfo) {
         bdgType.initial = "R";
         bdgType.mention = "Répétition de lettres";
         bdgType.comment = "You can precise the repetition (strong/incident...)";
+        badgeSystem(exactTarget, bdgType, "update");
+    } else if (bdgType == "Ajout de lettre/son") {
+        let bdgType = {};
+        bdgType.initial = "+";
+        bdgType.mention = "Ajout de lettre/son";
+        bdgType.comment = "...";
         badgeSystem(exactTarget, bdgType, "update");
     } else if (bdgType == "Point d'arrêt") {
         let bdgType = {};

@@ -821,12 +821,12 @@
     }
     
     .spaceRed {
-        background-color: pink;
+        background-color: pink!important;
         border: 1px thistle dotted;
     }
     
     .yellowWord {
-        background-color: yellow;
+        background-color: yellow!important;
     }
     
     .mComplexe {

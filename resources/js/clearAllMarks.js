@@ -6,4 +6,5 @@ export default function clearAllMarks() {
     $(".firstWordRead").removeClass("firstWordRead");
     $(".lastWordRead").removeClass("lastWordRead");
     $(".offLine").prop("checked", true);
+
 }

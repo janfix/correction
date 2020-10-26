@@ -2,6 +2,8 @@ import * as Rconti from './Rcontainer';
 
 export default function markLiaison(loc, type) {
 
+    console.log(Rconti.RContainer.liaisons);
+
     let locid = $(loc).attr("id");
     let Wprev = $("#" + locid).prev().attr("id");
     let Wnext = $("#" + locid).next().attr("id");

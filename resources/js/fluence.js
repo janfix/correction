@@ -7,9 +7,9 @@ import wordCMenu from './Word_CMenu';
 import spaceCMenu from './space_Cmenu';
 import punctCMenu from './punctCMenu';
 import timerCmenu from './timer_CMenu';
-import badgeSystem from './badgeSystem';
+/* import badgeSystem from './badgeSystem';
 import markLiaison from './markLiaison';
-import { each } from "jquery";
+import { each } from "jquery"; */
 import editorMode from "./editormode";
 
 
@@ -39,6 +39,8 @@ $(function() {
         }];
 
     }
+
+    Rconti.RContainer.liaisons = [];
 
 
     var textRef = CItem[0].content;
@@ -135,6 +137,7 @@ $(function() {
 
     // load TT Data   
     function loadTTData(nextOne) {
+        console.log("Depuis LoadTTdata");
         for (let i = 0; i < CData.length; i++) {
             if (CData[i].id == nextOne) {
                 //Load media    
@@ -430,6 +433,30 @@ $(function() {
     var wordTimerArray = [];
     //Time tagger installation
     $(".timeTagger").on("click", function() {
+        var modeActif = $(".mode").html();
+        if (modeActif == "Edition") {
+            //Load data !!! 
+            var actifRecord = $("#jumpDone").val();
+            console.log(actifRecord);
+            $(".ctimeBox").remove(); // Clean timetagger state if used in creation mode before.
+            for (let i = 0; i < Rconti.CorrDoneData.length; i++) {
+                if (Rconti.CorrDoneData[i].id == actifRecord) {
+                    console.log(Rconti.CorrDoneData[i].id)
+                    var editResult = JSON.parse(Rconti.CorrDoneData[i].results);
+                    console.log(editResult.timer)
+                    for (let y = 0; y < editResult.timer.length; y++) {
+                        $("#" + editResult.timer[y].origin).after("<div data-w=" + editResult.timer[y].origin + " class='ctimeBox'>" + editResult.timer[y].time + "</div>")
+                    }
+                }
+
+            }
+
+
+
+
+        } else {
+            //Mode creation
+        }
 
         $(".chronoTrack").css("backgroundColor", "green");
         Rconti.RContainer.tracker[1] = true;
@@ -438,7 +465,7 @@ $(function() {
         $(".ctimeBox").show();
 
         //Prepare context
-        $(".editZone").slideToggle();
+        $(".editZone").slideUp();
         $(".textSpace").find("input").prop("disabled", true).css("cursor", "default");
 
         //Hidding Buttons 
@@ -526,7 +553,7 @@ $(function() {
     // Closer Timetagger and restore marker UI !:::::!!!!! 
     $(".closeTTagger ").on("click", function() {
         //Edit Zone
-        $(".editZone").slideToggle();
+        $(".editZone").slideDown();
         //Line elements
         $(".textSpace").find("input").prop("disabled", false).css("cursor", "default");
         // Button - toolbar 2
@@ -618,5 +645,5 @@ $(function() {
         window.location.reload(true);
     })
     console.log("ready!");
-
+    console.log(Rconti.RContainer.liaisons);
 });

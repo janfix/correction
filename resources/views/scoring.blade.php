@@ -39,7 +39,7 @@
                                     <option selected disabled>choisissez...</option>
                                     <option value="inaudible">Inaudible</option>
                                     <option value="Contenu_Inap">Contenu inapproprié</option>
-                                    <option value="troncque">Tronqué</option>
+                                    <option value="tronque">Tronqué</option>
                                     <option value="interfs">Interférences</option>
                                     <option value="valide">Valide</option>
                                 </select>
@@ -80,7 +80,7 @@
                                     <option selected disabled>choisissez...</option>
                                     <option value="inaudible">Inaudible</option>
                                     <option value="Contenu_Inap">Contenu inapproprié</option>
-                                    <option value="troncque">Tronqué</option>
+                                    <option value="tronque">Tronqué</option>
                                     <option value="interfs">Interférences</option>
                                     <option value="valide">Valide</option>
                                 </select>

@@ -46673,15 +46673,19 @@ function editorMode() {
   $(".ttEditor").css("display", "inline");
   $(".testtaker").hide();
   $(".corrapp").css("background-color", "#fff3ef");
-  Object(_clearAllMarks__WEBPACK_IMPORTED_MODULE_1__["default"])(); //Update data First element by default
+  Object(_clearAllMarks__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  $(".closeTTagger").trigger("click"); //Update data First element by default
 
   updateData(); //Install listener on Test Taker Select to get ID value 
 
   $("#jumpDone").on("change", function () {
+    $(".closeTTagger").trigger("click");
+
     for (var _i = 0; _i < CorrDoneData.length; _i++) {
       if (CorrDoneData[_i].id == $(this).val()) {
         R = JSON.parse(CorrDoneData[_i].results);
-        Object(_clearAllMarks__WEBPACK_IMPORTED_MODULE_1__["default"])();
+        Object(_clearAllMarks__WEBPACK_IMPORTED_MODULE_1__["default"])(); // $(".liaigroup").remove();
+
         updateData(CorrDoneData[_i].id);
         _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].badges = R.badges;
         _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].liaisons = R.liaisons;
@@ -46690,8 +46694,10 @@ function editorMode() {
     }
   });
 
-  function updateData() {
-    //AudioQuality
+  function updateData(IDActif) {
+    _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].timer = R.timer;
+    console.log(R.timer); //AudioQuality
+
     $("#QaudioSelectEDITOR").val(R.audioQ);
     $("#commentPerf").val(R.comment);
     console.log(R);
@@ -46762,7 +46768,11 @@ function editorMode() {
       letterData.origin = R.letterBadges[_i5][1].origin;
       letterData.type = R.letterBadges[_i5][1].type;
       Object(_letterBadgeUpdate__WEBPACK_IMPORTED_MODULE_0__["default"])(letterData);
-    }
+    } //Display only 1 record ChronoTag ! 
+
+
+    var activRecord = $("#jumpDone").val();
+    console.log(activRecord);
   } // Close Editor and return to new correction mode
 
 
@@ -46773,7 +46783,10 @@ function editorMode() {
     $(".corrapp").css("background-color", "#F8F9FA");
     Object(_clearAllMarks__WEBPACK_IMPORTED_MODULE_1__["default"])();
     $(".trackIcon").css("background-color", "crimson");
+    _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].liaisons = [];
+    $(".textSpace").find(".ctimeBox").remove();
   });
+  return R;
 }
 
 /***/ }),
@@ -46797,11 +46810,7 @@ var constants__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_re
 /* harmony import */ var _space_Cmenu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./space_Cmenu */ "./resources/js/space_Cmenu.js");
 /* harmony import */ var _punctCMenu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./punctCMenu */ "./resources/js/punctCMenu.js");
 /* harmony import */ var _timer_CMenu__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./timer_CMenu */ "./resources/js/timer_CMenu.js");
-/* harmony import */ var _badgeSystem__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./badgeSystem */ "./resources/js/badgeSystem.js");
-/* harmony import */ var _markLiaison__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./markLiaison */ "./resources/js/markLiaison.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _editormode__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./editormode */ "./resources/js/editormode.js");
+/* harmony import */ var _editormode__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./editormode */ "./resources/js/editormode.js");
 
 
 
@@ -46811,8 +46820,9 @@ var constants__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_re
 
 
 
-
-
+/* import badgeSystem from './badgeSystem';
+import markLiaison from './markLiaison';
+import { each } from "jquery"; */
 
 
 $(function () {
@@ -46838,6 +46848,7 @@ $(function () {
     }];
   }
 
+  _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].liaisons = [];
   var textRef = CItem[0].content;
   var instructions = CItem[0].instructions;
   /*  var CorrCode = CData[0].Corr_Code;
@@ -46876,7 +46887,7 @@ $(function () {
     loadTTData(newval);
   });
   $(".openEditorMode").on("click", function () {
-    Object(_editormode__WEBPACK_IMPORTED_MODULE_12__["default"])();
+    Object(_editormode__WEBPACK_IMPORTED_MODULE_9__["default"])();
   });
   $(".HLliaisons").on("click", function () {
     $(".liaisonTrack").css("backgroundColor", "green");
@@ -46918,6 +46929,8 @@ $(function () {
 
 
   function loadTTData(nextOne) {
+    console.log("Depuis LoadTTdata");
+
     for (var _i2 = 0; _i2 < CData.length; _i2++) {
       if (CData[_i2].id == nextOne) {
         //Load media    
@@ -47111,12 +47124,34 @@ $(function () {
   var wordTimerArray = []; //Time tagger installation
 
   $(".timeTagger").on("click", function () {
+    var modeActif = $(".mode").html();
+
+    if (modeActif == "Edition") {
+      //Load data !!! 
+      var actifRecord = $("#jumpDone").val();
+      console.log(actifRecord);
+      $(".ctimeBox").remove(); // Clean timetagger state if used in creation mode before.
+
+      for (var _i3 = 0; _i3 < _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["CorrDoneData"].length; _i3++) {
+        if (_Rcontainer__WEBPACK_IMPORTED_MODULE_3__["CorrDoneData"][_i3].id == actifRecord) {
+          console.log(_Rcontainer__WEBPACK_IMPORTED_MODULE_3__["CorrDoneData"][_i3].id);
+          var editResult = JSON.parse(_Rcontainer__WEBPACK_IMPORTED_MODULE_3__["CorrDoneData"][_i3].results);
+          console.log(editResult.timer);
+
+          for (var y = 0; y < editResult.timer.length; y++) {
+            $("#" + editResult.timer[y].origin).after("<div data-w=" + editResult.timer[y].origin + " class='ctimeBox'>" + editResult.timer[y].time + "</div>");
+          }
+        }
+      }
+    } else {//Mode creation
+    }
+
     $(".chronoTrack").css("backgroundColor", "green");
     _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].tracker[1] = true; //show chrono-mark
 
     $(".ctimeBox").show(); //Prepare context
 
-    $(".editZone").slideToggle();
+    $(".editZone").slideUp();
     $(".textSpace").find("input").prop("disabled", true).css("cursor", "default"); //Hidding Buttons 
 
     $(".HLcomplexWords").hide();
@@ -47193,7 +47228,7 @@ $(function () {
 
   $(".closeTTagger ").on("click", function () {
     //Edit Zone
-    $(".editZone").slideToggle(); //Line elements
+    $(".editZone").slideDown(); //Line elements
 
     $(".textSpace").find("input").prop("disabled", false).css("cursor", "default"); // Button - toolbar 2
 
@@ -47257,17 +47292,17 @@ $(function () {
         var delwtid = $(e.target).attr("data-w");
         console.log(delwtid);
 
-        for (var _i3 = 0; _i3 < wordTimerArray.length; _i3++) {
-          if (wordTimerArray[_i3] == delwtid) {
-            wordTimerArray.splice(_i3, 1);
+        for (var _i4 = 0; _i4 < wordTimerArray.length; _i4++) {
+          if (wordTimerArray[_i4] == delwtid) {
+            wordTimerArray.splice(_i4, 1);
           }
         } //Suppression de la data dans le RContainer à faire
         // Trouver l'ID à virer et la virer ...
 
 
-        for (var _i4 = 0; _i4 < _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer.length; _i4++) {
-          if (_Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer[_i4].origin == delwtid) {
-            _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer.splice(_i4, 1);
+        for (var _i5 = 0; _i5 < _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer.length; _i5++) {
+          if (_Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer[_i5].origin == delwtid) {
+            _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer.splice(_i5, 1);
           }
         }
 
@@ -47280,6 +47315,7 @@ $(function () {
     window.location.reload(true);
   });
   console.log("ready!");
+  console.log(_Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].liaisons);
 });
 
 /***/ }),
@@ -47469,6 +47505,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Rcontainer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Rcontainer */ "./resources/js/Rcontainer.js");
 
 function markLiaison(loc, type) {
+  console.log(_Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].liaisons);
   var locid = $(loc).attr("id");
   var Wprev = $("#" + locid).prev().attr("id");
   var Wnext = $("#" + locid).next().attr("id");
@@ -48661,8 +48698,8 @@ function RWordCount() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\laragon\www\correction\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\laragon\www\correction\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\laragon\www\deppcorrection.wiquid.fr\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\laragon\www\deppcorrection.wiquid.fr\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -133,5 +133,5 @@ $(document).ready(function() {
 
 
 
-    console.log("ready from attribution 11")
+    //console.log("ready from attribution 11")
 });

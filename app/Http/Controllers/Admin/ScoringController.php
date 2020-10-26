@@ -54,16 +54,16 @@ class ScoringController extends Controller
           "created_at" => "2019-11-27 14:47:18",
           "updated_at" => "2019-11-27 14:47:18");
           //$superArray = json_encode($superArray);
-          dd($corrections);
+          //dd($corrections);
 
           $items = new collection;
           
           $iteminfos = array(
             "mediapath"=>"-",
-            "corrname" =>"This correction is over",          
-            "instructions"=> "This correction is over",
-            "content"=> "This correction is over",
-            "content_ref"=> "This correction is over",
+            "corrname" =>"Cette correction est terminée",          
+            "instructions"=> "Cette correction est terminée",
+            "content"=> "Cette correction est terminée",
+            "content_ref"=> "Cette correction est terminée",
             "subject"=> "-",
             "level"=> "-",
             "grade"=>"-"

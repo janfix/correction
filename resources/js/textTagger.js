@@ -11,7 +11,6 @@ import punctCMenu from './punctCMenu';
 import RWordCount from './wordcounter';
 
 export default function tagtext(st_brut) {
-    console.log("From TextTagger");
     var st_arrLine = [];
     var complexWord = []
 

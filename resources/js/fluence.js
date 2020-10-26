@@ -73,6 +73,16 @@ $(function() {
         " - Grade: " + CItem[0].grade
     );
 
+    if (CItem[0].corrname == "Cette correction est terminée") {
+        $(".editZone").html("<div class='fini'>Cette correction est terminée.</div>");
+        $(".testtaker ").hide();
+        $(".toolbarCorrection").hide();
+        $(".bigReset").hide();
+        $("#commentPerf").hide();
+        $(".commentTitle").hide();
+        $(".textSpace").hide();
+    }
+
     $("#mp3").attr("src", "/../uploads/" + mediaFolderName + "/" + CData[0].mediafilename + ".mp3");
 
     //Hide time tagger button
@@ -91,6 +101,8 @@ $(function() {
         loadTTData(newval);
 
     });
+
+
 
 
     $(".openEditorMode").on("click", function() {
@@ -644,6 +656,5 @@ $(function() {
     $(".bigReset").on("click", function() {
         window.location.reload(true);
     })
-    console.log("ready!");
-    console.log(Rconti.RContainer.liaisons);
+
 });

@@ -14,7 +14,7 @@
      </div>
        <div class="container p-3 corrapp">
         <div class="itemInfo"></div>    
-        <h1 class="toptitle">{{trans('correction.Scoring text-reading fluency')}}</h1>
+        <h1 class="toptitle">Evaluer la lecture orale de texte</h1>
             
             
             <div class="testtaker row">

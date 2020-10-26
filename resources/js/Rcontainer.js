@@ -30,7 +30,7 @@ var groupMark = function(firstW, lastW, type) {
 }
 
 try {
-    console.log("LOAD DU JSON DONE");
+
     var CorrDoneData = JSON.parse($(".hiddenCorrDone").html());
 } catch (error) {
     var CorrDoneData = [{

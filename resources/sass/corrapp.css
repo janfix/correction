@@ -867,3 +867,9 @@
     .trackCorr {
         margin-left: 3px;
     }
+    
+    .fini {
+        margin-top: 18px;
+        font-size: 65px;
+        text-align: center;
+    }

@@ -1,38 +1,38 @@
 // IDM 
-$(document).ready(function () {
+$(document).ready(function() {
     var strWord = $(".IDMhiddenItem").html();
     //console.log(strWord);
     try {
-       strWord = JSON.parse(strWord);  
+        strWord = JSON.parse(strWord);
     } catch (error) {
-      strWord =[{word:"none"}]; 
+        strWord = [{ word: "none" }];
     }
     var wordobj;
     try {
-      wordobj = JSON.parse(strWord[0].content);  
+        wordobj = JSON.parse(strWord[0].content);
     } catch (error) {
-      wordobj = {words:["none"]}  
+        wordobj = { words: ["none"] }
     }
-    
-    var brutMediaNameSTR = $(".itemAvailable").html().trim().slice(0,-1);
+
+    var brutMediaNameSTR = $(".itemAvailable").html().trim().slice(0, -1);
     var brutMediaName = brutMediaNameSTR.split(",");
-   // console.log(brutMediaName);
+    // console.log(brutMediaName);
     var wordFilter = [];
     var wordOK = [];
-    var allWords =  wordobj.words;
+    var allWords = wordobj.words;
     //console.log(allWords);
-   for (let i = 0; i < brutMediaName.length; i++) {
-       let OneItem = brutMediaName[i].split("_")[1];
-       wordFilter.push(OneItem);
-   }
+    for (let i = 0; i < brutMediaName.length; i++) {
+        let OneItem = brutMediaName[i].split("_")[1];
+        wordFilter.push(OneItem);
+    }
     //console.log(wordFilter);
 
     for (let i = 0; i < wordFilter.length; i++) {
         for (let y = 0; y < allWords.length; y++) {
-             if (wordFilter[i] == y){
-              wordOK.push(allWords[y]);
-             };
-        }    
+            if (wordFilter[i] == y) {
+                wordOK.push(allWords[y]);
+            };
+        }
     }
     //console.log(wordOK);
     var wordArray = wordobj.words;
@@ -44,25 +44,25 @@ $(document).ready(function () {
     try {
         IDMCorrobj = JSON.parse(strCorr);
     } catch (error) {
-        IDMCorrobj = [{state:"", mediafilename:"null_null"}]
+        IDMCorrobj = [{ state: "", mediafilename: "null_null" }]
     }
 
     //console.log(IDMCorrobj[0].mediafilename);
     //Scan the item completely done
-console.log(IDMCorrobj);
+    console.log(IDMCorrobj);
 
     for (let i = 0; i < wordArray.length; i++) {
         let itemCpt = 0,
-        itemCptTodo = 0;
+            itemCptTodo = 0;
         for (var key in IDMCorrobj) {
             if (IDMCorrobj.hasOwnProperty(key)) {
                 let stritemByTTid = IDMCorrobj[key].mediafilename;
                 let itemByTTid = stritemByTTid.split("_");
-                    if (itemByTTid[1] == i) {
-                        if (IDMCorrobj[key].state == "todo") {
-                            ++itemCptTodo
-                        }
+                if (itemByTTid[1] == i) {
+                    if (IDMCorrobj[key].state == "todo") {
+                        ++itemCptTodo
                     }
+                }
             }
         }
         if (itemCptTodo == 0) {
@@ -78,16 +78,16 @@ console.log(IDMCorrobj);
 
 
 
-    $(".idmValidation").on("click", function () {
-        var btMention = $(this).html();        
+    $(".idmValidation").on("click", function() {
+        var btMention = $(this).html();
         var $that = $('.IDMttTodo').find('.active').clone();
         var recordID = $that.attr("data");
         IDMCorrobj[recordID].state = "done";
-       
+
         $('.IDMttTodo').find('.active').animate({
             left: "+800px",
             opacity: "0"
-        }, 500, function () {
+        }, 500, function() {
             $(this).fadeOut('slow').remove();
 
 
@@ -108,7 +108,7 @@ console.log(IDMCorrobj);
             $("#ttidactiv").html(active_TT);
 
         });
-      
+
     })
 
     var zeActiveWord = $(".activWord").html();
@@ -123,7 +123,7 @@ console.log(IDMCorrobj);
         getmediaIDM(zeActiveWord);
     }
 
-    $("#worditem").on('change', function () {
+    $("#worditem").on('change', function() {
         var choosenWord = $(this).val();
         $("#wordToListen").html(choosenWord);
         $(".activWord").html(choosenWord);
@@ -134,28 +134,29 @@ console.log(IDMCorrobj);
     });
 
     // Default LOAD 
-var uniqWord = [];
-var greyWords = JSON.parse($(".greyWords").html());
+    var uniqWord = [];
+    var greyWords = JSON.parse($(".greyWords").html());
 
     for (let i = 0; i < (wordArray.length); i++) {
 
         for (let y = 0; y < wordOK.length; y++) {
-            if (wordOK[y] == wordArray[i]){
-               if (uniqWord.indexOf(wordOK[y]) == -1) {
-                   uniqWord.push(wordOK[y]);}
+            if (wordOK[y] == wordArray[i]) {
+                if (uniqWord.indexOf(wordOK[y]) == -1) {
+                    uniqWord.push(wordOK[y]);
+                }
             }
         }
 
     }
     for (let i = 0; i < uniqWord.length; i++) {
-         if (zeActiveWord == uniqWord[i]) {
-             $("#worditem").prepend('<option selected  class="' + uniqWord[i] + '"  value="' + uniqWord[i] + '">' + uniqWord[i] + '</option>');
-         } else {
-             $("#worditem").append('<option class="' + uniqWord[i] + '"  value="' + uniqWord[i] + '">' + uniqWord[i] + '</option>');
-         }
-        
+        if (zeActiveWord == uniqWord[i]) {
+            $("#worditem").prepend('<option selected  class="' + uniqWord[i] + '"  value="' + uniqWord[i] + '">' + uniqWord[i] + '</option>');
+        } else {
+            $("#worditem").append('<option class="' + uniqWord[i] + '"  value="' + uniqWord[i] + '">' + uniqWord[i] + '</option>');
+        }
+
     }
-   
+
     for (let i = 0; i < greyWords.length; i++) {
         $("." + greyWords[i]).css("color", "lightgrey");
     }
@@ -182,11 +183,11 @@ var greyWords = JSON.parse($(".greyWords").html());
     function getmediaIDM(Witem) {
         var idrecord;
         console.log(Witem);
-        
+
         $(".IDMtodoList").empty();
         $(".IDMListDone").empty();
         for (var key in IDMCorrobj) {
-            
+
             let strTTid = IDMCorrobj[key].mediafilename;
             let StateItem = IDMCorrobj[key].state;
             let ResultItem = IDMCorrobj[key].results;
@@ -238,14 +239,14 @@ var greyWords = JSON.parse($(".greyWords").html());
         }
 
 
-        $(".backTodo").on('click', function () {
+        $(".backTodo").on('click', function() {
             let recid = $(this).parent().parent().parent().attr("name");
             $(this).parent().parent().parent().find(".idmttid").val(recid);
 
             $(this).parent().parent().parent().animate({
                 left: "-800px",
                 opacity: "0"
-            }, 500, function () {
+            }, 500, function() {
                 $(this).fadeOut('slow').remove();
             });
         });

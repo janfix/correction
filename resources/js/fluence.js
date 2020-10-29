@@ -361,6 +361,7 @@ $(function() {
         $("#datacorr").val(JSON.stringify(jsondata));
         $("#perfid").val((getPerfActiv()));
         console.log(jsondata);
+
         return true; // return false to cancel form action
     });
 
@@ -379,8 +380,6 @@ $(function() {
 
         //Results
         jsondata = Rconti.RContainer;
-
-
         $("#EMdatacorr").val(JSON.stringify(jsondata));
         var perfActiv = $("#jumpDone option:selected").val();
         $("#EMperfid").val(perfActiv);

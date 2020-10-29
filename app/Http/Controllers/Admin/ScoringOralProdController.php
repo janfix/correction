@@ -23,10 +23,16 @@ class ScoringOralProdController extends Controller
        $user = auth()->user(); // Scope by user
        //$corrections = Coresult:: where('item_id', $perfid)->where('state','todo')->get();
        $superArray = array();
+       $CorrDone = array();
       
        $corrections = $user->coresults->where('item_id', $perfid)->where('state','todo');// Scope by user
         foreach ($corrections as $key => $correction) { //Convert collection to array respecting structure of interface
           array_push($superArray, $correction);
+        }
+
+        $correctionsDone = $user->coresults->where('item_id', $perfid)->where('state','done');// Scope by user  
+         foreach ($correctionsDone as $key => $correctionDone) { //Convert collection to array respecting structure of interface
+          array_push($CorrDone, $correctionDone);
         }
   
         if(sizeof($superArray) > 0){
@@ -45,9 +51,6 @@ class ScoringOralProdController extends Controller
           "created_at" => "2019-11-27 14:47:18",
           "updated_at" => "2019-11-27 14:47:18");
           //$superArray = json_encode($superArray);
-  
-          
-
           //dd($corrections);
 
           $items = new collection;
@@ -90,7 +93,8 @@ class ScoringOralProdController extends Controller
         return view('scoringOral')->with([
             'user' => $user, 
             'correction'=>"[".implode(",",$superArray)."]", 
-            'item'=>$items
+            'item'=>$items,
+            'corrDone' =>"[".implode(",",$CorrDone)."]"
             ]);      
     }
 

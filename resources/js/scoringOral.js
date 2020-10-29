@@ -39,6 +39,12 @@ $(function() {
     if (hCorDone.length == 0) {
         $(".oralEditorMode").prop("disabled", true);
     }
+    console.log(CData[0].id)
+    if (CData[0].id == "") {
+
+        $(".middlePart").empty();
+        $(".middlePart").append('<h1>Correction terminée</h1>')
+    }
 
 
 
@@ -183,6 +189,8 @@ $(function() {
             $(".ttEditor").css("display", "none");
             $(".testtaker").show();
             $(".corrapp").css("background-color", "transparent");
+            $(".Qx").find("input").prop("checked", false);
+            $("#commentPerf").val("");
         })
 
 

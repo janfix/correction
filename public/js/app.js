@@ -48027,6 +48027,13 @@ $(function () {
     $(".oralEditorMode").prop("disabled", true);
   }
 
+  console.log(CData[0].id);
+
+  if (CData[0].id == "") {
+    $(".middlePart").empty();
+    $(".middlePart").append('<h1>Correction terminée</h1>');
+  }
+
   if (CItem[0].itemtype == "Oral_production") {
     //Building JSON RESPONSE To send to Database CREATION
     var getPerfActiv = function getPerfActiv() {
@@ -48154,6 +48161,8 @@ $(function () {
       $(".ttEditor").css("display", "none");
       $(".testtaker").show();
       $(".corrapp").css("background-color", "transparent");
+      $(".Qx").find("input").prop("checked", false);
+      $("#commentPerf").val("");
     });
   }
 });

@@ -46672,7 +46672,9 @@ function editorMode() {
   $(".testtaker").hide();
   $(".corrapp").css("background-color", "#fff3ef");
   Object(_clearAllMarks__WEBPACK_IMPORTED_MODULE_1__["default"])();
-  $(".closeTTagger").trigger("click"); //Update data First element by default
+  $(".closeTTagger").trigger("click");
+  var mediaFolderName = CorrDoneData[0].mediafolder;
+  $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[0].mediafilename + ".mp3"); //Update data First element by default
 
   updateData(); //Install listener on Test Taker Select to get ID value 
 
@@ -46682,6 +46684,7 @@ function editorMode() {
     for (var _i = 0; _i < CorrDoneData.length; _i++) {
       if (CorrDoneData[_i].id == $(this).val()) {
         R = JSON.parse(CorrDoneData[_i].results);
+        $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[_i].mediafilename + ".mp3");
         Object(_clearAllMarks__WEBPACK_IMPORTED_MODULE_1__["default"])(); // $(".liaigroup").remove();
 
         updateData(CorrDoneData[_i].id);
@@ -46783,6 +46786,13 @@ function editorMode() {
     $(".trackIcon").css("background-color", "crimson");
     _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].liaisons = [];
     $(".textSpace").find(".ctimeBox").remove();
+    var CData = JSON.parse($(".hiddenData").html());
+
+    for (var _i6 = 0; _i6 < CData.length; _i6++) {
+      if (CData[_i6].id == $("#jump").val()) {
+        $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CData[_i6].mediafilename + ".mp3");
+      }
+    }
   });
   return R;
 }

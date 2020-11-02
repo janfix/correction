@@ -30,6 +30,9 @@ export default function editorMode() {
     clearAllMarks();
     $(".closeTTagger").trigger("click");
 
+    var mediaFolderName = CorrDoneData[0].mediafolder;
+    $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[0].mediafilename + ".mp3");
+
 
 
     //Update data First element by default
@@ -38,10 +41,11 @@ export default function editorMode() {
     //Install listener on Test Taker Select to get ID value 
     $("#jumpDone").on("change", function() {
         $(".closeTTagger").trigger("click");
+
         for (let i = 0; i < CorrDoneData.length; i++) {
             if (CorrDoneData[i].id == $(this).val()) {
                 R = JSON.parse(CorrDoneData[i].results);
-
+                $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[i].mediafilename + ".mp3");
                 clearAllMarks();
                 // $(".liaigroup").remove();
                 updateData(CorrDoneData[i].id);
@@ -140,6 +144,14 @@ export default function editorMode() {
         $(".trackIcon").css("background-color", "crimson");
         Rconti.RContainer.liaisons = [];
         $(".textSpace").find(".ctimeBox").remove();
+        var CData = JSON.parse($(".hiddenData").html());
+        for (let i = 0; i < CData.length; i++) {
+            if (CData[i].id == $("#jump").val()) {
+                $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CData[i].mediafilename + ".mp3");
+            }
+
+        }
+
 
     });
 

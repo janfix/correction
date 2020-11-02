@@ -147,6 +147,7 @@ export default function editorMode() {
         var CData = JSON.parse($(".hiddenData").html());
         for (let i = 0; i < CData.length; i++) {
             if (CData[i].id == $("#jump").val()) {
+                console.log("JP TRACKER");
                 $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CData[i].mediafilename + ".mp3");
             }
 

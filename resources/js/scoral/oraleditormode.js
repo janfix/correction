@@ -34,6 +34,9 @@ export default function oralEditorMode() {
     $(".testtaker").hide();
     $(".corrapp").css("background-color", "#fff3ef");
 
+    var mediaFolderName = CorrDoneData[0].mediafolder;
+    $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[0].mediafilename + ".mp3");
+
 
     var IDActif = $("#jumpDone").val();
     //Update data First element by default
@@ -50,6 +53,7 @@ export default function oralEditorMode() {
         for (let i = 0; i < CorrDoneData.length; i++) {
             if (CorrDoneData[i].id == IDActif) {
                 R = JSON.parse(CorrDoneData[i].results);
+                $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[i].mediafilename + ".mp3");
                 //AudioQuality
                 $("#QaudioSelectEDITOR").val(R.audioQ);
                 $("#commentPerf").val(R.comment);
@@ -68,14 +72,20 @@ export default function oralEditorMode() {
 
 
     // Close Editor and return to new correction mode
-    $(".closeEditorMode").on("click", function() {
+    $(".oralCloseEditorMode").on("click", function() {
         $(".mode").html("Creation");
         $(".ttEditor").hide();
         $(".testtaker").show();
         $(".corrapp").css("background-color", "#F8F9FA");
-        clearAllMarks();
         $(".trackIcon").css("background-color", "crimson");
         $(".textSpace").find(".ctimeBox").remove();
+        var CData = JSON.parse($(".hiddenData").html());
+        for (let i = 0; i < CData.length; i++) {
+            if (CData[i].id == $("#jump").val()) {
+                $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CData[i].mediafilename + ".mp3");
+            }
+
+        }
 
     });
 

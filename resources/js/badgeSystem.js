@@ -9,6 +9,12 @@ import RWordCount from './wordcounter';
 //POP OVER Free Annotation
 export default function badgeSystem(zeTarget, bdgType, mode) {
     var ElementType = $(zeTarget).attr("data-type"); // Letter or Word ?
+    console.log(bdgType);
+    console.log(ElementType);
+    console.log(mode);
+    if (typeof ElementType == "undefined") {
+        ElementType = bdgType.unit;
+    }
     var styleElement;
     var Tracker;
     var badgeTracker;
@@ -24,20 +30,24 @@ export default function badgeSystem(zeTarget, bdgType, mode) {
 
     if (ElementType == "letter") {
 
-        console.log(zeTarget);
-        console.log(bdgType);
+        /* console.log(zeTarget);
+        console.log(bdgType); */
 
         Tracker = $(zeTarget).parent().attr('id');
         var uniqID = Tracker + bdgType.initial;
-        console.log(Tracker);
-        console.log(uniqID);
+        /*         console.log(uniqID);
+                console.log(Tracker);
+         */
 
-
-        badgeTracker = new Rconti.badges(bdgType.initial, bdgType.mention, Tracker, uniqID);
+        badgeTracker = new Rconti.letterBadges(bdgType.initial, bdgType.mention, Tracker, uniqID);
         console.log(badgeTracker);
         var wordCode = badgeTracker.origin.split("L");
         if (mode == "creation") {
+            console.log("YYYYYYYYESTU?");
             Rconti.RContainer.letterBadges.push([wordCode[0], badgeTracker]);
+            console.log(Rconti.RContainer.letterBadges);
+        } else {
+            console.log("MODE EDITION BADGE LETTRE")
         }
 
         $(zeTarget).parent().find(".badgeContainer").append('<div id="' + uniqID + '" title="' + bdgType.mention + '" class="' + styleElement + ' freeNote" data-content="<i>' + bdgType.comment + '</i>">' + bdgType.initial + '</div>');

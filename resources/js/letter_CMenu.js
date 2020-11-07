@@ -42,6 +42,7 @@ export default function letterCMenu() {
                 bdgType.initial = "G";
                 bdgType.mention = "Graphème mal lu";
                 bdgType.pHolder = "You can precise the type of confusion : symetry b/d or p/b or more phonological : m/n, s/c";
+                bdgType.unit = "letter"
                 badgeSystem(e.target, bdgType, "creation");
                 $(".dropdown-item").off();
                 $("#letterCMenu").removeClass("show").hide();
@@ -51,6 +52,7 @@ export default function letterCMenu() {
                 bdgType.initial = "I";
                 bdgType.mention = "Inversion de lettres(I)";
                 bdgType.pHolder = "You can precise the inversion";
+                bdgType.unit = "letter"
                 badgeSystem(e.target, bdgType, "creation");
                 $(".dropdown-item").off();
                 $("#letterCMenu").removeClass("show").hide();
@@ -60,6 +62,7 @@ export default function letterCMenu() {
                 bdgType.initial = "R";
                 bdgType.mention = "Répétition de lettres";
                 bdgType.pHolder = "You can precise the repetition (strong/incident...)";
+                bdgType.unit = "letter"
                 badgeSystem(e.target, bdgType, "creation");
                 $(".dropdown-item").off();
                 $("#letterCMenu").removeClass("show").hide();
@@ -70,6 +73,7 @@ export default function letterCMenu() {
                 bdgType.initial = "+";
                 bdgType.mention = "Ajout de lettre/son";
                 bdgType.pHolder = "You can precise the repetition (strong/incident...)";
+                bdgType.unit = "letter"
                 badgeSystem(e.target, bdgType, "creation");
                 $(".dropdown-item").off();
                 $("#letterCMenu").removeClass("show").hide();
@@ -80,6 +84,7 @@ export default function letterCMenu() {
                 bdgType.initial = "A";
                 bdgType.mention = "Point d'arrêt";
                 bdgType.pHolder = "You can comment";
+                bdgType.unit = "letter"
                 badgeSystem(e.target, bdgType, "creation");
                 $(".dropdown-item").off();
                 $("#letterCMenu").removeClass("show").hide();
@@ -89,6 +94,7 @@ export default function letterCMenu() {
                 bdgType.initial = "O";
                 bdgType.mention = "Ommission";
                 bdgType.pHolder = "You can comment the ommission";
+                bdgType.unit = "letter"
                 badgeSystem(e.target, bdgType, "creation");
                 $(".dropdown-item").off();
                 $("#letterCMenu").removeClass("show").hide();

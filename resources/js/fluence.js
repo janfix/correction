@@ -102,7 +102,9 @@ $(function() {
 
     });
 
-
+    $("body").on("click", function() {
+        closeAllMC();
+    })
 
 
     $(".openEditorMode").on("click", function() {
@@ -111,12 +113,14 @@ $(function() {
 
     $(".HLliaisons").on("click", function() {
         $(".liaisonTrack").css("backgroundColor", "green");
+        $(".liaisonTrackED").css("backgroundColor", "green");
         Rconti.RContainer.tracker[3] = true;
         $(".liaiOblig").toggleClass("spaceRed");
     });
 
     $(".HLcomplexWords").on("click", function() {
         $(".mComplexTrack").css("backgroundColor", "green");
+        $(".mComplexTrackED").css("backgroundColor", "green");
         Rconti.RContainer.tracker[2] = true;
         $(".complexWord").toggleClass("yellowWord").removeClass("h_word");
     });
@@ -301,7 +305,7 @@ $(function() {
         var isItLast = $(word).attr("class").split(/\s+/);
 
         // From word to h-word and reverse
-        $(word).toggleClass("word").toggleClass("h_word");
+        $(word).toggleClass("h_word");
         // Constitution of Array hesiWords based on unique Word ID
         if (hesiWords.indexOf($(word).attr("id")) === -1) {
             hesiWords.push($(word).attr("id"));
@@ -326,7 +330,7 @@ $(function() {
     })
 
     $("#QaudioSelectEDITOR").on("change", function() {
-        $(".audioTrack").css("backgroundColor", "green");
+        $(".audioTrackED").css("backgroundColor", "green");
         Rconti.RContainer.tracker[0] = true;
 
         if ($(this).val() == "inaudible" || $(this).val() == "Contenu_Inap") {
@@ -465,11 +469,10 @@ $(function() {
 
 
 
-        } else {
-            //Mode creation
         }
 
         $(".chronoTrack").css("backgroundColor", "green");
+        $(".chronoTrackED").css("backgroundColor", "green");
         Rconti.RContainer.tracker[1] = true;
 
         //show chrono-mark
@@ -554,7 +557,9 @@ $(function() {
         $(".resetTimer").on("click", function() {
             $("#timerCmenu").hide();
             $(".ctimeBox").remove();
-            wordTimerArray = [];
+            //wordTimerArray = [];
+            Rconti.RContainer.timer = [];
+
         });
 
 
@@ -593,7 +598,6 @@ $(function() {
         $(".word").on("click", function() {
             closeAllMC();
             var isItLast = $(this).attr("class").split(/\s+/);
-            console.log(isItLast);
             if (isItLast.indexOf("lastWordRead") == -1) {
                 mark_hesitation(this);
             }

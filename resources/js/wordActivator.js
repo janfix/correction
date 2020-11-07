@@ -6,18 +6,21 @@
 import * as Rconti from './Rcontainer';
 import letterCMenu from './letter_CMenu';
 import letterBadgeUpdate from './letterBadgeUpdate';
-import badgeSystem from './badgeSystem';
-
-
-
 
 // Add listeners on Words and listeners on word's letters...
 export default function wordActivator() {
+    var CorrDoneData = Rconti.CorrDoneData;
+    var idtt = $("#jumpDone").val();
+    for (let i = 0; i < CorrDoneData.length; i++) {
+        if (CorrDoneData[i].id == idtt) {
+            var PersonalResults = JSON.parse(CorrDoneData[i].results) //input
+        }
+    }
 
 
     $(".word").on("click", function() {
         console.log("Loading CorrDoneData");
-        var CorrDoneData = Rconti.CorrDoneData;
+
         var whatMode = $(".mode").html();
 
         var wordToDisplay = "";
@@ -46,7 +49,6 @@ export default function wordActivator() {
                         bdginfo.type = Rconti.RContainer.letterBadges[i][1].type;
                         console.log(bdginfo);
                         letterBadgeUpdate(bdginfo);
-                        /* badgeSystem($("#" + idLet).html(), bdginfo) */
                     };
 
                 }
@@ -60,14 +62,10 @@ export default function wordActivator() {
 
         if (whatMode == "Edition") {
             console.log("Edition --------");
-            var idtt = $("#jumpDone").val();
 
-            for (let i = 0; i < CorrDoneData.length; i++) {
-                if (CorrDoneData[i].id == idtt) {
-                    var PersonalResults = JSON.parse(CorrDoneData[i].results)
 
-                }
-            }
+
+
 
 
             for (let y = 0; y < PersonalResults.letterBadges.length; y++) {
@@ -81,6 +79,8 @@ export default function wordActivator() {
                 console.log(PersonalResults);
 
                 $("#" + zeTarget).find(".badgeContainer").append('<div id= ' + id + ' class="badgeLetter" title="' + bdgType + '">' + codeError + '</div>');
+                console.log(Rconti.RContainer);
+
                 $(".badgeLetter:contains('A')").parent().parent().find(".exactLetter").append("<span class='DIA'>|</span>");
                 var wBlocked = $(".badgeLetter:contains('A')").parent().parent().attr("data-word");
                 if (wBlocked) {
@@ -101,6 +101,8 @@ export default function wordActivator() {
                 $(".badgeLetter:contains('O')").parent().parent().addClass("missingLetter");
 
             }
+            Rconti.RContainer.letterBadges = PersonalResults.letterBadges;
+            console.log(Rconti.RContainer);
 
         }
 

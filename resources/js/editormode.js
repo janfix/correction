@@ -38,9 +38,12 @@ export default function editorMode() {
     //Update data First element by default
     updateData()
 
+
     //Install listener on Test Taker Select to get ID value 
     $("#jumpDone").on("change", function() {
         $(".closeTTagger").trigger("click");
+        $(".letterControl").html("<span class='letter zoneEdition'>Espace analyse des mots </span>");
+
 
         for (let i = 0; i < CorrDoneData.length; i++) {
             if (CorrDoneData[i].id == $(this).val()) {
@@ -53,18 +56,19 @@ export default function editorMode() {
                 Rconti.RContainer.liaisons = R.liaisons;
                 Rconti.RContainer.letterBadges = R.letterBadges;
 
+
             }
         }
     })
 
     function updateData(IDActif) {
         Rconti.RContainer.timer = R.timer;
-        console.log(R.timer)
+        Rconti.RContainer.timeReset = R.timeReset;
+        $(".startValue").html(R.timeReset);
 
         //AudioQuality
         $("#QaudioSelectEDITOR").val(R.audioQ);
         $("#commentPerf").val(R.comment);
-        console.log(R);
         if (R.tracker[0] == true) {
             $(".audioTrackED").css("backgroundColor", "green");
         } else {
@@ -93,6 +97,13 @@ export default function editorMode() {
         if (R.lastWord.length > 0) { $("#" + R.lastWord).addClass("lastWordRead"); }
         //TODO : cancel lines and words after ! 
         //TODO : listener dblckick to cancel
+        //Update in data give element to Rconti.container ! 
+        Rconti.RContainer.firstWord = R.firstWord;
+        Rconti.RContainer.lastWord = R.lastWord;
+
+        //Tracker rouge / vert
+        Rconti.RContainer.tracker = R.tracker;
+
 
 
         //Loops automatic manage empty fields
@@ -118,17 +129,18 @@ export default function editorMode() {
         }
 
         //Badges For letters - First LOAD - !
-
         for (let i = 0; i < R.letterBadges.length; i++) {
             var letterData = {};
             letterData.origin = R.letterBadges[i][1].origin;
             letterData.type = R.letterBadges[i][1].type;
-            letterBadgeUpdate(letterData);
+            //letterBadgeUpdate(letterData); //Inutile car c'est le word activator qui prend en charge !!!!
         }
 
         //Display only 1 record ChronoTag ! 
         var activRecord = $("#jumpDone").val();
         console.log(activRecord);
+
+        BadgeLetterDelete()
 
 
 
@@ -152,9 +164,73 @@ export default function editorMode() {
             }
 
         }
+        $(".closeTTagger").trigger("click");
+        $(".letterControl").html('<span class="letter zoneEdition">Espace analyse des mots </span>');
 
 
     });
+
+    //DELELTE BADGE LETTER ON DBLCLICK
+    function BadgeLetterDelete() {
+        $(document).on("dblclick", ".badgeLetter", function(e) {
+            let specialCase = $(this).attr("title");
+            // console.log(specialCase);
+            if (specialCase == "Scalling Point" || specialCase == "Point d'arrêt" || specialCase == "Ommission") {
+                if (typeof $(e.target).parent().parent().attr("id") !== "undefined") {
+                    let IdentifWord = $(e.target).parent().parent().attr("id").split("L");
+                    if (typeof IdentifWord !== "undefined") {}
+                    console.log(IdentifWord);
+                    let WordLength = $("#" + IdentifWord[0]).html().length
+                    $(".DIA").remove();
+                    for (let i = IdentifWord[1]; i < WordLength; i++) {
+                        $("#" + IdentifWord[0] + "L" + i).removeClass("missingLetter");
+                        $("#" + IdentifWord[0] + "L" + i).find(".exactLetter").removeClass("missingLetter");
+                    }
+                }
+            }
+
+            //Si on est en Creation c'est removeData ci-dessous, si on modifie c'est un nouveau prog. avec R, CAD on écrit dans le HTML caché toutes les modifs à chaud.
+            //Donc à chaque modif, on charge tout le json et on le modifie, puis on le réécrit en dur.
+            removeData(this);
+            $(this).remove();
+        });
+
+        function removeData(that) {
+            console.log(that)
+            let remID = $(that).attr("id"); // ID to remove
+            let modeActif = $(".mode").html();
+            let TTactif = $("#jumpDone").val();
+            let IDLetterBadge = that.id
+            console.log($(that).attr("class").search("badgeLetter"));
+
+
+            if ($(that).attr("class").search("badgeLetter") == -1) { //Simple Word Badge Deletion
+                for (let i = 0; i < Rconti.RContainer.badges.length; i++) {
+                    if (remID == Rconti.RContainer.badges[i].id) {
+                        R.letterBadges.splice(y, 1);
+                        Rconti.RContainer.badges.splice(i, 1);
+                    }
+                }
+
+            } else { //badgeLetter Deletion
+                console.log(Rconti.RContainer);
+
+                for (let y = 0; y < Rconti.RContainer.letterBadges.length; y++) {
+                    console.log(Rconti.RContainer.letterBadges[y][1].id);
+                    console.log(that.id)
+                    if (Rconti.RContainer.letterBadges[y][1].id == that.id) {
+                        console.log("DELETOR");
+                        R.letterBadges.splice(y, 1);
+                        Rconti.RContainer.letterBadges.splice(y, 1);
+                    }
+                }
+            }
+
+
+        }
+
+
+    }
 
 
     return R

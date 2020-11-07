@@ -18,6 +18,13 @@ var badges = function(codeError, type, origin, id) {
     this.id = id
 }
 
+var letterBadges = function(codeError, type, origin, id) {
+    this.codeError = codeError;
+    this.type = type;
+    this.origin = origin;
+    this.id = id
+}
+
 var timeMark = function(origin, time) {
     this.origin = origin;
     this.time = time;
@@ -28,6 +35,7 @@ var groupMark = function(firstW, lastW, type) {
     this.lastW = lastW;
     this.type = type;
 }
+
 
 try {
 
@@ -63,4 +71,4 @@ RContainer.global.autoCorr = "";
 RContainer.global.comment = "";
 RContainer.global.jumpedWord = "";
 
-export { RContainer, obs, badges, timeMark, groupMark, CorrDoneData }
+export { RContainer, obs, badges, letterBadges, timeMark, groupMark, CorrDoneData }

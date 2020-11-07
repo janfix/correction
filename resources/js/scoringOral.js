@@ -43,7 +43,12 @@ $(function() {
     if (CData[0].id == "") {
 
         $(".middlePart").empty();
-        $(".middlePart").append('<h1>Correction terminée</h1>')
+        $(".middlePart").append('<h1>Correction terminée</h1>');
+        $(".commentPerfContainer").empty();
+        $(".oralEditorMode").prop("disabled", "true");
+        $("#QaudioSelect").prop("disabled", "true");
+
+
     }
 
 

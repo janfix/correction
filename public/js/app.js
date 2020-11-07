@@ -45679,7 +45679,7 @@ module.exports = function(module) {
 /*!************************************!*\
   !*** ./resources/js/Rcontainer.js ***!
   \************************************/
-/*! exports provided: RContainer, obs, badges, timeMark, groupMark, CorrDoneData */
+/*! exports provided: RContainer, obs, badges, letterBadges, timeMark, groupMark, CorrDoneData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45687,6 +45687,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RContainer", function() { return RContainer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "obs", function() { return obs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "badges", function() { return badges; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "letterBadges", function() { return letterBadges; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "timeMark", function() { return timeMark; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "groupMark", function() { return groupMark; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CorrDoneData", function() { return CorrDoneData; });
@@ -45702,6 +45703,13 @@ var obs = function obs(type, origin, comment, id) {
 };
 
 var badges = function badges(codeError, type, origin, id) {
+  this.codeError = codeError;
+  this.type = type;
+  this.origin = origin;
+  this.id = id;
+};
+
+var letterBadges = function letterBadges(codeError, type, origin, id) {
   this.codeError = codeError;
   this.type = type;
   this.origin = origin;
@@ -46188,6 +46196,14 @@ __webpack_require__.r(__webpack_exports__);
 function badgeSystem(zeTarget, bdgType, mode) {
   var ElementType = $(zeTarget).attr("data-type"); // Letter or Word ?
 
+  console.log(bdgType);
+  console.log(ElementType);
+  console.log(mode);
+
+  if (typeof ElementType == "undefined") {
+    ElementType = bdgType.unit;
+  }
+
   var styleElement;
   var Tracker;
   var badgeTracker;
@@ -46203,18 +46219,24 @@ function badgeSystem(zeTarget, bdgType, mode) {
   }
 
   if (ElementType == "letter") {
-    console.log(zeTarget);
-    console.log(bdgType);
+    /* console.log(zeTarget);
+    console.log(bdgType); */
     Tracker = $(zeTarget).parent().attr('id');
     var uniqID = Tracker + bdgType.initial;
-    console.log(Tracker);
-    console.log(uniqID);
-    badgeTracker = new _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["badges"](bdgType.initial, bdgType.mention, Tracker, uniqID);
+    /*         console.log(uniqID);
+            console.log(Tracker);
+     */
+
+    badgeTracker = new _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["letterBadges"](bdgType.initial, bdgType.mention, Tracker, uniqID);
     console.log(badgeTracker);
     var wordCode = badgeTracker.origin.split("L");
 
     if (mode == "creation") {
+      console.log("YYYYYYYYESTU?");
       _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges.push([wordCode[0], badgeTracker]);
+      console.log(_Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges);
+    } else {
+      console.log("MODE EDITION BADGE LETTRE");
     }
 
     $(zeTarget).parent().find(".badgeContainer").append('<div id="' + uniqID + '" title="' + bdgType.mention + '" class="' + styleElement + ' freeNote" data-content="<i>' + bdgType.comment + '</i>">' + bdgType.initial + '</div>');
@@ -46680,6 +46702,7 @@ function editorMode() {
 
   $("#jumpDone").on("change", function () {
     $(".closeTTagger").trigger("click");
+    $(".letterControl").html("<span class='letter zoneEdition'>Espace analyse des mots </span>");
 
     for (var _i = 0; _i < CorrDoneData.length; _i++) {
       if (CorrDoneData[_i].id == $(this).val()) {
@@ -46697,11 +46720,11 @@ function editorMode() {
 
   function updateData(IDActif) {
     _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].timer = R.timer;
-    console.log(R.timer); //AudioQuality
+    _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].timeReset = R.timeReset;
+    $(".startValue").html(R.timeReset); //AudioQuality
 
     $("#QaudioSelectEDITOR").val(R.audioQ);
     $("#commentPerf").val(R.comment);
-    console.log(R);
 
     if (R.tracker[0] == true) {
       $(".audioTrackED").css("backgroundColor", "green");
@@ -46738,9 +46761,14 @@ function editorMode() {
       $("#" + R.lastWord).addClass("lastWordRead");
     } //TODO : cancel lines and words after ! 
     //TODO : listener dblckick to cancel
-    //Loops automatic manage empty fields
-    //Badges
+    //Update in data give element to Rconti.container ! 
 
+
+    _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].firstWord = R.firstWord;
+    _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].lastWord = R.lastWord; //Tracker rouge / vert
+
+    _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].tracker = R.tracker; //Loops automatic manage empty fields
+    //Badges
 
     for (var _i2 = 0; _i2 < R.badges.length; _i2++) {
       console.log(R.badges[_i2]);
@@ -46767,13 +46795,13 @@ function editorMode() {
     for (var _i5 = 0; _i5 < R.letterBadges.length; _i5++) {
       var letterData = {};
       letterData.origin = R.letterBadges[_i5][1].origin;
-      letterData.type = R.letterBadges[_i5][1].type;
-      Object(_letterBadgeUpdate__WEBPACK_IMPORTED_MODULE_0__["default"])(letterData);
+      letterData.type = R.letterBadges[_i5][1].type; //letterBadgeUpdate(letterData); //Inutile car c'est le word activator qui prend en charge !!!!
     } //Display only 1 record ChronoTag ! 
 
 
     var activRecord = $("#jumpDone").val();
     console.log(activRecord);
+    BadgeLetterDelete();
   } // Close Editor and return to new correction mode
 
 
@@ -46790,10 +46818,77 @@ function editorMode() {
 
     for (var _i6 = 0; _i6 < CData.length; _i6++) {
       if (CData[_i6].id == $("#jump").val()) {
+        console.log("JP TRACKER");
         $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CData[_i6].mediafilename + ".mp3");
       }
     }
-  });
+
+    $(".closeTTagger").trigger("click");
+    $(".letterControl").html('<span class="letter zoneEdition">Espace analyse des mots </span>');
+  }); //DELELTE BADGE LETTER ON DBLCLICK
+
+  function BadgeLetterDelete() {
+    $(document).on("dblclick", ".badgeLetter", function (e) {
+      var specialCase = $(this).attr("title"); // console.log(specialCase);
+
+      if (specialCase == "Scalling Point" || specialCase == "Point d'arrêt" || specialCase == "Ommission") {
+        if (typeof $(e.target).parent().parent().attr("id") !== "undefined") {
+          var IdentifWord = $(e.target).parent().parent().attr("id").split("L");
+
+          if (typeof IdentifWord !== "undefined") {}
+
+          console.log(IdentifWord);
+          var WordLength = $("#" + IdentifWord[0]).html().length;
+          $(".DIA").remove();
+
+          for (var _i7 = IdentifWord[1]; _i7 < WordLength; _i7++) {
+            $("#" + IdentifWord[0] + "L" + _i7).removeClass("missingLetter");
+            $("#" + IdentifWord[0] + "L" + _i7).find(".exactLetter").removeClass("missingLetter");
+          }
+        }
+      } //Si on est en Creation c'est removeData ci-dessous, si on modifie c'est un nouveau prog. avec R, CAD on écrit dans le HTML caché toutes les modifs à chaud.
+      //Donc à chaque modif, on charge tout le json et on le modifie, puis on le réécrit en dur.
+
+
+      removeData(this);
+      $(this).remove();
+    });
+
+    function removeData(that) {
+      console.log(that);
+      var remID = $(that).attr("id"); // ID to remove
+
+      var modeActif = $(".mode").html();
+      var TTactif = $("#jumpDone").val();
+      var IDLetterBadge = that.id;
+      console.log($(that).attr("class").search("badgeLetter"));
+
+      if ($(that).attr("class").search("badgeLetter") == -1) {
+        //Simple Word Badge Deletion
+        for (var _i8 = 0; _i8 < _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].badges.length; _i8++) {
+          if (remID == _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].badges[_i8].id) {
+            R.letterBadges.splice(y, 1);
+            _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].badges.splice(_i8, 1);
+          }
+        }
+      } else {
+        //badgeLetter Deletion
+        console.log(_Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"]);
+
+        for (var _y = 0; _y < _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].letterBadges.length; _y++) {
+          console.log(_Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].letterBadges[_y][1].id);
+          console.log(that.id);
+
+          if (_Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].letterBadges[_y][1].id == that.id) {
+            console.log("DELETOR");
+            R.letterBadges.splice(_y, 1);
+            _Rcontainer__WEBPACK_IMPORTED_MODULE_4__["RContainer"].letterBadges.splice(_y, 1);
+          }
+        }
+      }
+    }
+  }
+
   return R;
 }
 
@@ -46905,16 +47000,21 @@ $(function () {
     var newval = $(this).val();
     loadTTData(newval);
   });
+  $("body").on("click", function () {
+    Object(_closeAll__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  });
   $(".openEditorMode").on("click", function () {
     Object(_editormode__WEBPACK_IMPORTED_MODULE_9__["default"])();
   });
   $(".HLliaisons").on("click", function () {
     $(".liaisonTrack").css("backgroundColor", "green");
+    $(".liaisonTrackED").css("backgroundColor", "green");
     _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].tracker[3] = true;
     $(".liaiOblig").toggleClass("spaceRed");
   });
   $(".HLcomplexWords").on("click", function () {
     $(".mComplexTrack").css("backgroundColor", "green");
+    $(".mComplexTrackED").css("backgroundColor", "green");
     _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].tracker[2] = true;
     $(".complexWord").toggleClass("yellowWord").removeClass("h_word");
   });
@@ -47017,7 +47117,7 @@ $(function () {
     // From stop_word to h-word 
     var isItLast = $(word).attr("class").split(/\s+/); // From word to h-word and reverse
 
-    $(word).toggleClass("word").toggleClass("h_word"); // Constitution of Array hesiWords based on unique Word ID
+    $(word).toggleClass("h_word"); // Constitution of Array hesiWords based on unique Word ID
 
     if (hesiWords.indexOf($(word).attr("id")) === -1) {
       hesiWords.push($(word).attr("id"));
@@ -47044,7 +47144,7 @@ $(function () {
     }
   });
   $("#QaudioSelectEDITOR").on("change", function () {
-    $(".audioTrack").css("backgroundColor", "green");
+    $(".audioTrackED").css("backgroundColor", "green");
     _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].tracker[0] = true;
 
     if ($(this).val() == "inaudible" || $(this).val() == "Contenu_Inap") {
@@ -47162,10 +47262,10 @@ $(function () {
           }
         }
       }
-    } else {//Mode creation
     }
 
     $(".chronoTrack").css("backgroundColor", "green");
+    $(".chronoTrackED").css("backgroundColor", "green");
     _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].tracker[1] = true; //show chrono-mark
 
     $(".ctimeBox").show(); //Prepare context
@@ -47240,8 +47340,9 @@ $(function () {
 
     $(".resetTimer").on("click", function () {
       $("#timerCmenu").hide();
-      $(".ctimeBox").remove();
-      wordTimerArray = [];
+      $(".ctimeBox").remove(); //wordTimerArray = [];
+
+      _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer = [];
     });
   }); // Closer Timetagger and restore marker UI !:::::!!!!! 
 
@@ -47275,7 +47376,6 @@ $(function () {
     $(".word").on("click", function () {
       Object(_closeAll__WEBPACK_IMPORTED_MODULE_2__["default"])();
       var isItLast = $(this).attr("class").split(/\s+/);
-      console.log(isItLast);
 
       if (isItLast.indexOf("lastWordRead") == -1) {
         mark_hesitation(this);
@@ -47362,36 +47462,42 @@ function letterBadgeUpdate(bdgInfo) {
     _bdgType.initial = "G";
     _bdgType.mention = "Graphème mal lu";
     _bdgType.comment = "You can precise the type of confusion : symetry b/d or p/b or more phonological : m/n, s/c";
+    _bdgType.unit = "letter";
     Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_0__["default"])(exactTarget, _bdgType, "update");
   } else if (bdgType == "Inversion de lettres(I)") {
     var _bdgType2 = {};
     _bdgType2.initial = "I";
     _bdgType2.mention = "Inversion de lettres";
     _bdgType2.comment = "You can precise the inversion";
+    _bdgType2.unit = "letter";
     Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_0__["default"])(exactTarget, _bdgType2, "update");
   } else if (bdgType == "Répétition de lettres") {
     var _bdgType3 = {};
     _bdgType3.initial = "R";
     _bdgType3.mention = "Répétition de lettres";
     _bdgType3.comment = "You can precise the repetition (strong/incident...)";
+    _bdgType3.unit = "letter";
     Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_0__["default"])(exactTarget, _bdgType3, "update");
   } else if (bdgType == "Ajout de lettre/son") {
     var _bdgType4 = {};
     _bdgType4.initial = "+";
     _bdgType4.mention = "Ajout de lettre/son";
     _bdgType4.comment = "...";
+    _bdgType4.unit = "letter";
     Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_0__["default"])(exactTarget, _bdgType4, "update");
   } else if (bdgType == "Point d'arrêt") {
     var _bdgType5 = {};
     _bdgType5.initial = "A";
     _bdgType5.mention = "Point d'arrêt";
     _bdgType5.comment = "You can comment";
+    _bdgType5.unit = "letter";
     Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_0__["default"])(exactTarget, _bdgType5, "update");
   } else if (bdgType == "Ommission") {
     var _bdgType6 = {};
     _bdgType6.initial = "O";
     _bdgType6.mention = "Ommission";
     _bdgType6.comment = "You can comment the ommission";
+    _bdgType6.unit = "letter";
     Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_0__["default"])(exactTarget, _bdgType6, "update");
   }
 }
@@ -47447,6 +47553,7 @@ function letterCMenu() {
         bdgType.initial = "G";
         bdgType.mention = "Graphème mal lu";
         bdgType.pHolder = "You can precise the type of confusion : symetry b/d or p/b or more phonological : m/n, s/c";
+        bdgType.unit = "letter";
         Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_1__["default"])(e.target, bdgType, "creation");
         $(".dropdown-item").off();
         $("#letterCMenu").removeClass("show").hide();
@@ -47456,6 +47563,7 @@ function letterCMenu() {
         bdgType.initial = "I";
         bdgType.mention = "Inversion de lettres(I)";
         bdgType.pHolder = "You can precise the inversion";
+        bdgType.unit = "letter";
         Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_1__["default"])(e.target, bdgType, "creation");
         $(".dropdown-item").off();
         $("#letterCMenu").removeClass("show").hide();
@@ -47465,6 +47573,7 @@ function letterCMenu() {
         bdgType.initial = "R";
         bdgType.mention = "Répétition de lettres";
         bdgType.pHolder = "You can precise the repetition (strong/incident...)";
+        bdgType.unit = "letter";
         Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_1__["default"])(e.target, bdgType, "creation");
         $(".dropdown-item").off();
         $("#letterCMenu").removeClass("show").hide();
@@ -47474,6 +47583,7 @@ function letterCMenu() {
         bdgType.initial = "+";
         bdgType.mention = "Ajout de lettre/son";
         bdgType.pHolder = "You can precise the repetition (strong/incident...)";
+        bdgType.unit = "letter";
         Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_1__["default"])(e.target, bdgType, "creation");
         $(".dropdown-item").off();
         $("#letterCMenu").removeClass("show").hide();
@@ -47483,6 +47593,7 @@ function letterCMenu() {
         bdgType.initial = "A";
         bdgType.mention = "Point d'arrêt";
         bdgType.pHolder = "You can comment";
+        bdgType.unit = "letter";
         Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_1__["default"])(e.target, bdgType, "creation");
         $(".dropdown-item").off();
         $("#letterCMenu").removeClass("show").hide();
@@ -47492,6 +47603,7 @@ function letterCMenu() {
         bdgType.initial = "O";
         bdgType.mention = "Ommission";
         bdgType.pHolder = "You can comment the ommission";
+        bdgType.unit = "letter";
         Object(_badgeSystem__WEBPACK_IMPORTED_MODULE_1__["default"])(e.target, bdgType, "creation");
         $(".dropdown-item").off();
         $("#letterCMenu").removeClass("show").hide();
@@ -47678,6 +47790,8 @@ function oralEditorMode() {
   $(".ttEditor").css("display", "inline");
   $(".testtaker").hide();
   $(".corrapp").css("background-color", "#fff3ef");
+  var mediaFolderName = CorrDoneData[0].mediafolder;
+  $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[0].mediafilename + ".mp3");
   var IDActif = $("#jumpDone").val(); //Update data First element by default
 
   updateData(IDActif); //Install listener on Test Taker Select to get ID value 
@@ -47689,7 +47803,8 @@ function oralEditorMode() {
   function updateData(IDActif) {
     for (var _i = 0; _i < CorrDoneData.length; _i++) {
       if (CorrDoneData[_i].id == IDActif) {
-        R = JSON.parse(CorrDoneData[_i].results); //AudioQuality
+        R = JSON.parse(CorrDoneData[_i].results);
+        $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[_i].mediafilename + ".mp3"); //AudioQuality
 
         $("#QaudioSelectEDITOR").val(R.audioQ);
         $("#commentPerf").val(R.comment);
@@ -47703,14 +47818,20 @@ function oralEditorMode() {
   } // Close Editor and return to new correction mode
 
 
-  $(".closeEditorMode").on("click", function () {
+  $(".oralCloseEditorMode").on("click", function () {
     $(".mode").html("Creation");
     $(".ttEditor").hide();
     $(".testtaker").show();
     $(".corrapp").css("background-color", "#F8F9FA");
-    clearAllMarks();
     $(".trackIcon").css("background-color", "crimson");
     $(".textSpace").find(".ctimeBox").remove();
+    var CData = JSON.parse($(".hiddenData").html());
+
+    for (var _i2 = 0; _i2 < CData.length; _i2++) {
+      if (CData[_i2].id == $("#jump").val()) {
+        $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CData[_i2].mediafilename + ".mp3");
+      }
+    }
   });
 }
 
@@ -48042,6 +48163,9 @@ $(function () {
   if (CData[0].id == "") {
     $(".middlePart").empty();
     $(".middlePart").append('<h1>Correction terminée</h1>');
+    $(".commentPerfContainer").empty();
+    $(".oralEditorMode").prop("disabled", "true");
+    $("#QaudioSelect").prop("disabled", "true");
   }
 
   if (CItem[0].itemtype == "Oral_production") {
@@ -48721,20 +48845,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Rcontainer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Rcontainer */ "./resources/js/Rcontainer.js");
 /* harmony import */ var _letter_CMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./letter_CMenu */ "./resources/js/letter_CMenu.js");
 /* harmony import */ var _letterBadgeUpdate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./letterBadgeUpdate */ "./resources/js/letterBadgeUpdate.js");
-/* harmony import */ var _badgeSystem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./badgeSystem */ "./resources/js/badgeSystem.js");
 // Licence Create commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 // https://creativecommons.org/licenses/by-nc-sa/4.0/
 // Author : Jean-Philippe Rivière - Wiquid - January 2020 project
 // Base idea of project DEPP. Ministère de l'éducation nationale - France
 
 
-
  // Add listeners on Words and listeners on word's letters...
 
 function wordActivator() {
+  var CorrDoneData = _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["CorrDoneData"];
+  var idtt = $("#jumpDone").val();
+
+  for (var i = 0; i < CorrDoneData.length; i++) {
+    if (CorrDoneData[i].id == idtt) {
+      var PersonalResults = JSON.parse(CorrDoneData[i].results); //input
+    }
+  }
+
   $(".word").on("click", function () {
     console.log("Loading CorrDoneData");
-    var CorrDoneData = _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["CorrDoneData"];
     var whatMode = $(".mode").html();
     var wordToDisplay = "";
     var lineNumber = $(this).parent().find(".lineNumber").html();
@@ -48745,8 +48875,8 @@ function wordActivator() {
     $("#LProw" + lineNumber).css("opacity", "1");
     var wordCandidate = $(this).html();
 
-    for (var i = 0; i < wordCandidate.length; i++) {
-      wordToDisplay = wordToDisplay + '<div id="' + $(this).attr("id") + 'L' + i + '" class="letter normalLetter " data-type="letter" data-state="normal" data-word="' + $(this).attr("id") + '"><div data-type="letter" class="exactLetter">' + wordCandidate[i] + '</div><div class="badgeContainer"></div></div>';
+    for (var _i = 0; _i < wordCandidate.length; _i++) {
+      wordToDisplay = wordToDisplay + '<div id="' + $(this).attr("id") + 'L' + _i + '" class="letter normalLetter " data-type="letter" data-state="normal" data-word="' + $(this).attr("id") + '"><div data-type="letter" class="exactLetter">' + wordCandidate[_i] + '</div><div class="badgeContainer"></div></div>';
     }
 
     $(".letterControl").html(wordToDisplay);
@@ -48757,16 +48887,15 @@ function wordActivator() {
 
         var bdginfo = {};
 
-        for (var _i = 0; _i < _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges.length; _i++) {
+        for (var _i2 = 0; _i2 < _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges.length; _i2++) {
           //Check solo badge
-          if (_Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges[_i][1].origin == idLet) {
+          if (_Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges[_i2][1].origin == idLet) {
             console.log(idLet);
-            bdginfo.id = _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges[_i][1].id;
-            bdginfo.origin = _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges[_i][1].origin;
-            bdginfo.type = _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges[_i][1].type;
+            bdginfo.id = _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges[_i2][1].id;
+            bdginfo.origin = _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges[_i2][1].origin;
+            bdginfo.type = _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges[_i2][1].type;
             console.log(bdginfo);
             Object(_letterBadgeUpdate__WEBPACK_IMPORTED_MODULE_2__["default"])(bdginfo);
-            /* badgeSystem($("#" + idLet).html(), bdginfo) */
           }
 
           ;
@@ -48779,13 +48908,6 @@ function wordActivator() {
 
     if (whatMode == "Edition") {
       console.log("Edition --------");
-      var idtt = $("#jumpDone").val();
-
-      for (var _i2 = 0; _i2 < CorrDoneData.length; _i2++) {
-        if (CorrDoneData[_i2].id == idtt) {
-          var PersonalResults = JSON.parse(CorrDoneData[_i2].results);
-        }
-      }
 
       for (var y = 0; y < PersonalResults.letterBadges.length; y++) {
         var zeTarget = PersonalResults.letterBadges[y][1].origin;
@@ -48796,6 +48918,7 @@ function wordActivator() {
         console.log(this);
         console.log(PersonalResults);
         $("#" + zeTarget).find(".badgeContainer").append('<div id= ' + id + ' class="badgeLetter" title="' + bdgType + '">' + codeError + '</div>');
+        console.log(_Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"]);
         $(".badgeLetter:contains('A')").parent().parent().find(".exactLetter").append("<span class='DIA'>|</span>");
         var wBlocked = $(".badgeLetter:contains('A')").parent().parent().attr("data-word");
 
@@ -48815,6 +48938,9 @@ function wordActivator() {
 
         $(".badgeLetter:contains('O')").parent().parent().addClass("missingLetter");
       }
+
+      _Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"].letterBadges = PersonalResults.letterBadges;
+      console.log(_Rcontainer__WEBPACK_IMPORTED_MODULE_0__["RContainer"]);
     }
 
     function addLetterListener() {

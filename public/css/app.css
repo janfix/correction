@@ -18,7 +18,7 @@
         display: inline;
         padding: 2px;
         border-radius: 5px;
-        background-color: greenyellow;
+        background-color: greenyellow!important;
     }
     
     .corrapp .stop_word {
@@ -720,7 +720,7 @@
     
     #commentPerf {
         border-color: grey;
-        width: 100%;
+        width: 33%
     }
     
     .rightTbar {

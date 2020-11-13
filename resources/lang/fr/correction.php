@@ -104,7 +104,7 @@ return [
     'Pre-correction' => 'Pre-correction',
     'Test taker id' => 'Elève id',
     'Go to test taker...' => 'Aller à l\'élève n°...',
-    'To do' => 'Restant',
+    'To do' => 'Restants',
     'Instructions' => 'Instructions',
     'Next' => 'Suivant',
     'Audio quality' => 'Qualité audio',

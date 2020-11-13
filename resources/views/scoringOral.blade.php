@@ -15,15 +15,17 @@
        <div class="container p-3 corrapp">
         <div class="itemInfo"></div>    
         <h1 class="toptitle">{{trans('correction.Scoring oral production')}}</h1>   
-            <div class="testtaker row">
+        <div class="cpt  row">{{trans('correction.To do')}} : <span class="todo">___ </span></div>    
+        <div class="testtaker row">
                 {{-- <div class="ttID barElement precoTool">{{trans('correction.Pre-correction')}}: <button id ="preCorrBT" type="button" class="btn btn-warning btn-sm instruct" >{{trans('correction.ACTIVATED')}}</button>    </div> --}}                
-                <div class="ttID barElement">{{trans('correction.Test taker id')}}:</div>
+                <div class="ttID barElement">{{trans('correction.Test taker id')}}:                </div>
+                
                 <div class="jumpto barElement">
                 <select disabled class="form-control-sm" name="jump" id="jump">
                 <option disabled selected value="" >- {{trans('correction.Go to test taker...')}} -</option>
                 </select>
                 </div>
-                <div class="cpt barElement ttID">{{trans('correction.To do')}} : <span class="todo">___ </span></div>
+               
                 <div class="barElement">
                     <form action ="scoring/store" method="post" id="dataFlexOral">
                         @csrf
@@ -42,8 +44,8 @@
                                     <option value="0">Valide</option>
                                 </select>
 
-                           <button  disabled class="resultSender btn btn-primary btn-sm mr-1" type="submit">Enregistrer votre correction</button> 
-                           <button type="button" title="Cliquez sur ce bouton pour faire apparaître les corrections que vous avez déjà encodées afin d'y apporter des modifications ou bien pour les compléter." class="btn btn-info btn-sm oralEditorMode"><i class="fas fa-edit"></i> Editer mes corrections</button>    
+                           <button  disabled class="resultSender btn btn-primary btn-sm mr-1" type="submit"><i class="fas fa-save"></i> Enregistrer</button> 
+                           <button type="button" title="Cliquez sur ce bouton pour faire apparaître les corrections que vous avez déjà encodées afin d'y apporter des modifications ou bien pour les compléter." class="btn btn-info btn-sm oralEditorMode"><i class="fas fa-edit"></i> Editer</button>    
                         </div>
                         
 
@@ -101,8 +103,9 @@
                 </div>
                
             </div>
-            </div>
             
+            </div>
+
            
 
          
@@ -132,6 +135,8 @@
             </div> 
 
        <!-- Modal -->
+
+       
     </main>
     
 @endsection

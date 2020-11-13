@@ -108,6 +108,7 @@ $(function() {
 
 
     $(".openEditorMode").on("click", function() {
+        wordTimerArray = [];
         editorMode();
     });
 
@@ -465,6 +466,25 @@ $(function() {
                 }
 
             }
+            $(".ctimeBox").on('dblclick', function(e) {
+
+                let delwtid = $(e.target).attr("data-w");
+                console.log(delwtid);
+                for (let i = 0; i < wordTimerArray.length; i++) {
+                    if (wordTimerArray[i] == delwtid) {
+                        wordTimerArray.splice(i, 1);
+                    }
+                }
+                //Suppression de la data dans le RContainer à faire
+                // Trouver l'ID à virer et la virer ...
+                for (let i = 0; i < Rconti.RContainer.timer.length; i++) {
+                    if (Rconti.RContainer.timer[i].origin == delwtid) {
+                        Rconti.RContainer.timer.splice(i, 1);
+                    }
+
+                }
+                $(e.target).remove();
+            })
 
 
 
@@ -525,8 +545,9 @@ $(function() {
         //Show Time tagger button
         $(".timeOption").show();
 
-        var startTime = 0
-            //Redifine start
+        var startTime = 0;
+        $(".startValue").html(0);
+        //Redifine start
         $(".redifStart").on("click", function(e) {
             startTime = getCurTime();
             $(".startValue").html(startTime.toFixed(3));
@@ -539,19 +560,21 @@ $(function() {
         //Time tagger word listener
         $(".word").on("click", function(e) {
             let ctime = getCurTime();
-            ctime = ctime - startTime;
+            let ResetTimer = $(".startValue").html();
+            //ctime = ctime - startTime;
+            ctime = ctime - ResetTimer;
             ctime = ctime.toFixed(3)
             $(this).attr("data-ctime", ctime);
             timebadge(e.target, ctime);
         });
 
-        $(".h_word").on("click", function(e) {
+        /* $(".h_word").on("click", function(e) {
             let ctime = getCurTime();
             ctime = ctime - startTime;
             ctime = ctime.toFixed(3)
             $(this).attr("data-ctime", ctime);
             timebadge(e.target, ctime);
-        });
+        }); */
 
         //Reset Timer data
         $(".resetTimer").on("click", function() {
@@ -623,12 +646,14 @@ $(function() {
     }
 
     function timebadge(target, ctime) {
+        console.log("TimeBadge")
         let wtid = $(target).attr("id");
 
         if (wordTimerArray.indexOf(wtid) === -1) {
             //console.log(wtid);
             //console.log(wordTimerArray);
             wordTimerArray.push(wtid);
+            console.log(target);
             $(target).after('<div class="ctimeBox" data-w ="' + wtid + '" >' + ctime + '</div>');
             let timeData = new Rconti.timeMark(wtid, ctime);
             //console.log(timeData);

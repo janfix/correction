@@ -46696,7 +46696,7 @@ function editorMode() {
   Object(_clearAllMarks__WEBPACK_IMPORTED_MODULE_1__["default"])();
   $(".closeTTagger").trigger("click");
   var mediaFolderName = CorrDoneData[0].mediafolder;
-  $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[0].mediafilename + ".mp3"); //Update data First element by default
+  $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[0].mediafilename + ".mp3#t=00:0" + R.timeReset); //Update data First element by default
 
   updateData(); //Install listener on Test Taker Select to get ID value 
 
@@ -46707,7 +46707,7 @@ function editorMode() {
     for (var _i = 0; _i < CorrDoneData.length; _i++) {
       if (CorrDoneData[_i].id == $(this).val()) {
         R = JSON.parse(CorrDoneData[_i].results);
-        $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[_i].mediafilename + ".mp3");
+        $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[0].mediafilename + ".mp3#t=00:0" + R.timeReset);
         Object(_clearAllMarks__WEBPACK_IMPORTED_MODULE_1__["default"])(); // $(".liaigroup").remove();
 
         updateData(CorrDoneData[_i].id);
@@ -47004,6 +47004,7 @@ $(function () {
     Object(_closeAll__WEBPACK_IMPORTED_MODULE_2__["default"])();
   });
   $(".openEditorMode").on("click", function () {
+    wordTimerArray = [];
     Object(_editormode__WEBPACK_IMPORTED_MODULE_9__["default"])();
   });
   $(".HLliaisons").on("click", function () {
@@ -47262,6 +47263,27 @@ $(function () {
           }
         }
       }
+
+      $(".ctimeBox").on('dblclick', function (e) {
+        var delwtid = $(e.target).attr("data-w");
+        console.log(delwtid);
+
+        for (var _i4 = 0; _i4 < wordTimerArray.length; _i4++) {
+          if (wordTimerArray[_i4] == delwtid) {
+            wordTimerArray.splice(_i4, 1);
+          }
+        } //Suppression de la data dans le RContainer à faire
+        // Trouver l'ID à virer et la virer ...
+
+
+        for (var _i5 = 0; _i5 < _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer.length; _i5++) {
+          if (_Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer[_i5].origin == delwtid) {
+            _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer.splice(_i5, 1);
+          }
+        }
+
+        $(e.target).remove();
+      });
     }
 
     $(".chronoTrack").css("backgroundColor", "green");
@@ -47314,7 +47336,8 @@ $(function () {
     $(".textSpace").css('background-color', "#effbff"); //Show Time tagger button
 
     $(".timeOption").show();
-    var startTime = 0; //Redifine start
+    var startTime = 0;
+    $(".startValue").html(0); //Redifine start
 
     $(".redifStart").on("click", function (e) {
       startTime = getCurTime();
@@ -47325,18 +47348,21 @@ $(function () {
 
     $(".word").on("click", function (e) {
       var ctime = getCurTime();
-      ctime = ctime - startTime;
+      var ResetTimer = $(".startValue").html(); //ctime = ctime - startTime;
+
+      ctime = ctime - ResetTimer;
       ctime = ctime.toFixed(3);
       $(this).attr("data-ctime", ctime);
       timebadge(e.target, ctime);
     });
-    $(".h_word").on("click", function (e) {
-      var ctime = getCurTime();
-      ctime = ctime - startTime;
-      ctime = ctime.toFixed(3);
-      $(this).attr("data-ctime", ctime);
-      timebadge(e.target, ctime);
-    }); //Reset Timer data
+    /* $(".h_word").on("click", function(e) {
+        let ctime = getCurTime();
+        ctime = ctime - startTime;
+        ctime = ctime.toFixed(3)
+        $(this).attr("data-ctime", ctime);
+        timebadge(e.target, ctime);
+    }); */
+    //Reset Timer data
 
     $(".resetTimer").on("click", function () {
       $("#timerCmenu").hide();
@@ -47397,12 +47423,14 @@ $(function () {
   }
 
   function timebadge(target, ctime) {
+    console.log("TimeBadge");
     var wtid = $(target).attr("id");
 
     if (wordTimerArray.indexOf(wtid) === -1) {
       //console.log(wtid);
       //console.log(wordTimerArray);
       wordTimerArray.push(wtid);
+      console.log(target);
       $(target).after('<div class="ctimeBox" data-w ="' + wtid + '" >' + ctime + '</div>');
       var timeData = new _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["timeMark"](wtid, ctime); //console.log(timeData);
 
@@ -47411,17 +47439,17 @@ $(function () {
         var delwtid = $(e.target).attr("data-w");
         console.log(delwtid);
 
-        for (var _i4 = 0; _i4 < wordTimerArray.length; _i4++) {
-          if (wordTimerArray[_i4] == delwtid) {
-            wordTimerArray.splice(_i4, 1);
+        for (var _i6 = 0; _i6 < wordTimerArray.length; _i6++) {
+          if (wordTimerArray[_i6] == delwtid) {
+            wordTimerArray.splice(_i6, 1);
           }
         } //Suppression de la data dans le RContainer à faire
         // Trouver l'ID à virer et la virer ...
 
 
-        for (var _i5 = 0; _i5 < _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer.length; _i5++) {
-          if (_Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer[_i5].origin == delwtid) {
-            _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer.splice(_i5, 1);
+        for (var _i7 = 0; _i7 < _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer.length; _i7++) {
+          if (_Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer[_i7].origin == delwtid) {
+            _Rcontainer__WEBPACK_IMPORTED_MODULE_3__["RContainer"].timer.splice(_i7, 1);
           }
         }
 
@@ -47772,8 +47800,7 @@ function oralEditorMode() {
   } // Array of all test takers selected For correction done (DONE)
 
 
-  var allttDone = [];
-  $("#jumpDone").empty();
+  var allttDone = []; // $("#jumpDone").empty();
 
   for (var i = 0; i < CorrDoneData.length; i++) {
     allttDone.push(CorrDoneData[i].id);
@@ -47785,6 +47812,7 @@ function oralEditorMode() {
 
   var R = JSON.parse(CorrDoneData[0].results); // Install UI for edition
 
+  $(".textMaskOral").hide();
   $(".mode").html("Edition"); //Edition
 
   $(".ttEditor").css("display", "inline");
@@ -47825,6 +47853,7 @@ function oralEditorMode() {
     $(".corrapp").css("background-color", "#F8F9FA");
     $(".trackIcon").css("background-color", "crimson");
     $(".textSpace").find(".ctimeBox").remove();
+    $("#QaudioSelect").prop('selectedIndex', 0);
     var CData = JSON.parse($(".hiddenData").html());
 
     for (var _i2 = 0; _i2 < CData.length; _i2++) {
@@ -48161,11 +48190,13 @@ $(function () {
   console.log(CData[0].id);
 
   if (CData[0].id == "") {
-    $(".middlePart").empty();
-    $(".middlePart").append('<h1>Correction terminée</h1>');
-    $(".commentPerfContainer").empty();
+    /*      $(".middlePart").empty();                
+            $(".commentPerfContainer").empty(); */
+    $(".toptitle").html('<h2>Evaluer la production orale : Correction terminée</h2><p>Vous avez terminé vos corrections, vous pouvez rééditer vos choix et de les modifier.</p>');
     $(".oralEditorMode").prop("disabled", "true");
     $("#QaudioSelect").prop("disabled", "true");
+    Object(_scoral_oraleditormode__WEBPACK_IMPORTED_MODULE_0__["default"])();
+    $(".oralCloseEditorMode ").hide();
   }
 
   if (CItem[0].itemtype == "Oral_production") {
@@ -48192,6 +48223,7 @@ $(function () {
 
     var object = contentOBJ.questions;
     var Qgroup = 1;
+    var registerable = [false, false];
 
     for (var property in object) {
       //console.log(Qgroup);
@@ -48210,6 +48242,10 @@ $(function () {
           }
 
           if (gotAnswer.length == Object.keys(object).length) {
+            registerable[0] = true;
+          }
+
+          if (registerable[0] && registerable[1]) {
             $(".resultSender").prop("disabled", false);
           }
 
@@ -48238,7 +48274,46 @@ $(function () {
     }
 
     console.log(CItem);
-    $(".supportSpace").append('<img width="80%" src="/uploads/' + CItem[0].mediapath + '/' + contentOBJ.img + '"/>'); //dragElement(document.getElementById("support"));
+    $(".supportSpace").append('<img class="imgSupport" title="Cliquez sur l\'image pour l\'agrandir" data-toggle="modal" data-target="#modalIMG" width="80%" src="/uploads/' + CItem[0].mediapath + '/' + contentOBJ.img + '"/>');
+    installModalIMG();
+    $(window).on("scroll", function (e) {});
+    var lastScrollTop = 0;
+    $(window).on("scroll", function (e) {
+      var st = $(this).scrollTop();
+
+      if (st > lastScrollTop) {
+        // downscroll code
+        console.log("TO BOTTOM");
+        var scrollTop = $(window).scrollTop();
+        console.log(scrollTop);
+
+        if (scrollTop > $(".supportSpace").offset().top) {
+          $(".supportSpace").css("top", scrollTop);
+        }
+      } else {
+        // upscroll code
+        console.log("TO The TOP OF THE PAGE");
+        var scrollTop = $(window).scrollTop();
+        console.log(scrollTop);
+        console.log($(".supportSpace").offset().top);
+
+        if (scrollTop < $(".supportSpace").offset().top) {
+          console.log("vers top");
+
+          if (scrollTop < 200) {
+            scrollTop = 200;
+          }
+
+          $(".supportSpace").css("top", scrollTop);
+        }
+      }
+
+      lastScrollTop = st;
+    });
+    /* $(window).on('scroll', function() {
+        var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+        $(".supportSpace").css("top", scrollBottom);
+    }) */
 
     $("#QaudioSelect").on("change", function () {
       if ($(this).val() == "4" || $(this).val() == "3" || $(this).val() == "2") {
@@ -48250,8 +48325,14 @@ $(function () {
           "height": maskHeight
         });
         $(".resultSender").prop("disabled", false);
+        $(".Qx").find("input").prop("checked", false);
       } else {
         $(".textMaskOral").remove();
+        registerable[1] = true;
+
+        if (registerable[0] && registerable[1]) {
+          $(".resultSender").prop("disabled", false);
+        }
       }
     });
     $('#dataFlexOral').on("submit", function () {
@@ -48280,24 +48361,30 @@ $(function () {
       console.log(jsondata);
       return true; // return false to cancel form action
     });
-    $(".oralEditorMode").on("click", function () {
-      $(".mode").html("Edition"); //Edition
+  }
 
-      $(".ttEditor").css("display", "inline");
-      $(".testtaker").hide();
-      $(".corrapp").css("background-color", "#fff3ef");
-      console.log("Display editor mode");
-      Object(_scoral_oraleditormode__WEBPACK_IMPORTED_MODULE_0__["default"])();
-    });
-    $(".oralCloseEditorMode").on("click", function () {
-      $(".mode").html("Edition"); //Edition
+  $(".oralEditorMode").on("click", function () {
+    $(".Qx").find("input").prop("checked", false);
+    $(".mode").html("Edition"); //Edition
 
-      $(".ttEditor").css("display", "none");
-      $(".testtaker").show();
-      $(".corrapp").css("background-color", "transparent");
-      $(".Qx").find("input").prop("checked", false);
-      $("#commentPerf").val("");
-    });
+    $(".ttEditor").css("display", "inline");
+    $(".testtaker").hide();
+    $(".corrapp").css("background-color", "#fff3ef");
+    console.log("Display editor modessss");
+    Object(_scoral_oraleditormode__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  });
+  $(".oralCloseEditorMode").on("click", function () {
+    $(".mode").html("Edition"); //Edition
+
+    $(".ttEditor").css("display", "none");
+    $(".testtaker").show();
+    $(".corrapp").css("background-color", "transparent");
+    $(".Qx").find("input").prop("checked", false);
+    $("#commentPerf").val("");
+  });
+
+  function installModalIMG(nextOne) {
+    $('body').prepend('<div class="modalContainer">' + '<div class="modal fade modal-lg" id="modalIMG" tabindex="-1" role="dialog" aria-labelledby="modalInstructlLabel" aria-hidden="true">' + '<div class="modal-dialog modal-lg" role="document">' + '<div class="modal-content">' + '<div class="modal-header"><h5 class="modal-title" id="modalInstructLabel">Support</h5>' + '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>' + '</button></div><div class="modal-body"><img class="imgSupport" data-toggle="modal" data-target="#modalIMG" width="100%" src="/uploads/' + CItem[0].mediapath + '/' + contentOBJ.img + '"/></div><div class="modal-footer">' + '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div></div></div>');
   }
 });
 

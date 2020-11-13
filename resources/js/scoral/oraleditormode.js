@@ -17,7 +17,7 @@ export default function oralEditorMode() {
 
     // Array of all test takers selected For correction done (DONE)
     var allttDone = [];
-    $("#jumpDone").empty();
+    // $("#jumpDone").empty();
     for (let i = 0; i < CorrDoneData.length; i++) {
         allttDone.push(CorrDoneData[i].id);
         $("#jumpDone").append("<option value =" + CorrDoneData[i].id + ">" + CorrDoneData[i].id + "</option>");
@@ -25,10 +25,12 @@ export default function oralEditorMode() {
     //Put Select box by default on 1rst Record
     $("#jumpDone").prop("selectedIndex", 0);
 
+
     //Build R object for response from RQdone By default 0 (First Record)
     var R = JSON.parse(CorrDoneData[0].results);
 
     // Install UI for edition
+    $(".textMaskOral").hide();
     $(".mode").html("Edition"); //Edition
     $(".ttEditor").css("display", "inline");
     $(".testtaker").hide();
@@ -79,6 +81,7 @@ export default function oralEditorMode() {
         $(".corrapp").css("background-color", "#F8F9FA");
         $(".trackIcon").css("background-color", "crimson");
         $(".textSpace").find(".ctimeBox").remove();
+        $("#QaudioSelect").prop('selectedIndex', 0);
         var CData = JSON.parse($(".hiddenData").html());
         for (let i = 0; i < CData.length; i++) {
             if (CData[i].id == $("#jump").val()) {

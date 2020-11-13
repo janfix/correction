@@ -52,8 +52,9 @@ class ScoringOralProdController extends Controller
           "updated_at" => "2019-11-27 14:47:18");
           //$superArray = json_encode($superArray);
           //dd($corrections);
-
-          $items = new collection;
+          
+          $items = Iteminfo::where('id', $perfid)->get(); 
+          /* $items = new collection;
           
           $iteminfos = array(
             "mediapath"=>"-",
@@ -66,7 +67,7 @@ class ScoringOralProdController extends Controller
             "grade"=>"-"
 
           );
-          $items[0] = $iteminfos;
+          $items[0] = $iteminfos; */
          
           //$items->subject = "French";
           //$items->language = "French";

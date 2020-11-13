@@ -2,6 +2,8 @@ import oralEditorMode from './scoral/oraleditormode';
 
 $(function() {
 
+
+
     //Result container 
     var Roral = {
         audioQ: "",
@@ -41,12 +43,16 @@ $(function() {
     }
     console.log(CData[0].id)
     if (CData[0].id == "") {
-
-        $(".middlePart").empty();
-        $(".middlePart").append('<h1>Correction terminée</h1>');
-        $(".commentPerfContainer").empty();
+        /*      $(".middlePart").empty();                
+                $(".commentPerfContainer").empty(); */
+        $(".toptitle").html('<h2>Evaluer la production orale : Correction terminée</h2><p>Vous avez terminé vos corrections, vous pouvez rééditer vos choix et de les modifier.</p>');
         $(".oralEditorMode").prop("disabled", "true");
         $("#QaudioSelect").prop("disabled", "true");
+
+
+        oralEditorMode();
+        $(".oralCloseEditorMode ").hide();
+
 
 
     }
@@ -64,6 +70,7 @@ $(function() {
         //console.log(contentOBJ.questions);
         var object = contentOBJ.questions;
         var Qgroup = 1;
+        var registerable = [false, false];
         for (const property in object) {
             //console.log(Qgroup);
             //console.log(`${property}: ${object[property]}`);
@@ -82,9 +89,15 @@ $(function() {
                         gotAnswer.push($(this).attr("name"));
 
                     }
-                    if (gotAnswer.length == Object.keys(object).length) {
-                        $(".resultSender").prop("disabled", false);
 
+                    if (gotAnswer.length == Object.keys(object).length) {
+                        registerable[0] = true;
+
+
+                    }
+
+                    if (registerable[0] && registerable[1]) {
+                        $(".resultSender").prop("disabled", false);
                     }
                     console.log(this);
                     var NewPair = false
@@ -111,9 +124,47 @@ $(function() {
         }
 
         console.log(CItem);
-        $(".supportSpace").append('<img width="80%" src="/uploads/' + CItem[0].mediapath + '/' + contentOBJ.img + '"/>');
+        $(".supportSpace").append('<img class="imgSupport" title="Cliquez sur l\'image pour l\'agrandir" data-toggle="modal" data-target="#modalIMG" width="80%" src="/uploads/' + CItem[0].mediapath + '/' + contentOBJ.img + '"/>');
 
-        //dragElement(document.getElementById("support"));
+        installModalIMG()
+
+
+        $(window).on("scroll", function(e) {
+
+
+        });
+
+        var lastScrollTop = 0;
+        $(window).on("scroll", function(e) {
+            var st = $(this).scrollTop();
+            if (st > lastScrollTop) {
+                // downscroll code
+                console.log("TO BOTTOM")
+                var scrollTop = $(window).scrollTop();
+                console.log(scrollTop)
+                if (scrollTop > $(".supportSpace").offset().top) {
+                    $(".supportSpace").css("top", scrollTop);
+                }
+            } else {
+                // upscroll code
+                console.log("TO The TOP OF THE PAGE")
+                var scrollTop = $(window).scrollTop();
+                console.log(scrollTop);
+                console.log($(".supportSpace").offset().top)
+                if (scrollTop < $(".supportSpace").offset().top) {
+                    console.log("vers top")
+                    if (scrollTop < 200) { scrollTop = 200 }
+                    $(".supportSpace").css("top", scrollTop);
+                }
+
+            }
+            lastScrollTop = st;
+        });
+
+        /* $(window).on('scroll', function() {
+            var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+            $(".supportSpace").css("top", scrollBottom);
+        }) */
 
 
         $("#QaudioSelect").on("change", function() {
@@ -124,8 +175,13 @@ $(function() {
                 $(".questions").prepend("<div class='textMaskOral'></div>");
                 $(".textMaskOral").css({ "width": maskWidth, "height": maskHeight });
                 $(".resultSender").prop("disabled", false);
+                $(".Qx").find("input").prop("checked", false);
             } else {
                 $(".textMaskOral").remove();
+                registerable[1] = true;
+                if (registerable[0] && registerable[1]) {
+                    $(".resultSender").prop("disabled", false);
+                }
             }
         });
 
@@ -180,25 +236,39 @@ $(function() {
         });
 
 
-        $(".oralEditorMode").on("click", function() {
-            $(".mode").html("Edition"); //Edition
-            $(".ttEditor").css("display", "inline");
-            $(".testtaker").hide();
-            $(".corrapp").css("background-color", "#fff3ef");
-            console.log("Display editor mode");
-            oralEditorMode();
-        })
-
-        $(".oralCloseEditorMode").on("click", function() {
-            $(".mode").html("Edition"); //Edition
-            $(".ttEditor").css("display", "none");
-            $(".testtaker").show();
-            $(".corrapp").css("background-color", "transparent");
-            $(".Qx").find("input").prop("checked", false);
-            $("#commentPerf").val("");
-        })
 
 
+
+    }
+
+    $(".oralEditorMode").on("click", function() {
+        $(".Qx").find("input").prop("checked", false);
+        $(".mode").html("Edition"); //Edition
+        $(".ttEditor").css("display", "inline");
+        $(".testtaker").hide();
+        $(".corrapp").css("background-color", "#fff3ef");
+        console.log("Display editor modessss");
+        oralEditorMode();
+    })
+
+    $(".oralCloseEditorMode").on("click", function() {
+        $(".mode").html("Edition"); //Edition
+        $(".ttEditor").css("display", "none");
+        $(".testtaker").show();
+        $(".corrapp").css("background-color", "transparent");
+        $(".Qx").find("input").prop("checked", false);
+        $("#commentPerf").val("");
+    })
+
+    function installModalIMG(nextOne) {
+        $('body').prepend('<div class="modalContainer">' +
+            '<div class="modal fade modal-lg" id="modalIMG" tabindex="-1" role="dialog" aria-labelledby="modalInstructlLabel" aria-hidden="true">' +
+            '<div class="modal-dialog modal-lg" role="document">' +
+            '<div class="modal-content">' +
+            '<div class="modal-header"><h5 class="modal-title" id="modalInstructLabel">Support</h5>' +
+            '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>' +
+            '</button></div><div class="modal-body"><img class="imgSupport" data-toggle="modal" data-target="#modalIMG" width="100%" src="/uploads/' + CItem[0].mediapath + '/' + contentOBJ.img + '"/></div><div class="modal-footer">' +
+            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div></div></div>');
     }
 
 

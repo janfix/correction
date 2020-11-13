@@ -31,7 +31,8 @@ export default function editorMode() {
     $(".closeTTagger").trigger("click");
 
     var mediaFolderName = CorrDoneData[0].mediafolder;
-    $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[0].mediafilename + ".mp3");
+    $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[0].mediafilename + ".mp3#t=00:0" + R.timeReset);
+
 
 
 
@@ -48,7 +49,7 @@ export default function editorMode() {
         for (let i = 0; i < CorrDoneData.length; i++) {
             if (CorrDoneData[i].id == $(this).val()) {
                 R = JSON.parse(CorrDoneData[i].results);
-                $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[i].mediafilename + ".mp3");
+                $("audio").attr("src", "/../uploads/" + mediaFolderName + "/" + CorrDoneData[0].mediafilename + ".mp3#t=00:0" + R.timeReset);
                 clearAllMarks();
                 // $(".liaigroup").remove();
                 updateData(CorrDoneData[i].id);

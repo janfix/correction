@@ -153,7 +153,7 @@ $(function() {
 
     // load TT Data   
     function loadTTData(nextOne) {
-        console.log("Depuis LoadTTdata");
+        //console.log("Depuis LoadTTdata");
         for (let i = 0; i < CData.length; i++) {
             if (CData[i].id == nextOne) {
                 //Load media    

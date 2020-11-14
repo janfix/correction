@@ -59,7 +59,7 @@ export default function oralEditorMode() {
                 //AudioQuality
                 $("#QaudioSelectEDITOR").val(R.audioQ);
                 $("#commentPerf").val(R.comment);
-                console.log(R.QAnswers);
+
 
                 for (let y = 0; y < R.QAnswers.length; y++) {
                     $("#" + R.QAnswers[y][1]).prop("checked", true);

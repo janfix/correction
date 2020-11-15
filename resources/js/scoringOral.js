@@ -2,7 +2,7 @@ import oralEditorMode from './scoral/oraleditormode';
 
 $(function() {
 
-
+    console.log("16:28");
 
     //Result container 
     var Roral = {

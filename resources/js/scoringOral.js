@@ -51,9 +51,6 @@ $(function() {
 
 
         oralEditorMode();
-        $(".oralCloseEditorMode ").hide();
-
-
 
     }
 
@@ -170,14 +167,12 @@ $(function() {
         $("#QaudioSelect").on("change", function() {
 
             if ($(this).val() == "4" || $(this).val() == "3" || $(this).val() == "2") {
-                var maskHeight = $(".questions").css("height");
-                var maskWidth = $(".questions").css("width");
-                $(".questions").prepend("<div class='textMaskOral'></div>");
-                $(".textMaskOral").css({ "width": maskWidth, "height": maskHeight });
-                $(".resultSender").prop("disabled", false);
+                $(".Qx").find("input").prop("disabled", true);
                 $(".Qx").find("input").prop("checked", false);
+                $(".resultSender").prop("disabled", false);
             } else {
-                $(".textMaskOral").remove();
+                $(".Qx").find("input").prop("disabled", false);
+                // $(".Qx").find("input").prop("checked", true);
                 registerable[1] = true;
                 if (registerable[0] && registerable[1]) {
                     $(".resultSender").prop("disabled", false);
